@@ -1,6 +1,6 @@
 {
   # Add your NixOS modules here
   #
-  # my-module = ./my-module;
+  day-night-plasma-wallpapers = ./day-night-plasma-wallpapers;
 }
 
