@@ -28,7 +28,7 @@ stdenv.mkDerivation rec {
     description = "KDE Plasma utility to automatically change to a night wallpaper when the sun is reaching sunset.";
     license = lib.licenses.mit;
     homepage = "https://github.com/SCOTT-HAMILTON/Day-night-plasma-wallpapers";
-    maintainers = with lib.maintainers; [ shamilton ];
+    maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = stdenv.lib.platforms.linux;
   };
 }
