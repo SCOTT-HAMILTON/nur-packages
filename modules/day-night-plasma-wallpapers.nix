@@ -8,7 +8,7 @@ let
   cfg = config.services.day-night-plasma-wallpapers;
   shamilton = import (builtins.fetchTarball {
           url = "https://github.com/SCOTT-HAMILTON/nur-packages-template/archive/master.tar.gz";
-          sha256 = "0jw11msqd4gczw2iq69jp2jbwrnhl1jvdbk16yjk9d6pm74fnjwx";
+          sha256 = "1fkizrmcrzkvm3hsjcvhlybdh509dgsfvp07d47a3np99m0mxbyc";
         }) {};
 in {
 
