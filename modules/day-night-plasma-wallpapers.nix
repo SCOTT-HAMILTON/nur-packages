@@ -6,10 +6,9 @@ with lib;
 
 let
   cfg = config.services.day-night-plasma-wallpapers;
-  shamilton = import (builtins.fetchTarball {
-          url = "https://github.com/SCOTT-HAMILTON/nur-packages-template/archive/master.tar.gz";
-          sha256 = "0jxblfs0l1khfyp2k1rzjbfcp91gm8h9dyyrh8960730a8nl5zrb";
-        }) {};
+  package-day-night-plasma-wallpapers = pkgs.callPackage ./../pkgs/day-night-plasma-wallpapers { 
+    qttools = pkgs.qt5.qttools;  
+  };
 in {
 
   options.services.day-night-plasma-wallpapers = {
@@ -17,7 +16,7 @@ in {
 
     package = mkOption {
       type = types.package;
-      default = shamilton.day-night-plasma-wallpapers;
+      default = package-day-night-plasma-wallpapers;
       defaultText = "shamilton.day-night-plasma-wallpapers";
       description = "Day-night-plasma-wallpapers derivation to use.";
     };
@@ -35,7 +34,6 @@ in {
       path = [ pkgs.qt5.qttools.bin cfg.package ];
       script = ''${cfg.package}/bin/update-day-night-plasma-wallpapers.sh'';
     };
-    environment.systemPackages = [ cfg.package ];
     systemd.user.timers.day-night-plasma-wallpapers = {
       description = "Day-night-plasma-wallpapers timer updating the wallpapers according to sun light";
       partOf = [ "day-night-plasma-wallpapers.service" ];
