@@ -1,4 +1,4 @@
-{ config, lib, pkgs, nur, ... }:
+{ config, lib, pkgs, ... }:
 
 with lib;
 
@@ -17,17 +17,10 @@ in {
       '';
     };
 
-    package = mkOption {
-      type = types.package;
-      default = nur.repos.shamilton.day-night-plasma-wallpapers;
-      defaultText = "nur.repos.shamilton.day-night-plasma-wallpapers";
-      description = "Day-night-plasma-wallpapers derivation to use.";
-    };
-
     path = mkOption {
       type = types.listOf types.path;
       default = [];
-      example = literalExample "[ pkgs.bash nur.repos.shamilton.day-night-plasma-wallpapers ]";
+      example = literalExample "[ pkgs.bash ]";
       description = "List of derivations to put in path.";
     };
 
