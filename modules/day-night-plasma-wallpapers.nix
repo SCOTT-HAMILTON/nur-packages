@@ -8,7 +8,7 @@ let
   cfg = config.services.day-night-plasma-wallpapers;
   shamilton = import (builtins.fetchTarball {
           url = "https://github.com/SCOTT-HAMILTON/nur-packages-template/archive/master.tar.gz";
-          sha256 = "1fkizrmcrzkvm3hsjcvhlybdh509dgsfvp07d47a3np99m0mxbyc";
+          sha256 = "0jxblfs0l1khfyp2k1rzjbfcp91gm8h9dyyrh8960730a8nl5zrb";
         }) {};
 in {
 
@@ -22,13 +22,6 @@ in {
       description = "Day-night-plasma-wallpapers derivation to use.";
     };
 
-    # path = mkOption {
-    #   type = types.listOf types.path;
-    #   default = [];
-    #   example = literalExample "[ pkgs.bash ]";
-    #   description = "List of derivations to put in path.";
-    # };
-
     onCalendar = mkOption {
       type = types.str;
       default = "*-*-* 16:00:00"; # Run at 4 pm everyday (16h)
@@ -39,14 +32,15 @@ in {
   config = {
     systemd.user.services.day-night-plasma-wallpapers = {
       description = "Day-night-plasma-wallpapers: a software to update your wallpaper according to the day light";
-      path = [ cfg.package ];
+      path = [ pkgs.qt5.qttools.bin cfg.package ];
       script = ''${cfg.package}/bin/update-day-night-plasma-wallpapers.sh'';
     };
     environment.systemPackages = [ cfg.package ];
     systemd.user.timers.day-night-plasma-wallpapers = {
-      description = "Day-night-plasma-wallpapers timer";
+      description = "Day-night-plasma-wallpapers timer updating the wallpapers according to sun light";
       partOf = [ "day-night-plasma-wallpapers.service" ];
       wantedBy = [ "timers.target" ];
+
       timerConfig.OnCalendar = cfg.onCalendar;
       # start immediately after computer is started:
       # timerConfig.Persistent = "true";
