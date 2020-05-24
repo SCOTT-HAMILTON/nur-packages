@@ -38,15 +38,15 @@ in {
 
         Service = {
           Type = "oneshot";
-          Environment = [ "PATH=${pkgs.qttools}/bin"];
+          Environment = [ "PATH=${pkgs.qttools}/bin" ];
           ExecStart = "${cfg.package}/bin/update-day-night-plasma-wallpapers.sh";
         };
 
         Install = { WantedBy = [ "timers.target" ]; };
       };
     }
-    (mkIf (cfg.interval != null) {
-      systemd.user.timers.random-background = {
+    (mkIf (cfg.onCalendar != null) {
+      systemd.user.timers.day-night-plasma-wallpapers = {
         Unit = { 
           Description = "Day-night-plasma-wallpapers timer updating the wallpapers according to sun light";
           partOf = [ "day-night-plasma-wallpapers.service" ];
