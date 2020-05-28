@@ -1,7 +1,7 @@
 { lib
 , stdenv
 , fetchFromGitHub
-, qttools
+, dbus-python
 , coreutils
 }:
 stdenv.mkDerivation rec {
@@ -13,14 +13,14 @@ stdenv.mkDerivation rec {
     owner = "SCOTT-HAMILTON";
     repo = "Day-night-plasma-wallpapers";
     rev = "master";
-    sha256 = "0b9m0dycw2x3c4lhl677w6wbrcpgs983h8ynz6ird33x281pfs6q";
+    sha256 = "0nfp8xlkj0zf5kyrhq009bshyf5aghaicz5i2ly949z8l8mbx97h";
   };
 
-  buildInputs = [ qttools ];
+  propagatedBuildInputs = [ dbus-python ];
 
   installPhase = ''
-    install -Dm 555 update-day-night-plasma-wallpapers.sh $out/bin/update-day-night-plasma-wallpapers.sh
-    install -Dm 555 update-day-night-plasma-wallpapers.sh $out/.config/autostart-scripts/update-day-night-plasma-wallpapers.sh
+    install -Dm 555 update-day-night-plasma-wallpapers.py $out/bin/update-day-night-plasma-wallpapers.py
+    install -Dm 555 update-day-night-plasma-wallpapers.py $out/.config/autostart-scripts/update-day-night-plasma-wallpapers.py
   '';
 
   meta = {
