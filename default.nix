@@ -19,5 +19,9 @@
   };
 
   spectacle-clipboard = pkgs.libsForQt5.callPackage ./pkgs/spectacle-clipboard { };
+
+  scripts = pkgs.callPackage ./pkgs/Scripts {
+    eom = pkgs.mate.eom;
+  };
 }
 
