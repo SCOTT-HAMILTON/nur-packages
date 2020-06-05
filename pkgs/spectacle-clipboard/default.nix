@@ -29,7 +29,7 @@ mkDerivation rec {
     owner = "SCOTT-HAMILTON";
     repo = "spectacle";
     rev = "349b33c4a82ddb69724a8e085c364bac2d5a04ff";
-    sha256 = lib.fakeSha256;
+    sha256 = "1xylvhs2fni0vjkqp2p92hbby9151ydk54gmh6l3rdlvbp7i1sx8";
   };
 
   postPatch = ''
