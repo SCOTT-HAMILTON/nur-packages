@@ -15,7 +15,6 @@
   overlays = import ./overlays; # nixpkgs overlays
 
   day-night-plasma-wallpapers = pkgs.callPackage ./pkgs/day-night-plasma-wallpapers { 
-    qttools = pkgs.qt5.qttools;  
     dbus-python = pkgs.python3Packages.dbus-python;
   };
 
