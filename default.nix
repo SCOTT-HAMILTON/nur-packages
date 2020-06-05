@@ -17,5 +17,7 @@
   day-night-plasma-wallpapers = pkgs.callPackage ./pkgs/day-night-plasma-wallpapers { 
     qttools = pkgs.qt5.qttools;  
   };
+
+  spectacle-clipboard = pkgs.libsForQt5.callPackage ./pkgs/spectacle-clipboard { };
 }
 
