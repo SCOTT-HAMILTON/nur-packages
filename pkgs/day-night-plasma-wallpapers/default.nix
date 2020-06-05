@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
     owner = "SCOTT-HAMILTON";
     repo = "Day-night-plasma-wallpapers";
     rev = "master";
-    sha256 = "0nfp8xlkj0zf5kyrhq009bshyf5aghaicz5i2ly949z8l8mbx97h";
+    sha256 = "0ribzd0svp9sp0j87lhfqb7kivh3hw38ldvr5ps8qkr778460fdl";
   };
 
   propagatedBuildInputs = [ dbus-python ];
@@ -23,11 +23,11 @@ stdenv.mkDerivation rec {
     install -Dm 555 update-day-night-plasma-wallpapers.py $out/.config/autostart-scripts/update-day-night-plasma-wallpapers.py
   '';
 
-  meta = {
+  meta = with lib; {
     description = "KDE Plasma utility to automatically change to a night wallpaper when the sun is reaching sunset.";
-    license = lib.licenses.mit;
+    license = licenses.mit;
     homepage = "https://github.com/SCOTT-HAMILTON/Day-night-plasma-wallpapers";
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
-    platforms = stdenv.lib.platforms.linux;
+    platforms = platforms.linux;
   };
 }
