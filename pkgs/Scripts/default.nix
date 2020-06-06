@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
     owner = "SCOTT-HAMILTON";
     repo = "Scripts";
     rev = "master";
-    sha256 = "05hqxqpxs5bnm51vqm1m7w1bj8fc1xwafcj88q1j7358q7nxbyrb";
+    sha256 = "0c0qv5jfnh6aa2dbnyz3dg2lvsrchbbd1rhq9j62g86n77nbxq0h";
   };
 
   propagatedBuildInputs = [ eom surf zathura ];
