@@ -30,5 +30,8 @@ rec {
     lcms = pkgs.lcms2;
   };
   lokalize = pkgs.libsForQt5.callPackage ./pkgs/Lokalize { };
+  ksmoothdock = pkgs.libsForQt5.callPackage ./pkgs/ksmoothdock { };
+  keysmith = pkgs.kdeApplications.callPackage ./pkgs/keysmith { };
+
 }
 
