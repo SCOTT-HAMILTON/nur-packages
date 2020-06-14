@@ -5,6 +5,7 @@
 , coreutils
 }:
 buildVimPluginFrom2Nix {
+
   pname = "vim-async";
   version = "2020-03-17";
 

@@ -3,7 +3,7 @@
 , fetchFromGitHub
 , coreutils
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
 
   pname = "Myvimconfig";
   version = "unstable";
@@ -30,11 +30,11 @@ stdenv.mkDerivation rec {
     cp vimrc $out
   '';
 
-  meta = {
+  meta = with lib; {
     description = "My vim config";
-    license = lib.licenses.mit;
+    license = licenses.mit;
     homepage = "https://github.com/SCOTT-HAMILTON/vimconfig";
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
-    platforms = stdenv.lib.platforms.linux;
+    platforms = platforms.linux;
   };
 }

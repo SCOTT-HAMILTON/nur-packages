@@ -5,6 +5,7 @@
 , coreutils
 }:
 buildVimPluginFrom2Nix rec {
+
   pname = "vim-asyncomplete";
   version = "2.0.0";
 

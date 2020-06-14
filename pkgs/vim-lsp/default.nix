@@ -5,6 +5,7 @@
 , vim-async
 }:
 buildVimPluginFrom2Nix rec {
+
   pname = "vim-lsp";
   version = "0.1.1";
 
@@ -18,11 +19,11 @@ buildVimPluginFrom2Nix rec {
   buildInputs = [ vim-async ];
   propagatedInputs = [ vim-async ];
 
-  meta = {
+  meta = with lib; {
     description = "Async language server protocol plugin for vim and neovim";
-    license = lib.licenses.mit;
+    license = licenses.mit;
     homepage = "https://github.com/prabirshrestha/vim-lsp";
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
-    platforms = lib.platforms.linux;
+    platforms = platforms.linux;
   };
 }

@@ -50,12 +50,6 @@ rec {
   sync-database = with pkgs.python3Packages; pkgs.callPackage ./pkgs/sync-database {
     inherit buildPythonPackage parallel-ssh merge-keepass pykeepass;
   };
-  vim-async = pkgs.callPackage ./pkgs/vim-async { };
-  vim-asyncomplete = pkgs.callPackage ./pkgs/vim-asyncomplete { };
-  vim-asyncomplete-lsp = pkgs.callPackage ./pkgs/vim-asyncomplete-lsp { };
-  vim-lsp = pkgs.callPackage ./pkgs/vim-lsp { };
-  vim-lsp-settings = pkgs.callPackage ./pkgs/vim-lsp-settings { };
-  vim-myftplugins = pkgs.callPackage ./pkgs/vim-myftplugins { };
 
 }
 

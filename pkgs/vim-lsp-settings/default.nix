@@ -8,6 +8,7 @@
 , vim-asyncomplete-lsp
 }:
 buildVimPluginFrom2Nix rec {
+
   pname = "vim-lsp-settings";
   version = "0.0.1";
 
@@ -21,11 +22,11 @@ buildVimPluginFrom2Nix rec {
   buildInputs =           [ vim-async vim-lsp vim-asyncomplete vim-asyncomplete-lsp ];
   propagatedBuildInputs = [ vim-async vim-lsp vim-asyncomplete vim-asyncomplete-lsp ];
 
-  meta = {
+  meta = with lib; {
     description = "Auto configurations for Language Server for vim-lsp";
-    license = lib.licenses.mit;
+    license = licenses.mit;
     homepage = "https://github.com/mattn/vim-lsp-settings";
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
-    platforms = lib.platforms.linux;
+    platforms = platforms.linux;
   };
 }

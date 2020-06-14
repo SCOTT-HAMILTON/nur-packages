@@ -5,6 +5,7 @@
 , coreutils
 }:
 buildVimPluginFrom2Nix {
+
   pname = "vim-asyncomplete-lsp";
   version = "2020-05-25";
 

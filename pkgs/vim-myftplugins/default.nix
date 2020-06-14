@@ -1,12 +1,11 @@
 { pkgs
 , lib
-, vimUtils
-, buildVimPluginFrom2Nix ? vimUtils.buildVimPluginFrom2Nix
-, stdenv
+, buildVimPluginFrom2Nix
 , fetchFromGitHub
 , coreutils
 }:
 buildVimPluginFrom2Nix {
+
   pname = "vim-myftplugins";
   version = "unstable";
 
@@ -23,11 +22,11 @@ buildVimPluginFrom2Nix {
     find . -maxdepth 1 | egrep -v "^\./ftplugin$|^\.$" | xargs -n1 -L1 -r -I{} rm -rf {}
   '';
 
-  meta = {
+  meta = with lib; {
     description = "My vim ftplugins";
-    license = lib.licenses.mit;
+    license = licenses.mit;
     homepage = "https://github.com/SCOTT-HAMILTON/vimconfig";
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
-    platforms = stdenv.lib.platforms.linux;
+    platforms = platforms.linux;
   };
 }
