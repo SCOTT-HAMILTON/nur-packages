@@ -32,24 +32,25 @@ rec {
   };
 
   # Instant WM and utils
+  rangerplugins = pkgs.callPackage ./pkgs/rangerplugins { };
   paperbash = pkgs.callPackage ./pkgs/Paperbash { };
   instantconf = pkgs.callPackage ./pkgs/InstantConf { };
-  instantdotfiles = pkgs.callPackage ./pkgs/InstantDotfiles { };
   instantshell = pkgs.callPackage ./pkgs/InstantShell { };
+  instantwidgets = pkgs.callPackage ./pkgs/InstantWidgets { };
+  instantdotfiles = pkgs.callPackage ./pkgs/InstantDotfiles {
+    InstantConf = instantconf;
+  };
   instantthemes = pkgs.callPackage ./pkgs/InstantTHEMES {
     Paperbash = paperbash;
   };
   instantutils = pkgs.callPackage ./pkgs/InstantUtils { 
-    InstantDotfiles = instantdotfiles;
-    InstantConf = instantconf;
-    InstantTHEMES = instantthemes;
-    InstantShell = instantshell;
+    rangerplugins = rangerplugins;
   };
   instantlogo = pkgs.callPackage ./pkgs/InstantLOGO { };
   instantmenu = pkgs.callPackage ./pkgs/InstantMENU {
     InstantUtils = instantutils;
   };
-  instantwallpaper = pkgs.callPackage ./pkgs/InstantWALLPAPER {
+  instantwallpaper = pkgs.callPackage ./pkgs/InstantWallpaper {
     InstantLOGO = instantlogo;
     InstantConf = instantconf;
     InstantUtils = instantutils;
@@ -57,6 +58,20 @@ rec {
   };
   instantwm = pkgs.callPackage ./pkgs/InstantWM {
     InstantUtils = instantutils;
+  };
+  instantdata = pkgs.callPackage ./pkgs/InstantData {
+    InstantConf = instantconf;
+    InstantDotfiles = instantdotfiles;
+    InstantLOGO  = instantlogo;
+    InstantMENU = instantmenu;
+    InstantShell = instantshell;
+    InstantTHEMES = instantthemes;
+    InstantUtils = instantutils;
+    InstantWALLPAPER = instantwallpaper;
+    InstantWidgets = instantwidgets;
+    InstantWM = instantwm;
+    Paperbash = paperbash;
+    rangerplugins = rangerplugins;
   };
 
   juk = pkgs.kdeApplications.callPackage ./pkgs/Juk { };

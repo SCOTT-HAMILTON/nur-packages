@@ -3,16 +3,13 @@
 , fetchFromGitHub
 , st
 , rofi
-, InstantDotfiles
 , neofetch
 , firefox
 , nitrogen
-, InstantConf
 , acpi
 , pciutils
-, InstantTHEMES
 , dunst
-, InstantShell
+, rangerplugins
 }:
 stdenv.mkDerivation rec {
 
@@ -23,7 +20,7 @@ stdenv.mkDerivation rec {
     owner = "instantOS";
     repo = "instantOS";
     rev = "master";
-    sha256 = "11d2hjjmamwxhicsxi9pdi9rds82hqf5hljbicclw1y745fygkx8";
+    sha256 = "0awa0hrvslglrnmrl9jzag87kpa045lwx4527pzj0h5clhbq7x2s";
   };
 
   postPatch = ''
@@ -36,15 +33,15 @@ stdenv.mkDerivation rec {
       --replace "#!/usr/bin/dash" "#!/bin/sh" \
       --replace "/usr/share/instantdotfiles/rofi/appmenu.rasi" "tmp_placeholder" \
       --replace rofi "${rofi}/bin/rofi" \
-      --replace "tmp_placeholder" "${InstantDotfiles}/share/instantdotfiles/rofi/appmenu.rasi"
+      --replace "tmp_placeholder" "\$(instantdata -d)/share/instantdotfiles/rofi/appmenu.rasi"
     substituteInPlace programs/ifeh \
       --replace "nitrogen" "${nitrogen}/bin/nitrogen"
     substituteInPlace autostart.sh \
-      --replace "iconf" "${InstantConf}/bin/iconf" \
-      --replace "instantthemes" "${InstantTHEMES}/bin/instantthemes" \
+      --replace "iconf" "\$(instantdata -c)/bin/iconf" \
+      --replace "instantthemes" "\$(instantdata -t)/bin/instantthemes" \
       --replace "dunst" "${dunst}/bin/dunst" \
-      --replace "instantshell" "${InstantShell}/bin/instantshell" \
-      --replace "instantdotfiles" "${InstantDotfiles}/bin/instantdotfiles"
+      --replace "instantshell" "\$(instantdata -s)/bin/instantshell" \
+      --replace "instantdotfiles" "\$(instantdata -d)/bin/instantdotfiles"
     substituteInPlace userinstall.sh \
       --replace "acpi" "${acpi}/bin/acpi" \
       --replace "lspci" "${pciutils}/bin/lspci"
@@ -52,10 +49,11 @@ stdenv.mkDerivation rec {
   
   installPhase = ''
     install -Dm 555 autostart.sh $out/bin/instantautostart
-    install -Dm 554 status.sh $out/bin/instantstatus
+    install -Dm 555 status.sh $out/bin/instantstatus
     install -Dm 555 monitor.sh $out/bin/instantmonitor
-    install -Dm 555 instantutils.sh $out/bin/instantutils
-    install -Dm 555 userinstall.sh $out/bin/userinstall.sh
+    
+    mkdir -p $out/share/instantutils
+    mv *.sh $out/share/instantutils
 
     install -Dm 555 programs/appmenu $out/bin/appmenu
     install -Dm 555 programs/checkinternet $out/bin/checkinternet
@@ -68,7 +66,8 @@ stdenv.mkDerivation rec {
     install -Dm 644 desktop/st-luke.desktop $out/share/applications/st-luke.desktop
   '';
 
-  propagatedBuildInputs = [ st InstantDotfiles neofetch firefox nitrogen InstantConf acpi InstantTHEMES dunst InstantShell ];
+  # propagatedBuildInputs = [ st InstantDotfiles neofetch firefox nitrogen InstantConf acpi InstantTHEMES dunst InstantShell rangerplugins ];
+  propagatedBuildInputs = [ st neofetch firefox nitrogen acpi dunst rangerplugins ];
 
   meta = with lib; {
     description = "InstantOS Utils";

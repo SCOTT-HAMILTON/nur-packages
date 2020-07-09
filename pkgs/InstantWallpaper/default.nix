@@ -1,8 +1,7 @@
 { lib
 , stdenv
 , fetchFromGitHub
-, gnumake
-, xlibs
+, fetchurl
 , InstantLOGO
 , InstantConf
 , InstantUtils
@@ -15,12 +14,24 @@ stdenv.mkDerivation rec {
   pname = "instantWALLPAPER";
   version = "unstable";
 
-  src = fetchFromGitHub {
-    owner = "instantOS";
-    repo = "instantWALLPAPER";
-    rev = "master";
-    sha256 = "1ril747fiwg0lzz4slc9ndzy5an3mwnmqk6fk58pp09z5g2wjhla";
-  };
+  srcs = [
+    (fetchFromGitHub {
+      owner = "instantOS";
+      repo = "instantWALLPAPER";
+      rev = "master";
+      sha256 = "1ril747fiwg0lzz4slc9ndzy5an3mwnmqk6fk58pp09z5g2wjhla";
+    }) 
+    (fetchurl {
+      url = "https://github.com/instantOS/instantOS/archive/master.tar.gz";
+      sha256 = "0448djpqvq5firya213sri4z3b7gwv2240f8swk90c9zrlhms161";
+    })
+  ];
+
+  sourceRoot = "source";
+  
+  postUnpack = ''
+    ls -lh
+  '';
 
   postPatch = ''
     substituteInPlace wall.sh \
@@ -35,18 +46,16 @@ stdenv.mkDerivation rec {
       --replace "convert" "${imagemagick}/bin/convert" \
       --replace "-composite" "__tmp_placeholder" \
       --replace "composite" "${imagemagick}/bin/composite" \
-      --replace "__tmp_placeholder" "-composite" \
-      --replace "ifeh" "${InstantUtils}/bin/ifeh" \
-      --replace "nitrogen" "${nitrogen}/bin/nitrogen"
-
+      --replace "__tmp_placeholder" "-composite"
+      # --replace "ifeh" "${InstantUtils}/bin/ifeh" \
   '';
   
   installPhase = ''
-    install -Dm 555 wall.sh $out/bin/wall.sh
-    install -Dm 555 wallutils.sh $out/bin/wallutils.sh
+    install -Dm 555 wallutils.sh $out/share/instantwallpaper/wallutils.sh
+    install -Dm 555 wall.sh $out/bin/instantwallpaper
   '';
 
-  propagatedBuildInputs = [ InstantLOGO InstantConf InstantUtils Paperbash imagemagick nitrogen ];
+  propagatedBuildInputs = [ InstantLOGO InstantConf Paperbash imagemagick nitrogen ];
 
   meta = with lib; {
     description = "Window manager of instantOS.";
