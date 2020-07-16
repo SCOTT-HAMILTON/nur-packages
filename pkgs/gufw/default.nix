@@ -37,7 +37,7 @@ buildPythonPackage {
     description = "Feature complete cross-platform Wii Remote access library";
     license = licenses.gpl3;
     homepage = "https://github.com/wiiuse/wiiuse";
-    maintainers = with maintainers; [ shamilton ];
+    maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = with platforms; linux;
   };
 }
