@@ -3,6 +3,7 @@
 , fetchFromGitHub 
 , pykeepass
 , click
+, pytest
 }:
 let 
   pyModuleDeps = [
@@ -17,14 +18,20 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "merge-keepass";
-    rev = "master";
-    sha256 = "0ww3h9bmkflrhjfzd41q4xv9vyjbhcf4mwyw2hbmh20ihmk5d3vn";
+    rev = "8e16cf2c685dc61f0c7ce5443866989b9c7fa946";
+    sha256 = "138gx3k68i1fanfgal9r2i3lhfw3v8gb9l2ir3pfxr1pyrn067g9";
   };
 
   buildInputs = pyModuleDeps;
   propagatedBuildInputs = pyModuleDeps;
 
-  doCheck = false;
+  checkInputs = [ pytest ];
+
+  checkPhase = ''
+    pytest tests.py
+  '';
+
+  doCheck = true;
 
   meta = with lib; {
     description = "Keepass Databases Merging script";

@@ -27,9 +27,6 @@ rec {
   fake-mic-wav-player = pkgs.libsForQt5.callPackage ./pkgs/FakeMicWavPlayer {
     inherit libfake argparse;
   };
-  gufw = with pkgs.python3Packages; pkgs.callPackage ./pkgs/gufw {
-    inherit buildPythonPackage distutils_extra;
-  };
   inkscape = pkgs.callPackage ./pkgs/inkscape-1.0 { 
     lcms = pkgs.lcms2;
   };
@@ -44,7 +41,7 @@ rec {
   libfake = pkgs.callPackage ./pkgs/FakeLib { };
   lokalize = pkgs.libsForQt5.callPackage ./pkgs/Lokalize { };
   merge-keepass = with pkgs.python3Packages; pkgs.callPackage ./pkgs/merge-keepass { 
-    inherit buildPythonPackage pykeepass click;
+    inherit buildPythonPackage pykeepass click pytest;
   };
   parallel-ssh = with pkgs.python3Packages; pkgs.callPackage ./pkgs/parallel-ssh {
     inherit buildPythonPackage setuptools fetchPypi paramiko gevent ssh2-python;

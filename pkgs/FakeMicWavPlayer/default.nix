@@ -11,11 +11,10 @@
 , libogg
 , argparse
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
 
   pname = "FakeMicWavPlayer";
   version = "unstable";
-  debug = false;
 
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
@@ -24,7 +23,6 @@ stdenv.mkDerivation rec {
     sha256 = "1q5bn7h28z0wzs115nql5arhbfap1vijx4h284jpfxj042xbzw6n";
   };
 
-  # src = ./src.tar.gz;
 
   nativeBuildInputs = [ pkg-config ninja meson cmake ];
 

@@ -39,12 +39,13 @@ in
       programs.vim.enable = true;
       programs.vim.extraConfig = builtins.readFile "${MyVimConfig}/vimrc";
       programs.vim.plugins = [
+        pkgs.vimPlugins.vim-abolish
         pkgs.vimPlugins.commentary
         pkgs.vimPlugins.vim-colorschemes
         pkgs.vimPlugins.vim-qml
-        vim-myftplugins
         vim-lsp
         vim-lsp-settings
+        vim-myftplugins
         vim-vala
       ];
     }

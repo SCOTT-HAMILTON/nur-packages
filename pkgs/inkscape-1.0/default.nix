@@ -136,7 +136,7 @@ stdenv.mkDerivation rec {
     description = "Vector graphics editor";
     homepage = "https://www.inkscape.org";
     license = licenses.gpl3Plus;
-    maintainers = [ "Jan Tojnar <jtojnar@gmail.com>" ];
+    maintainers = [ maintainers.jtojnar ];
     platforms = platforms.all;
     longDescription = ''
       Inkscape is a feature-rich vector graphics editor that edits

@@ -13,7 +13,7 @@ buildVimPluginFrom2Nix {
     owner = "SCOTT-HAMILTON";
     repo = "vimconfig";
     rev = "master";
-    sha256 = "0f9fpgc16hscx73qf1yisf75bg07faqgkqp7g28jr8q5qbyzzmv4";
+    sha256 = "1xg7kyh9r805y8948f7yvsj5fkaqx763v8rdnyf252k6cszpqi5v";
   };
 
   buildInputs = [ coreutils ];
