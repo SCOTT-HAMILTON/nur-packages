@@ -55,7 +55,7 @@ stdenv.mkDerivation rec {
     description = "A slick-looking LightDM greeter";
     license = licenses.gpl3Plus;
     homepage = "https://github.com/linuxmint/slick-greeter";
-    maintainers = [ maintainers.shamilton ];
+    maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
   };
 }
