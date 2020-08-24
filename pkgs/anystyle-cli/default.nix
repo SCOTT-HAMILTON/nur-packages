@@ -33,7 +33,7 @@ buildRubyGem rec {
     description = "Command line interface to the AnyStyle Parser and Finder";
     homepage    = "https://anystyle.io/";
     license     = licenses.bsd2;
-    maintainers = with maintainers; [ shamilton ];
+    maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms   = platforms.unix;
   };
 }
