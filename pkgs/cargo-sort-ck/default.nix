@@ -21,7 +21,7 @@ buildRustPackage rec {
     description = "Check if tables and items in a .toml file are lexically sorted";
     homepage = "https://github.com/devinr528/cargo-sort-ck";
     license = licenses.mit;
-    maintainers = with maintainers; [ shamilton ];
+    maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
   };
 }
