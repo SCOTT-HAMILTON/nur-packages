@@ -21,10 +21,10 @@ rec {
     inherit buildRustPackage;
   };
   compton = pkgs.callPackage ./pkgs/Compton { };
-  # controls-for-fake = pkgs.libsForQt5.callPackage ./pkgs/ControlsForFake  {
-  #   inherit libfake;
-  #   FakeMicWavPlayer = fake-mic-wav-player;
-  # };
+  controls-for-fake = pkgs.libsForQt5.callPackage ./pkgs/ControlsForFake  {
+    inherit libfake;
+    FakeMicWavPlayer = fake-mic-wav-player;
+  };
   day-night-plasma-wallpapers = with pkgs.python3Packages; pkgs.callPackage ./pkgs/day-night-plasma-wallpapers { 
     dbus-python = dbus-python;
   };
