@@ -49,6 +49,7 @@ rec {
     inherit buildPythonPackage pykeepass click pytest;
   };
   ncgopher = pkgs.callPackage ./pkgs/ncgopher { };
+  numworks-udev-rules = pkgs.callPackage ./pkgs/numworks-udev-rules { };
   parallel-ssh = with pkgs.python3Packages; pkgs.callPackage ./pkgs/parallel-ssh {
     inherit buildPythonPackage setuptools fetchPypi paramiko gevent ssh2-python;
   };
