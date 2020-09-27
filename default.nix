@@ -87,6 +87,7 @@ rec {
     gst-plugins-ugly = gst_all_1.gst-plugins-ugly;
   };
   wiiuse = pkgs.callPackage ./pkgs/WiiUse { };
-
+  xtreme-download-manager = pkgs.callPackage ./pkgs/xtreme-download-manager {
+  };
 }
 
