@@ -76,6 +76,9 @@ rec {
   sync-database = with pkgs.python3Packages; pkgs.callPackage ./pkgs/sync-database {
     inherit buildPythonPackage parallel-ssh merge-keepass pykeepass;
   };
+  timetable2header = with pkgs.python3Packages; pkgs.callPackage ./pkgs/TimeTable2Header {
+    inherit buildPythonPackage click pandas numpy odfpy;
+  };
   vokoscreen-ng = with pkgs; libsForQt5.callPackage ./pkgs/vokoscreenNG {
     gstreamer = gst_all_1.gstreamer;
     gst-plugins-base = gst_all_1.gst-plugins-base;
