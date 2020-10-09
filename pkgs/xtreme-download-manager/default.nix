@@ -9,7 +9,7 @@
 
 let
   mvn2nix = import
-    (fetchTarball "https://github.com/fzakaria/mvn2nix/archive/master.tar.gz")
+    (fetchTarball "https://github.com/fzakaria/mvn2nix/archive/bc86f650d80ce9d29c376d6955ed175cba87915e.tar.gz")
     { };
   mavenRepository =
    mvn2nix.buildMavenRepositoryFromLockFile { file = ./mvn2nix-lock.json; };

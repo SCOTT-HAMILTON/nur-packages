@@ -7,6 +7,7 @@
     myvim = ./myvim.nix;
     redshift-auto = ./redshift-auto.nix;
     sync-database = ./sync-database.nix;
+    pronotebot = ./pronotebot.nix;
   };
 }
 
