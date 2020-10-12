@@ -39,7 +39,6 @@ stdenv.mkDerivation rec {
 
   sourceRoot = ".";
 
-
   propagatedBuildInputs = [
     python38
     coreutils findutils gawk eom surf zathura 
