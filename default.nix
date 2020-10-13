@@ -59,6 +59,9 @@ rec {
   pronotebot = with pkgs.python3Packages; pkgs.callPackage ./pkgs/PronoteBot {
     inherit buildPythonPackage pybase64 selenium click;
   };
+  pygetwindow = with pkgs.python3Packages; pkgs.callPackage ./pkgs/pygetwindow {
+    inherit buildPythonPackage fetchPypi pyrect;
+  };
   python-iconf = with pkgs.python3Packages; pkgs.callPackage ./pkgs/python-iconf {
     inherit buildPythonPackage fetchPypi pytest;
   };
