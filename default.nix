@@ -65,6 +65,9 @@ rec {
   python3-xlib = with pkgs.python3Packages; pkgs.callPackage ./pkgs/python3-xlib {
     inherit buildPythonPackage fetchPypi;
   };
+  pyrect = with pkgs.python3Packages; pkgs.callPackage ./pkgs/pyrect {
+    inherit buildPythonPackage fetchPypi;
+  };
   pyscreeze = with pkgs.python3Packages; pkgs.callPackage ./pkgs/pyscreeze {
     inherit buildPythonPackage fetchPypi pillow;
   };
