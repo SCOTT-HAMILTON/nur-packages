@@ -1,6 +1,7 @@
 { lib
 , buildPythonPackage
 , fetchPypi 
+, pillow
 , pyperclip
 , python3-xlib
 }:
@@ -15,6 +16,7 @@ buildPythonPackage rec {
   };
 
   propagatedBuildInputs = [
+    pillow
     pyperclip
     python3-xlib
   ];

@@ -48,19 +48,27 @@ rec {
   merge-keepass = with pkgs.python3Packages; pkgs.callPackage ./pkgs/merge-keepass { 
     inherit buildPythonPackage pykeepass click pytest;
   };
-  mouseinfo = with pkgs.python3Packages; pkgs.callPackage ./pkgs/mouseinfo {
-    inherit buildPythonPackage fetchPypi pyperclip python3-xlib;
+  mouseinfo = with pkgs.python37Packages; pkgs.callPackage ./pkgs/mouseinfo {
+    inherit buildPythonPackage fetchPypi pyperclip python3-xlib pillow;
   };
   ncgopher = pkgs.callPackage ./pkgs/ncgopher { };
   numworks-udev-rules = pkgs.callPackage ./pkgs/numworks-udev-rules { };
   parallel-ssh = with pkgs.python3Packages; pkgs.callPackage ./pkgs/parallel-ssh {
     inherit buildPythonPackage setuptools fetchPypi paramiko gevent ssh2-python;
   };
-  pronotebot = with pkgs.python3Packages; pkgs.callPackage ./pkgs/PronoteBot {
-    inherit buildPythonPackage pybase64 selenium click;
-  };
+  # pronotebot = with pkgs.python3Packages; pkgs.callPackage ./pkgs/PronoteBot {
+  #   inherit buildPythonPackage pybase64 selenium click;
+  # };
   pyautogui = with pkgs.python3Packages; pkgs.callPackage ./pkgs/pyautogui {
-    inherit buildPythonPackage fetchPypi pytweening pygetwindow python3-xlib pyscreeze mouseinfo;
+  inherit
+    buildPythonPackage
+    fetchPypi
+    pymsgbox
+    pytweening
+    pygetwindow
+    python3-xlib
+    pyscreeze
+    mouseinfo;
   };
   pygetwindow = with pkgs.python3Packages; pkgs.callPackage ./pkgs/pygetwindow {
     inherit buildPythonPackage fetchPypi pyrect;
