@@ -59,6 +59,9 @@ rec {
   python-iconf = with pkgs.python3Packages; pkgs.callPackage ./pkgs/python-iconf {
     inherit buildPythonPackage fetchPypi pytest;
   };
+  pytweening = with pkgs.python3Packages; pkgs.callPackage ./pkgs/pytweening {
+    inherit buildPythonPackage;
+  };
   qtile = pkgs.callPackage ./pkgs/qtile { };
   rofi = pkgs.callPackage ./pkgs/rofi { };
   semantik = pkgs.libsForQt5.callPackage ./pkgs/semantik { };
