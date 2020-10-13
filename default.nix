@@ -48,6 +48,9 @@ rec {
   merge-keepass = with pkgs.python3Packages; pkgs.callPackage ./pkgs/merge-keepass { 
     inherit buildPythonPackage pykeepass click pytest;
   };
+  mouseinfo = with pkgs.python3Packages; pkgs.callPackage ./pkgs/mouseinfo {
+    inherit buildPythonPackage fetchPypi pyperclip python3-xlib;
+  };
   ncgopher = pkgs.callPackage ./pkgs/ncgopher { };
   numworks-udev-rules = pkgs.callPackage ./pkgs/numworks-udev-rules { };
   parallel-ssh = with pkgs.python3Packages; pkgs.callPackage ./pkgs/parallel-ssh {
