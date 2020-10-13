@@ -3,18 +3,12 @@
 , fetchFromGitHub 
 , click
 , geckodriver
+, pyautogui
 , pybase64
 , selenium
 , wget
 }:
 
-let
-  mach-nix = import (builtins.fetchGit {
-    url = "https://github.com/DavHau/mach-nix/";
-    ref = "refs/tags/2.4.1";
-  });
-  pyautogui = mach-nix.buildPythonPackage "https://github.com/asweigart/pyautogui/tarball/a62027c63fde";
-in
 buildPythonPackage rec {
   pname = "PronoteBot";
   version = "1.0.0";

@@ -56,9 +56,10 @@ rec {
   parallel-ssh = with pkgs.python3Packages; pkgs.callPackage ./pkgs/parallel-ssh {
     inherit buildPythonPackage setuptools fetchPypi paramiko gevent ssh2-python;
   };
-  # pronotebot = with pkgs.python3Packages; pkgs.callPackage ./pkgs/PronoteBot {
-  #   inherit buildPythonPackage pybase64 selenium click;
-  # };
+  pronotebot = with pkgs.python3Packages; pkgs.callPackage ./pkgs/PronoteBot {
+    inherit buildPythonPackage pybase64 selenium click pyautogui;
+    inherit (pkgs.python3Packages) wget;
+  };
   pyautogui = with pkgs.python3Packages; pkgs.callPackage ./pkgs/pyautogui {
   inherit
     buildPythonPackage
