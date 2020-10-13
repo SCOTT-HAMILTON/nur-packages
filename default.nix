@@ -59,6 +59,9 @@ rec {
   python-iconf = with pkgs.python3Packages; pkgs.callPackage ./pkgs/python-iconf {
     inherit buildPythonPackage fetchPypi pytest;
   };
+  python3-xlib = with pkgs.python3Packages; pkgs.callPackage ./pkgs/python3-xlib {
+    inherit buildPythonPackage fetchPypi;
+  };
   pytweening = with pkgs.python3Packages; pkgs.callPackage ./pkgs/pytweening {
     inherit buildPythonPackage;
   };
