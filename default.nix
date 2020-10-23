@@ -57,6 +57,9 @@ rec {
   parallel-ssh = with pkgs.python3Packages; pkgs.callPackage ./pkgs/parallel-ssh {
     inherit buildPythonPackage setuptools fetchPypi paramiko gevent ssh2-python;
   };
+  pdf2timetable = with pkgs.python3Packages; pkgs.callPackage ./pkgs/Pdf2TimeTable {
+    inherit buildPythonPackage click pandas numpy pypdf2 tabula-py;
+  };
   pronotebot = with pkgs.python3Packages; pkgs.callPackage ./pkgs/PronoteBot {
     inherit buildPythonPackage pybase64 selenium click pyautogui;
     inherit (pkgs.python3Packages) wget;
@@ -109,6 +112,9 @@ rec {
   };
   sync-database = with pkgs.python3Packages; pkgs.callPackage ./pkgs/sync-database {
     inherit buildPythonPackage parallel-ssh merge-keepass pykeepass;
+  };
+  tabula-py = with pkgs.python3Packages; pkgs.callPackage ./pkgs/tabula-py {
+    inherit buildPythonPackage fetchPypi distro numpy pandas setuptools_scm setuptools;
   };
   timetable2header = with pkgs.python3Packages; pkgs.callPackage ./pkgs/TimeTable2Header {
     inherit buildPythonPackage click pandas numpy odfpy;
