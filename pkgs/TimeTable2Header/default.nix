@@ -11,14 +11,14 @@ buildPythonPackage rec {
   pname = "TimeTable2Header";
   version = "1.0.0";
 
-  # src = fetchFromGitHub {
-  #   owner = "SCOTT-HAMILTON";
-  #   repo = "TimeTable2Header";
-  #   rev = "4bc1c6d98e7bdfa998a2a0617bf300654f83d3bc";
-  #   sha256 = "1nllxka4gr9jfrqpchg73ryx9lvpbw1d28fz5q9jd1352islgv5j";
-  # };
+  src = fetchFromGitHub {
+    owner = "SCOTT-HAMILTON";
+    repo = "TimeTable2Header";
+    rev = "c9b589685e06c5edbf4002f7c16453bd8688cc28";
+    sha256 = "1is202fsa6vwcj83kvbwx0jyrvxyhdlr6ciz30m1rn4dgg1hshic";
+  };
 
-  src = ./src.tar.gz;
+  # src = ./src.tar.gz;
 
   propagatedBuildInputs = [
     click

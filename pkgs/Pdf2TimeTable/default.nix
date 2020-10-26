@@ -13,14 +13,14 @@ buildPythonPackage rec {
   pname = "Pdf2TimeTable";
   version = "1.0.0";
 
-  # src = fetchFromGitHub {
-  #   owner = "SCOTT-HAMILTON";
-  #   repo = "Pdf2TimeTable";
-  #   rev = "28e6bf5dcc4c0836fde8e6727c16aa3a739e6009";
-  #   sha256 = "0dcl26c60g2l4jr3096hh1hrs2h3xgcfymxc29jhdbh2h7dwf5k4";
-  # };
+  src = fetchFromGitHub {
+    owner = "SCOTT-HAMILTON";
+    repo = "Pdf2TimeTable";
+    rev = "5efd9479115197544c736f1cefaf7a9f3b6a6cce";
+    sha256 = "19bhai2gmri6553km7l51anw18x9b439aii3rv2chs6sp52d18m1";
+  };
 
-  src = ./src.tar.gz;
+  # src = ./src.tar.gz;
 
   propagatedBuildInputs = [
     click
