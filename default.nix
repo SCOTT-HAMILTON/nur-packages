@@ -7,7 +7,20 @@
 
 { pkgs ? import <nixpkgs> {} 
 }:
-
+let
+  python_with_openpyxl305 = pkgs.python38.override {
+    packageOverrides = self: super: {
+      openpyxl = pkgs.python38Packages.openpyxl.overrideAttrs (old: {
+        version = "3.0.5";
+        src = pkgs.python38Packages.fetchPypi {
+          pname = "openpyxl";
+          version = "3.0.5";
+          sha256 = "06y7lbqnn0ga2x55az4hkqfs202fl6mkv3m5h0js2a01cnd1zq8q";
+        };
+      });
+    };
+  };
+in
 rec {
   # The `lib`, `modules`, and `overlay` names are special
   lib = import ./lib { inherit pkgs; }; # functions
@@ -57,12 +70,15 @@ rec {
   parallel-ssh = with pkgs.python3Packages; pkgs.callPackage ./pkgs/parallel-ssh {
     inherit buildPythonPackage setuptools fetchPypi paramiko gevent ssh2-python;
   };
-  pdf2timetable = with pkgs.python3Packages; pkgs.callPackage ./pkgs/Pdf2TimeTable {
-    inherit buildPythonPackage click pandas numpy pypdf2 tabula-py;
+  pdf2timetable = pkgs.callPackage ./pkgs/Pdf2TimeTable {
+    inherit (python_with_openpyxl305.pkgs) buildPythonPackage numpy openpyxl pandas pypdf2 click;
+    inherit tabula-py;
   };
   pronotebot = with pkgs.python3Packages; pkgs.callPackage ./pkgs/PronoteBot {
     inherit buildPythonPackage pybase64 selenium click pyautogui;
     inherit (pkgs.python3Packages) wget;
+  };
+  pronote-timetable-fetch = pkgs.callPackage ./pkgs/pronote-timetable-fetch {
   };
   pyautogui = with pkgs.python3Packages; pkgs.callPackage ./pkgs/pyautogui {
   inherit
@@ -114,7 +130,7 @@ rec {
     inherit buildPythonPackage parallel-ssh merge-keepass pykeepass;
   };
   tabula-py = with pkgs.python3Packages; pkgs.callPackage ./pkgs/tabula-py {
-    inherit buildPythonPackage fetchPypi distro numpy pandas setuptools_scm setuptools;
+    inherit (python_with_openpyxl305.pkgs) buildPythonPackage fetchPypi distro numpy pandas setuptools_scm setuptools;
   };
   timetable2header = with pkgs.python3Packages; pkgs.callPackage ./pkgs/TimeTable2Header {
     inherit buildPythonPackage click pandas numpy odfpy;

@@ -3,6 +3,7 @@
 , fetchFromGitHub 
 , click
 , numpy
+, openpyxl
 , pandas
 , pypdf2
 , tabula-py
@@ -12,20 +13,21 @@ buildPythonPackage rec {
   pname = "Pdf2TimeTable";
   version = "1.0.0";
 
-  src = fetchFromGitHub {
-    owner = "SCOTT-HAMILTON";
-    repo = "Pdf2TimeTable";
-    rev = "28e6bf5dcc4c0836fde8e6727c16aa3a739e6009";
-    sha256 = "0dcl26c60g2l4jr3096hh1hrs2h3xgcfymxc29jhdbh2h7dwf5k4";
-  };
+  # src = fetchFromGitHub {
+  #   owner = "SCOTT-HAMILTON";
+  #   repo = "Pdf2TimeTable";
+  #   rev = "28e6bf5dcc4c0836fde8e6727c16aa3a739e6009";
+  #   sha256 = "0dcl26c60g2l4jr3096hh1hrs2h3xgcfymxc29jhdbh2h7dwf5k4";
+  # };
 
-  # src = ./src.tar.gz;
+  src = ./src.tar.gz;
 
   propagatedBuildInputs = [
     click
     numpy
     pandas
     pypdf2
+    openpyxl
     tabula-py
   ];
 

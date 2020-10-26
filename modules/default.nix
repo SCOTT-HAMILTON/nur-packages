@@ -8,6 +8,7 @@
     redshift-auto = ./redshift-auto.nix;
     sync-database = ./sync-database.nix;
     pronotebot = ./pronotebot.nix;
+    pronote-timetable-fetch = ./pronote-timetable-fetch.nix;
   };
 }
 
