@@ -16,8 +16,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "Pdf2TimeTable";
-    rev = "5efd9479115197544c736f1cefaf7a9f3b6a6cce";
-    sha256 = "19bhai2gmri6553km7l51anw18x9b439aii3rv2chs6sp52d18m1";
+    rev = "4e5cc879d584916933ca72c93b68b076a1bcffbd";
+    sha256 = "16mvsbzbyh6l18jdmdlqwir34scnpysnkkazz2dqngic9s1zg6kw";
   };
 
   # src = ./src.tar.gz;

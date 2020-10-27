@@ -13,9 +13,10 @@ let
   src = pkgs.fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "pronote-timetable-fetch";
-    rev = "9767abb2e8b5ecac0f99944ebe3a4057f7912d25";
-    sha256 = "0rs73ga4ijjn6wh2f5m4sb9y7fza004859vf4nic9wi6hp76v9pn";
+    rev = "7a51ad077521fa2c8d9fd7b1767b40cf0d70147c";
+    sha256 = "1wy9iy2znisqsiq89l91kwi5n7llcf3bxgx40zaxc98pnrli7bj6";
   };
+  # src = ~/GIT/pronote-timetable-fetch;
 in
 (import ./node-packages.nix {
   inherit (pkgs) fetchurl;

@@ -129,7 +129,7 @@ rec {
   sync-database = with pkgs.python3Packages; pkgs.callPackage ./pkgs/sync-database {
     inherit buildPythonPackage parallel-ssh merge-keepass pykeepass;
   };
-  tabula-py = with pkgs.python3Packages; pkgs.callPackage ./pkgs/tabula-py {
+  tabula-py = pkgs.callPackage ./pkgs/tabula-py {
     inherit (python_with_openpyxl305.pkgs) buildPythonPackage fetchPypi distro numpy pandas setuptools_scm setuptools;
   };
   timetable2header = with pkgs.python3Packages; pkgs.callPackage ./pkgs/TimeTable2Header {
