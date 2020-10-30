@@ -80,6 +80,7 @@ rec {
   };
   pronote-timetable-fetch = pkgs.callPackage ./pkgs/pronote-timetable-fetch {
   };
+  ptouch-print = pkgs.callPackage ./pkgs/ptouch-print { };
   pyautogui = with pkgs.python3Packages; pkgs.callPackage ./pkgs/pyautogui {
   inherit
     buildPythonPackage
@@ -143,7 +144,6 @@ rec {
     gst-plugins-ugly = gst_all_1.gst-plugins-ugly;
   };
   wiiuse = pkgs.callPackage ./pkgs/WiiUse { };
-  xtreme-download-manager = pkgs.callPackage ./pkgs/xtreme-download-manager {
-  };
+  xtreme-download-manager = pkgs.callPackage ./pkgs/xtreme-download-manager { };
 }
 
