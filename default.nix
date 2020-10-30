@@ -20,11 +20,6 @@ let
       });
     };
   };
-  mvn2nix = import
-    (fetchTarball {
-      url = "https://github.com/fzakaria/mvn2nix/archive/bc86f650d80ce9d29c376d6955ed175cba87915e.tar.gz";
-      sha256 = "0lzy1l208sxrs83y6l7dlrbmg1q3y75gw4fxy3wpzjhsxlycv3xj";
-    }) { };
 in
 rec {
   # The `lib`, `modules`, and `overlay` names are special
@@ -70,6 +65,7 @@ rec {
   mouseinfo = with pkgs.python37Packages; pkgs.callPackage ./pkgs/mouseinfo {
     inherit buildPythonPackage fetchPypi pyperclip python3-xlib pillow;
   };
+  mvn2nix = pkgs.callPackage ./pkgs/mvn2nix { };
   ncgopher = pkgs.callPackage ./pkgs/ncgopher { };
   numworks-udev-rules = pkgs.callPackage ./pkgs/numworks-udev-rules { };
   parallel-ssh = with pkgs.python3Packages; pkgs.callPackage ./pkgs/parallel-ssh {
