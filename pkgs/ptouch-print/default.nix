@@ -29,7 +29,7 @@ stdenv.mkDerivation rec {
     description = "Command line tool to print labels on Brother P-Touch printers on Linux";
     license = licenses.gpl3Plus;
     homepage = "https://mockmoon-cybernetics.ch/computer/p-touch2430pc/";
-    maintainers = [ maintainers.shamilton ];
+    maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
   };
 }
