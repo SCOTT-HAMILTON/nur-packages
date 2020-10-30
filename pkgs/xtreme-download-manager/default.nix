@@ -3,16 +3,12 @@
 , fetchFromGitHub
 , stdenv
 , jdk11
-, maven
 , makeWrapper
+, maven
+, mvn2nix
 }:
 
 let
-  mvn2nix = import
-    (fetchTarball {
-      url = "https://github.com/fzakaria/mvn2nix/archive/bc86f650d80ce9d29c376d6955ed175cba87915e.tar.gz";
-      sha256 = "0lzy1l208sxrs83y6l7dlrbmg1q3y75gw4fxy3wpzjhsxlycv3xj"; 
-    }) { };
   mavenRepository =
    mvn2nix.buildMavenRepositoryFromLockFile { file = ./mvn2nix-lock.json; };
   source = fetchFromGitHub {

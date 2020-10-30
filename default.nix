@@ -20,6 +20,11 @@ let
       });
     };
   };
+  mvn2nix = import
+    (fetchTarball {
+      url = "https://github.com/fzakaria/mvn2nix/archive/bc86f650d80ce9d29c376d6955ed175cba87915e.tar.gz";
+      sha256 = "0lzy1l208sxrs83y6l7dlrbmg1q3y75gw4fxy3wpzjhsxlycv3xj";
+    }) { };
 in
 rec {
   # The `lib`, `modules`, and `overlay` names are special
@@ -144,6 +149,8 @@ rec {
     gst-plugins-ugly = gst_all_1.gst-plugins-ugly;
   };
   wiiuse = pkgs.callPackage ./pkgs/WiiUse { };
-  xtreme-download-manager = pkgs.callPackage ./pkgs/xtreme-download-manager { };
+  xtreme-download-manager = pkgs.callPackage ./pkgs/xtreme-download-manager {
+    inherit mvn2nix;
+  };
 }
 
