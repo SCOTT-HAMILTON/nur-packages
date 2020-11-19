@@ -149,5 +149,8 @@ rec {
   xtreme-download-manager = pkgs.callPackage ./pkgs/xtreme-download-manager {
     inherit mvn2nix;
   };
+  yaml2probatree = with pkgs.python3Packages; pkgs.callPackage ./pkgs/Yaml2ProbaTree {
+    inherit buildPythonPackage pyyaml click;
+  };
 }
 
