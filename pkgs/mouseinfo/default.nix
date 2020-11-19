@@ -15,6 +15,7 @@ buildPythonPackage rec {
     sha256 = "1rznyzv6w9f8bfq2x5b0ik0dqyk5ghlhmkiw1998waq6hn4gnqic";
   };
 
+
   propagatedBuildInputs = [
     pillow
     pyperclip

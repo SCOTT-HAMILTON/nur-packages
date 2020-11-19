@@ -7,6 +7,7 @@
 , pyscreeze
 , python3-xlib
 , pytweening
+, pyrect
 }:
 
 buildPythonPackage rec {
@@ -19,6 +20,7 @@ buildPythonPackage rec {
   };
 
   propagatedBuildInputs = [
+    pyrect
     mouseinfo
     pygetwindow
     pymsgbox

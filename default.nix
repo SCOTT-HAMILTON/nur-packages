@@ -62,7 +62,7 @@ rec {
   merge-keepass = with pkgs.python3Packages; pkgs.callPackage ./pkgs/merge-keepass { 
     inherit buildPythonPackage pykeepass click pytest;
   };
-  mouseinfo = with pkgs.python37Packages; pkgs.callPackage ./pkgs/mouseinfo {
+  mouseinfo = with pkgs.python38Packages; pkgs.callPackage ./pkgs/mouseinfo {
     inherit buildPythonPackage fetchPypi pyperclip python3-xlib pillow;
   };
   mvn2nix = pkgs.callPackage ./pkgs/mvn2nix { };
@@ -86,12 +86,13 @@ rec {
   inherit
     buildPythonPackage
     fetchPypi
-    pymsgbox
-    pytweening
+    mouseinfo
     pygetwindow
-    python3-xlib
+    pymsgbox
+    pyrect
     pyscreeze
-    mouseinfo;
+    python3-xlib
+    pytweening;
   };
   pygetwindow = with pkgs.python3Packages; pkgs.callPackage ./pkgs/pygetwindow {
     inherit buildPythonPackage fetchPypi pyrect;
