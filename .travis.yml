@@ -40,6 +40,7 @@ install:
  - travis_retry nix-channel --update
 
 script:
+ - git fetch origin
  - git checkout $BRANCH
  - nix-build ci.nix -A buildOutputs
  - nix eval -f default.nix 'lib'
