@@ -23,9 +23,9 @@ env:
 
 matrix:
   include:
-    - env: NIX_CHANNEL=https://nixos.org/channels/nixpkgs-unstable NIXPKGS_ALLOW_UNFREE=1
-    - env: NIX_CHANNEL=https://nixos.org/channels/nixos-unstable NIXPKGS_ALLOW_UNFREE=1
-    - env: NIX_CHANNEL=https://nixos.org/channels/nixos-20.03 NIXPKGS_ALLOW_UNFREE=1
+    - env: NIX_CHANNEL=https://nixos.org/channels/nixpkgs-unstable NIXPKGS_ALLOW_UNFREE=1 BRANCH="nixpkgs-unstable"
+    - env: NIX_CHANNEL=https://nixos.org/channels/nixos-unstable NIXPKGS_ALLOW_UNFREE=1 BRANCH="nixos-unstable"
+    - env: NIX_CHANNEL=https://nixos.org/channels/nixos-20.09 NIXPKGS_ALLOW_UNFREE=1 BRANCH="master"
 
 install:
  - nix --version
@@ -40,12 +40,14 @@ install:
  - travis_retry nix-channel --update
 
 script:
+ - git checkout $BRANCH
  - nix-build ci.nix -A buildOutputs
  - nix eval -f default.nix 'lib'
  - nix eval -f default.nix 'modules'
  - nix eval -f default.nix 'overlays'
 
 after_success:
+  - git checkout $BRANCH
   - nix-build ci.nix -A cacheOutputs | cachix push "${CACHIX_CACHE}"
   - if [ "cron" != "${TRAVIS_EVENT_TYPE}" -a "false" = "${TRAVIS_PULL_REQUEST}" -a "master" = "${TRAVIS_BRANCH}" ]; then
       curl -XPOST "https://nur-update.herokuapp.com/update?repo=${NUR_REPO}"; fi
