@@ -21,11 +21,20 @@ env:
     # https://github.com/nix-community/NUR/blob/master/repos.json
     - NUR_REPO=shamilton
 
+branches:
+  only:
+  - master
+  - nixpkgs-unstable
+  - nixos-unstable
+
 matrix:
   include:
-    - env: NIX_CHANNEL=https://nixos.org/channels/nixpkgs-unstable NIXPKGS_ALLOW_UNFREE=1 BRANCH="nixpkgs-unstable"
-    - env: NIX_CHANNEL=https://nixos.org/channels/nixos-unstable NIXPKGS_ALLOW_UNFREE=1 BRANCH="nixos-unstable"
-    - env: NIX_CHANNEL=https://nixos.org/channels/nixos-20.09 NIXPKGS_ALLOW_UNFREE=1 BRANCH="master"
+    - if: branch = nixpkgs-unstable
+      env: NIX_CHANNEL=https://nixos.org/channels/nixpkgs-unstable NIXPKGS_ALLOW_UNFREE=1
+    - if: branch = nixos-unstable
+      env: NIX_CHANNEL=https://nixos.org/channels/nixos-unstable NIXPKGS_ALLOW_UNFREE=1
+    - if: branch = master
+      env: NIX_CHANNEL=https://nixos.org/channels/nixos-20.09 NIXPKGS_ALLOW_UNFREE=1
 
 install:
  - nix --version
@@ -40,16 +49,12 @@ install:
  - travis_retry nix-channel --update
 
 script:
- - git fetch origin
- - git checkout $BRANCH
- - nix-build ci.nix -A buildOutputs
+ - nix-build
  - nix eval -f default.nix 'lib'
  - nix eval -f default.nix 'modules'
  - nix eval -f default.nix 'overlays'
 
 after_success:
-  - git fetch origin
-  - git checkout $BRANCH
-  - nix-build ci.nix -A cacheOutputs | cachix push "${CACHIX_CACHE}"
+  - nix-build | cachix push "${CACHIX_CACHE}"
   - if [ "cron" != "${TRAVIS_EVENT_TYPE}" -a "false" = "${TRAVIS_PULL_REQUEST}" -a "master" = "${TRAVIS_BRANCH}" ]; then
       curl -XPOST "https://nur-update.herokuapp.com/update?repo=${NUR_REPO}"; fi
