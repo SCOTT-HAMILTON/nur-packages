@@ -37,7 +37,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
         with:
-          ref: ${{ matrix.channel-branch }
+          ref: ${{ matrix.channel-branch }}
       - uses: cachix/install-nix-action@v12
       - uses: cachix/cachix-action@v8
         with:
@@ -46,22 +46,23 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Nix Version
         run: nix --version
-      - name: Configure Channels
-        run: |
-          if [ "${{ matrix.channel-branch }}" = "master" ]; then
-            nix-channel --add "https://nixos.org/channels/${{ env.DEFAULT_NIX_CHANNEL }}";
-          else
-            nix-channel --add "https://nixos.org/channels/${{ matrix.channel-branch }}";
-          fi
-      - name: Nix Channels
-        run: nix-channel --list
       - name: Build
         run: |
-          nix-build ci.nix -A buildOutputs --show-trace
+          if [ "${{ matrix.channel-branch }}" = "master" ]; then
+            export NIX_PATH=nixpkgs=channel:${{ env.DEFAULT_NIX_CHANNEL }}
+          else
+            export NIX_PATH=nixpkgs=channel:${{ matrix.channel-branch }}
+          fi
+          nix-build
           nix eval -f default.nix 'lib'
           nix eval -f default.nix 'modules'
           nix eval -f default.nix 'overlays'
       - name: Push
         run: |
-          nix-build ci.nix -A cacheOutputs | cachix push "${CACHIX_CACHE}"
+          if [ "${{ matrix.channel-branch }}" = "master" ]; then
+            export NIX_PATH=nixpkgs=channel:${{ env.DEFAULT_NIX_CHANNEL }}
+          else
+            export NIX_PATH=nixpkgs=channel:${{ matrix.channel-branch }}
+          fi
+          nix-build | cachix push "${CACHIX_CACHE}"
           curl -XPOST "https://nur-update.herokuapp.com/update?repo=${NUR_REPO}"
