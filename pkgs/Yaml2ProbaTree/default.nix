@@ -12,8 +12,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "Yaml2ProbaTree";
-    rev = "aaece38f9d00d657101d112f5f8cdd2d1753846d";
-    sha256 = "004fvx82gjj38dipl3rwr04zv57312m0r9rnhrvqhndh9ksbjvw2";
+    rev = "f3566f4b26b0bcb43fff04a17b43074d5f952346";
+    sha256 = "15vjpzw9jqv25vgc0kl7n3qci1mhm27ydnmlaa91vc5l4fg442jy";
   };
 
   # src = ./src.tar.gz;
