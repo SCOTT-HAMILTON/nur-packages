@@ -1,4 +1,5 @@
 { pkgs ? import <nixpkgs> {}
+, localUsage ? false
 }:
 let
   python_with_openpyxl305 = pkgs.python38.override {
@@ -58,7 +59,6 @@ rec {
   mouseinfo = with pkgs.python38Packages; pkgs.callPackage ./pkgs/mouseinfo {
     inherit buildPythonPackage fetchPypi pyperclip python3-xlib pillow;
   };
-  mvn2nix = pkgs.callPackage ./pkgs/mvn2nix { };
   ncgopher = pkgs.callPackage ./pkgs/ncgopher { };
   numworks-udev-rules = pkgs.callPackage ./pkgs/numworks-udev-rules { };
   parallel-ssh = with pkgs.python3Packages; pkgs.callPackage ./pkgs/parallel-ssh {
@@ -139,11 +139,14 @@ rec {
     gst-plugins-ugly = gst_all_1.gst-plugins-ugly;
   };
   wiiuse = pkgs.callPackage ./pkgs/WiiUse { };
-  xtreme-download-manager = pkgs.callPackage ./pkgs/xtreme-download-manager {
-    inherit mvn2nix;
-  };
   yaml2probatree = with pkgs.python3Packages; pkgs.callPackage ./pkgs/Yaml2ProbaTree {
     inherit buildPythonPackage pyyaml click;
   };
-}
-
+} //
+# Derivations not supported on NUR
+pkgs.lib.optionalAttrs (localUsage) (rec {
+  mvn2nix = pkgs.callPackage ./pkgs/mvn2nix { };
+  xtreme-download-manager = pkgs.callPackage ./pkgs/xtreme-download-manager {
+    inherit mvn2nix;
+  };
+})
