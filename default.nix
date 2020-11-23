@@ -1,8 +1,5 @@
 { pkgs ? import <nixpkgs> {}
-<<<<<<< HEAD
-=======
 , localUsage ? false
->>>>>>> 932f493a1bc0cfd917e3694bbdcf411fbce2cd9a
 }:
 let
   python_with_openpyxl305 = pkgs.python38.override {
