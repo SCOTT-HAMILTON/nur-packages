@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {}
+{ pkgs ? import <nixpkgs-unstable> {}
 , localUsage ? false
 }:
 let
@@ -26,7 +26,7 @@ rec {
   argparse = pkgs.callPackage ./pkgs/argparse { };
   baobab = pkgs.callPackage ./pkgs/baobab { };
   boca = pkgs.callPackage ./pkgs/boca { inherit smooth; };
-  bomber = pkgs.kdeApplications.callPackage ./pkgs/Bomber { };
+  bomber = pkgs.libsForQt5.kdeApplications.callPackage ./pkgs/Bomber { };
   cargo-sort-ck = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/cargo-sort-ck {
     inherit buildRustPackage;
   };
@@ -46,12 +46,12 @@ rec {
   inkscape = pkgs.callPackage ./pkgs/inkscape-1.0 { 
     lcms = pkgs.lcms2;
   };
-  juk = pkgs.kdeApplications.callPackage ./pkgs/Juk { };
-  kapptemplate = pkgs.kdeApplications.callPackage ./pkgs/KAppTemplate { };
-  kbreakout = pkgs.kdeApplications.callPackage ./pkgs/KBreakOut { };
-  keysmith = pkgs.kdeApplications.callPackage ./pkgs/keysmith { };
-  killbots = pkgs.kdeApplications.callPackage ./pkgs/Killbots { };
-  kirigami-gallery = pkgs.kdeApplications.callPackage ./pkgs/KirigamiGallery { };
+  juk = pkgs.libsForQt5.callPackage ./pkgs/Juk { };
+  kapptemplate = pkgs.libsForQt5.callPackage ./pkgs/KAppTemplate { };
+  kbreakout = pkgs.libsForQt5.kdeApplications.callPackage ./pkgs/KBreakOut { };
+  keysmith = pkgs.libsForQt5.kdeApplications.callPackage ./pkgs/keysmith { };
+  killbots = pkgs.libsForQt5.kdeApplications.callPackage ./pkgs/Killbots { };
+  kirigami-gallery = pkgs.libsForQt5.callPackage ./pkgs/KirigamiGallery { };
   ksmoothdock = pkgs.libsForQt5.callPackage ./pkgs/ksmoothdock { };
   libfake = pkgs.callPackage ./pkgs/FakeLib { };
   lokalize = pkgs.libsForQt5.callPackage ./pkgs/Lokalize { };
