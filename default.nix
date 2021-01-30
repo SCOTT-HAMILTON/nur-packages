@@ -62,6 +62,7 @@ rec {
     inherit buildPythonPackage fetchPypi pyperclip python3-xlib pillow;
   };
   ncgopher = pkgs.callPackage ./pkgs/ncgopher { };
+  nikto = pkgs.callPackage ./pkgs/nikto { };
   numworks-udev-rules = pkgs.callPackage ./pkgs/numworks-udev-rules { };
   parallel-ssh = with pkgs.python3Packages; pkgs.callPackage ./pkgs/parallel-ssh {
     inherit buildPythonPackage setuptools fetchPypi paramiko gevent ssh2-python;
