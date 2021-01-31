@@ -17,7 +17,7 @@ on:
 env:
   NUR_REPO: shamilton
   CACHIX_CACHE: scott-hamilton
-  NIXPKGS_ALLOW_BROKEN: 1
+  NIXPKGS_ALLOW_BROKEN: 0
   CACHIX_SIGNING_KEY: ${{ secrets.CACHIX_SIGNING_KEY }}
   DEFAULT_NIX_CHANNEL: nixos-20.09
   # Allows you to run this workflow manually from the Actions tab
@@ -56,7 +56,7 @@ jobs:
           else
             export NIX_PATH=nixpkgs=channel:${{ matrix.channel-branch }}
           fi
-          nix-build
+          nix-build all-unbroken.nix
           nix eval -f default.nix 'lib'
           nix eval -f default.nix 'modules'
           nix eval -f default.nix 'overlays'
@@ -67,5 +67,5 @@ jobs:
           else
             export NIX_PATH=nixpkgs=channel:${{ matrix.channel-branch }}
           fi
-          nix-build | cachix push "${CACHIX_CACHE}"
+          nix-build all-unbroken.nix | cachix push "${CACHIX_CACHE}"
           curl -XPOST "https://nur-update.herokuapp.com/update?repo=${NUR_REPO}"

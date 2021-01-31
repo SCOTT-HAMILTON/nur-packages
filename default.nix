@@ -30,6 +30,9 @@ rec {
   cargo-sort-ck = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/cargo-sort-ck {
     inherit buildRustPackage;
   };
+  commix = with pkgs.python37Packages; pkgs.callPackage ./pkgs/commix {
+    inherit buildPythonApplication;
+  };
   compton = pkgs.callPackage ./pkgs/Compton { };
   controls-for-fake = pkgs.libsForQt5.callPackage ./pkgs/ControlsForFake  {
     inherit libfake;
@@ -45,6 +48,10 @@ rec {
   haste-client = pkgs.callPackage ./pkgs/haste-client { };
   inkscape = pkgs.callPackage ./pkgs/inkscape-1.0 { 
     lcms = pkgs.lcms2;
+  };
+  iptux = with pkgs; callPackage ./pkgs/iptux {
+    inherit (gst_all_1) gstreamer;
+    inherit (gnome2) gtk;
   };
   juk = pkgs.libsForQt5.callPackage ./pkgs/Juk { };
   kapptemplate = pkgs.libsForQt5.callPackage ./pkgs/KAppTemplate { };
@@ -62,6 +69,7 @@ rec {
     inherit buildPythonPackage fetchPypi pyperclip python3-xlib pillow;
   };
   ncgopher = pkgs.callPackage ./pkgs/ncgopher { };
+  nikto = pkgs.callPackage ./pkgs/nikto { };
   numworks-udev-rules = pkgs.callPackage ./pkgs/numworks-udev-rules { };
   parallel-ssh = with pkgs.python3Packages; pkgs.callPackage ./pkgs/parallel-ssh {
     inherit buildPythonPackage setuptools fetchPypi paramiko gevent ssh2-python;
@@ -108,6 +116,7 @@ rec {
     inherit buildPythonPackage;
   };
   qtile = pkgs.callPackage ./pkgs/qtile { };
+  rustscan = pkgs.callPackage ./pkgs/rustscan { };
   semantik = pkgs.libsForQt5.callPackage ./pkgs/semantik { };
   scripts = with pkgs.python3Packages; pkgs.callPackage ./pkgs/Scripts {
     eom = pkgs.mate.eom;
