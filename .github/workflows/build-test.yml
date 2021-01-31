@@ -56,7 +56,7 @@ jobs:
           else
             export NIX_PATH=nixpkgs=channel:${{ matrix.channel-branch }}
           fi
-          nix-build
+          nix-build all-unbroken.nix
           nix eval -f default.nix 'lib'
           nix eval -f default.nix 'modules'
           nix eval -f default.nix 'overlays'
@@ -67,5 +67,5 @@ jobs:
           else
             export NIX_PATH=nixpkgs=channel:${{ matrix.channel-branch }}
           fi
-          nix-build | cachix push "${CACHIX_CACHE}"
+          nix-build all-unbroken.nix | cachix push "${CACHIX_CACHE}"
           curl -XPOST "https://nur-update.herokuapp.com/update?repo=${NUR_REPO}"
