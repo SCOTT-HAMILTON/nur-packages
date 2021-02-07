@@ -15,7 +15,7 @@
 mkDerivation rec {
 
   pname = "Lokalize";
-  version = "20.12.2";
+  version = "20.04.1";
 
   src = fetchFromGitHub {
     owner = "KDE";
