@@ -29,7 +29,7 @@ stdenv.mkDerivation rec {
     sha256 = "0fb3w968xxj39fazf8dcda6bgi9pbd6i4pichr6hgydwsi456k3d";
   };
   
-  # On nixos-unstable, th jsoncpp's pkg-config file is missing the version name.
+  # On nixos-unstable, the jsoncpp's pkg-config file is missing the version name.
   # This patch makes cmake ignore the jsoncpp's version as nixos-unstable provides 
   # jsoncpp 1.9.4
   patches = [ ./jsoncpp-no-pkgconfig-version.patch ];
@@ -45,7 +45,7 @@ stdenv.mkDerivation rec {
     gstreamer
     gtest
     gtk
-    (lib.getDev jsoncpp)
+    jsoncpp
     libXdmcp
     libpthreadstubs
     libselinux
