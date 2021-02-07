@@ -5,12 +5,13 @@
 , extra-cmake-modules
 , qtbase
 , qtquickcontrols2
+, kitemmodels
 , kactivities
 }:
 mkDerivation rec {
 
   pname = "KirigamiGallery";
-  version = "20.07.90";
+  version = "20.12.2";
 
   src = fetchFromGitHub {
     owner = "KDE";
@@ -20,8 +21,8 @@ mkDerivation rec {
   };
 
   nativeBuildInputs = [ extra-cmake-modules cmake  ];
-
   buildInputs = [ qtquickcontrols2 kactivities qtbase ];
+  propagatedBuildInputs = [ kitemmodels ];
 
   meta = with lib; {
     description = "View examples of Kirigami components";
