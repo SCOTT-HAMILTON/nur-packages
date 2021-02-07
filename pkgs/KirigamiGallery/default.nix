@@ -17,7 +17,7 @@ mkDerivation rec {
     owner = "KDE";
     repo = "kirigami-gallery";
     rev = "v${version}";
-    sha256 = "1xm29g0anpmg3j3mnjfvwia7npgmvpnx04q3d5ixmf52ybslyvlb";
+    sha256 = "18jgbhjpbdh2qi7rxyx3bh72ig753bfggqh4l3xk191cv7c3i7g2";
   };
 
   nativeBuildInputs = [ extra-cmake-modules cmake  ];
