@@ -1,4 +1,5 @@
 { stdenv
+, lib
 , fetchFromGitHub
 , mkDerivation
 , qmake
@@ -29,7 +30,7 @@ mkDerivation rec {
 
   enableParallelBuilding = true;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "MS Office files conversion client for the Unoconv Web Service";
     license = licenses.mit;
     homepage = "https://github.com/SCOTT-HAMILTON/UnoconvUI";
