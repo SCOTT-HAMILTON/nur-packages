@@ -8,8 +8,6 @@ on:
   push:
     branches:
        - master
-       - nixpkgs-unstable
-       - nixos-unstable
   schedule:
        # Once a week on saturday
        - cron: '7 13 * * 6' 
@@ -40,7 +38,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
         with:
-          ref: ${{ matrix.channel-branch }}
+          ref: master
       - uses: cachix/install-nix-action@v12
       - uses: cachix/cachix-action@v8
         with:
@@ -56,10 +54,10 @@ jobs:
           else
             export NIX_PATH=nixpkgs=channel:${{ matrix.channel-branch }}
           fi
-          nix-build all-unbroken.nix
-          nix eval -f default.nix 'lib'
-          nix eval -f default.nix 'modules'
-          nix eval -f default.nix 'overlays'
+          nix-build --argstr nixosVersion "${{ matrix.channel-branch }}" all-unbroken.nix
+          nix eval --argstr nixosVersion "${{ matrix.channel-branch }}" -f default.nix 'lib'
+          nix eval --argstr nixosVersion "${{ matrix.channel-branch }}" -f default.nix 'modules'
+          nix eval --argstr nixosVersion "${{ matrix.channel-branch }}" -f default.nix 'overlays'
       - name: Push
         run: |
           if [ "${{ matrix.channel-branch }}" = "master" ]; then
@@ -67,5 +65,5 @@ jobs:
           else
             export NIX_PATH=nixpkgs=channel:${{ matrix.channel-branch }}
           fi
-          nix-build all-unbroken.nix | cachix push "${CACHIX_CACHE}"
+          nix-build --argstr nixosVersion "${{ matrix.channel-branch }}" all-unbroken.nix | cachix push "${CACHIX_CACHE}"
           curl -XPOST "https://nur-update.herokuapp.com/update?repo=${NUR_REPO}"

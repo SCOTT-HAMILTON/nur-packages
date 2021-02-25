@@ -1,5 +1,6 @@
 { pkgs ? import <nixpkgs> {}
 , localUsage ? false
+, nixosVersion ? "master"
 }:
 let
   python_with_openpyxl305 = pkgs.python38.override {
@@ -15,6 +16,7 @@ let
     };
   };
 in
+pkgs.lib.traceValFn (x: "Nixos Version : ${nixosVersion}, Local Usage : ${if localUsage then "true" else "false"}")
 rec {
   # The `lib`, `modules`, and `overlay` names are special
   lib = import ./lib { inherit pkgs; }; # functions
