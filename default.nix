@@ -15,6 +15,7 @@ let
       });
     };
   };
+  kdeApplications = if nixosVersion == "master" then pkgs.kdeApplications else pkgs.libsForQt5.kdeApplications;
 in
 pkgs.lib.traceValFn (x: "Nixos Version : ${nixosVersion}, Local Usage : ${if localUsage then "true" else "false"}")
 rec {
@@ -28,7 +29,7 @@ rec {
   argparse = pkgs.callPackage ./pkgs/argparse { };
   baobab = pkgs.callPackage ./pkgs/baobab { };
   boca = pkgs.callPackage ./pkgs/boca { inherit smooth; };
-  bomber = pkgs.kdeApplications.callPackage ./pkgs/Bomber { };
+  bomber = kdeApplications.callPackage ./pkgs/Bomber { };
   cargo-sort-ck = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/cargo-sort-ck {
     inherit buildRustPackage;
   };
@@ -55,12 +56,12 @@ rec {
     inherit (gst_all_1) gstreamer;
     inherit (gnome2) gtk;
   };
-  juk = pkgs.kdeApplications.callPackage ./pkgs/Juk { };
-  kapptemplate = pkgs.kdeApplications.callPackage ./pkgs/KAppTemplate { };
-  kbreakout = pkgs.kdeApplications.callPackage ./pkgs/KBreakOut { };
-  keysmith = pkgs.kdeApplications.callPackage ./pkgs/keysmith { };
-  killbots = pkgs.kdeApplications.callPackage ./pkgs/Killbots { };
-  kirigami-gallery = pkgs.kdeApplications.callPackage ./pkgs/KirigamiGallery { };
+  juk = kdeApplications.callPackage ./pkgs/Juk { };
+  kapptemplate = kdeApplications.callPackage ./pkgs/KAppTemplate { };
+  kbreakout = kdeApplications.callPackage ./pkgs/KBreakOut { };
+  keysmith = kdeApplications.callPackage ./pkgs/keysmith { };
+  killbots = kdeApplications.callPackage ./pkgs/Killbots { };
+  kirigami-gallery = kdeApplications.callPackage ./pkgs/KirigamiGallery { };
   ksmoothdock = pkgs.libsForQt5.callPackage ./pkgs/ksmoothdock { };
   libfake = pkgs.callPackage ./pkgs/FakeLib { };
   lokalize = pkgs.libsForQt5.callPackage ./pkgs/Lokalize { };
