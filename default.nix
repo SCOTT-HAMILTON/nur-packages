@@ -17,7 +17,11 @@ let
   };
   kdeApplications = if nixosVersion == "master" then pkgs.kdeApplications else pkgs.libsForQt5.kdeApplications;
 in
-pkgs.lib.traceValFn (x: "Nixos Version : ${nixosVersion}, Local Usage : ${if localUsage then "true" else "false"}")
+  pkgs.lib.traceValFn (x:
+   "Nixpkgs version : ${pkgs.lib.version},
+    Nixos Version : ${nixosVersion},
+    Local Usage : ${if localUsage then "true" else "false"}"
+  )
 rec {
   # The `lib`, `modules`, and `overlay` names are special
   lib = import ./lib { inherit pkgs; }; # functions

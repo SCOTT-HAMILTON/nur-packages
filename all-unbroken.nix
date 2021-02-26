@@ -1,6 +1,6 @@
-{localUsage ? false, nixosVersion ? "master"} @ args:
+{pkgs ? import <nixpkgs> {}, localUsage ? false, nixosVersion ? "master"} @ args:
 let
-  lib = (import <nixpkgs> {}).lib;
+  lib = pkgs.lib;
   shamilton =
    lib.filterAttrs (n: v: n != "lib" && n != "modules" && n != "overlays" && (! (builtins.hasAttr "broken" (v.meta)) || ! v.meta.broken )) (import ./. args);
 in 
