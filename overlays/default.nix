@@ -3,5 +3,6 @@
   #
   # my-overlay = import ./my-overlay;
   tabbed = import ./tabbed;
+  rofi = import ./rofi;
 }
 
