@@ -1,13 +1,12 @@
-diff -ur a/config.def.h b/config.def.h
---- a/config.def.h	2020-07-05 10:16:53.373003844 +0200
-+++ b/config.def.h	2020-07-05 11:24:10.449904426 +0200
-@@ -36,14 +36,14 @@
+diff --color -ur a/config.def.h b/config.def.h
+--- a/config.def.h	2021-03-15 18:52:47.192368192 +0100
++++ b/config.def.h	2021-03-15 18:53:44.780608428 +0100
+@@ -36,14 +36,13 @@
  #define MODKEY ControlMask
  static Key keys[] = {
  	/* modifier             key        function     argument */
 -	{ MODKEY|ShiftMask,     XK_Return, focusonce,   { 0 } },
 -	{ MODKEY|ShiftMask,     XK_Return, spawn,       { 0 } },
-+	{ ShiftMask,   			XK_n, focusonce,       	{ 0 } },
 +	{ Mod1Mask,   			XK_n, spawn,       		{ 0 } },
  
 -	{ MODKEY|ShiftMask,     XK_l,      rotate,      { .i = +1 } },
@@ -23,7 +22,7 @@ diff -ur a/config.def.h b/config.def.h
  
  	{ MODKEY,               XK_grave,  spawn,       SETPROP("_TABBED_SELECT_TAB") },
  	{ MODKEY,               XK_1,      move,        { .i = 0 } },
-@@ -57,7 +57,7 @@
+@@ -57,7 +56,7 @@
  	{ MODKEY,               XK_9,      move,        { .i = 8 } },
  	{ MODKEY,               XK_0,      move,        { .i = 9 } },
  
