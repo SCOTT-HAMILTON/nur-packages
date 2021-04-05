@@ -37,6 +37,9 @@ rec {
   cargo-sort-ck = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/cargo-sort-ck {
     inherit buildRustPackage;
   };
+  cdc-cognitoform-result-generator = pkgs.callPackage ./pkgs/CdC-cognitoform-result-generator {
+    inherit (pkgs.python3Packages) buildPythonApplication pandas click setuptools;
+  };
   commix = with pkgs.python37Packages; pkgs.callPackage ./pkgs/commix {
     inherit buildPythonApplication;
   };
@@ -52,9 +55,13 @@ rec {
     inherit libfake argparse;
   };
   freac = pkgs.callPackage ./pkgs/freac { inherit boca smooth; };
+  geogebra = pkgs.callPackage ./pkgs/geogebra { };
   haste-client = pkgs.callPackage ./pkgs/haste-client { };
   inkscape = pkgs.callPackage ./pkgs/inkscape-1.0 { 
     lcms = pkgs.lcms2;
+  };
+  instanttee = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/InstantTee {
+    inherit buildRustPackage;
   };
   iptux = with pkgs; callPackage ./pkgs/iptux {
     inherit (gst_all_1) gstreamer;
@@ -71,6 +78,9 @@ rec {
   lokalize = pkgs.libsForQt5.callPackage ./pkgs/Lokalize { };
   merge-keepass = with pkgs.python3Packages; pkgs.callPackage ./pkgs/merge-keepass { 
     inherit buildPythonPackage pykeepass click pytest;
+  };
+  mermaid-cli = pkgs.callPackage ./pkgs/mermaid-cli {
+    inherit (pkgs.nix-gitignore) gitignoreSource;
   };
   mouseinfo = with pkgs.python38Packages; pkgs.callPackage ./pkgs/mouseinfo {
     inherit buildPythonPackage fetchPypi pyperclip python3-xlib pillow;
@@ -166,6 +176,6 @@ rec {
 pkgs.lib.optionalAttrs (localUsage) (rec {
   mvn2nix = pkgs.callPackage ./pkgs/mvn2nix { };
   xtreme-download-manager = pkgs.callPackage ./pkgs/xtreme-download-manager {
-    inherit mvn2nix;
+    inherit mvn2nix localUsage;
   };
 })
