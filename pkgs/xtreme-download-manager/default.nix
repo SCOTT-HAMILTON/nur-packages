@@ -6,6 +6,7 @@
 , makeWrapper
 , maven
 , mvn2nix
+, localUsage ? false
 }:
 
 let
@@ -75,6 +76,6 @@ in stdenv.mkDerivation rec {
     license = licenses.gpl2;
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
-    broken = true;
+    broken = ! localUsage;
   };
 }
