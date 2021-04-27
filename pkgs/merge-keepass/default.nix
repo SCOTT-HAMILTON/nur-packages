@@ -38,5 +38,6 @@ buildPythonPackage rec {
     license = licenses.mit;
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
+    broken = true;
   };
 }
