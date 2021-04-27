@@ -9,7 +9,7 @@
 , eom, surf, zathura, coreutils, findutils, gawk
 
 ## Sync databases deps
-, sync-database, buildPythonPackage, parallel-ssh, merge-keepass
+, buildPythonPackage, parallel-ssh
 }:
 let
   perlEnv = perl.withPackages(pp: with pp; [ PDFAPI2 ]);
@@ -41,7 +41,7 @@ stdenv.mkDerivation rec {
   propagatedBuildInputs = [
     python38
     coreutils findutils gawk eom surf zathura 
-    sync-database merge-keepass parallel-ssh
+    parallel-ssh
     perlEnv
   ];
 
@@ -70,8 +70,8 @@ stdenv.mkDerivation rec {
     install -Dm 644 scripts/icons/app-icon.svgz $out/share/icons/hicolor/scalable/apps/scripts.svgz
 
     # Install Synchronize Databases script
-    ln -s ${sync-database}/bin/sync_database $out/bin/sync_database
   '';
+    # ln -s ${sync-database}/bin/sync_database $out/bin/sync_database
 
   meta = with lib; {
     description = "Scripts to make my life easier";
@@ -79,5 +79,6 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/SCOTT-HAMILTON/Scripts";
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
+    broken = true;
   };
 }

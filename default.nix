@@ -154,7 +154,7 @@ pkgs.lib.traceValFn (x:
   semantik = pkgs.libsForQt5.callPackage ./pkgs/semantik { };
   scripts = with pkgs.python3Packages; pkgs.callPackage ./pkgs/Scripts {
     eom = pkgs.mate.eom;
-    inherit (self) sync-database parallel-ssh merge-keepass;
+    inherit (self) parallel-ssh;
     inherit buildPythonPackage;
   };
   slick-greeter = with pkgs.gnome3; pkgs.callPackage ./pkgs/slick-greeter {

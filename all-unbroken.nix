@@ -4,7 +4,7 @@ let
   shamilton = import ./. args;
 
   onlyUnbroken = attrs:
-    lib.filterAttrs (n: v: n != "lib" && n != "modules" && n != "overlays" && (! (builtins.hasAttr "broken" (v.meta)) || ! v.meta.broken )) attrs;
+    lib.filterAttrs (n: v: !(builtins.hasAttr "broken" v.meta && v.meta.broken )) attrs;
 
   onlyDerivations = attrs:
     lib.filterAttrs (n: v: lib.isDerivation v) attrs;
