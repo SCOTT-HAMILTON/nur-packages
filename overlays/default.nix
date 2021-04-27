@@ -1,9 +1,10 @@
+{ selfnur }:
 {
   # Add your overlays here
   #
   # my-overlay = import ./my-overlay;
-  alacritty = import ./alacritty;
-  tabbed = import ./tabbed;
+  alacritty = import ./alacritty { inherit (selfnur) patched-alacritty; };
+  tabbed = import ./tabbed { inherit (selfnur) patched-tabbed; };
   rofi = import ./rofi;
 }
 
