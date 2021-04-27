@@ -10,14 +10,12 @@ buildPythonApplication rec {
   pname = "CdC-cognitoform-result-generator";
   version = "0.1";
 
-  # src = fetchFromGitHub {
-  #   owner = "SCOTT-HAMILTON";
-  #   repo = "CdC-cognitoform-result-generator";
-  #   rev = "ffffffffffffffffffffffffffffffffffffffff";
-  #   sha256 = "0000000000000000000000000000000000000000000000000000";
-  # };
-
-  src = ./src.tar.gz;
+  src = fetchFromGitHub {
+    owner = "SCOTT-HAMILTON";
+    repo = "CdC-cognitoform-result-generator";
+    rev = "dd26d5816ab32a76125ac021532eeb5638725e3f";
+    sha256 = "0jai9c9vzh45jxa9zia8kxwbbz993d9xjdqd1b9y00s3rm88si8i";
+  };
 
   propagatedBuildInputs = [
     click
