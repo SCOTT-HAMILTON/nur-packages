@@ -61,7 +61,7 @@ pkgs.lib.traceValFn (x:
     inherit (self) libfake argparse;
   };
   freac = pkgs.callPackage ./pkgs/freac { inherit (self) boca smooth; };
-  geogebra = pkgs.callPackage ./pkgs/geogebra { };
+  # geogebra = pkgs.callPackage ./pkgs/geogebra { };
   graph-cli = with pkgs; python3Packages.callPackage ./pkgs/graph-cli {
     inherit (python3Packages) buildPythonPackage fetchPypi matplotlib pandas;
   };
@@ -147,7 +147,7 @@ pkgs.lib.traceValFn (x:
   pytweening = with pkgs.python3Packages; pkgs.callPackage ./pkgs/pytweening {
     inherit buildPythonPackage;
   };
-  qradiopredict = pkgs.libsForQt5.callPackage ./pkgs/qradiopredict { };
+  # qradiopredict = pkgs.libsForQt5.callPackage ./pkgs/qradiopredict { };
   qtile = pkgs.callPackage ./pkgs/qtile { };
   remark-lint = pkgs.callPackage ./pkgs/remark-lint { };
   rustscan = pkgs.callPackage ./pkgs/rustscan { };
@@ -225,5 +225,5 @@ pkgs.lib.optionalAttrs (localUsage) (rec {
   };
 })
 )).extend (self: super: {
-  overlays = import ./overlays { selfnur = self; }; # nixpkgs overlays
+  # overlays = import ./overlays { selfnur = self; }; # nixpkgs overlays
 })

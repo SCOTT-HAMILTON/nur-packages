@@ -1,7 +1,12 @@
 {pkgs ? import <nixpkgs> {}, localUsage ? false, nixosVersion ? "master"} @ args:
 let
   lib = pkgs.lib;
-  shamilton =
-   lib.filterAttrs (n: v: n != "lib" && n != "modules" && n != "overlays" && (! (builtins.hasAttr "broken" (v.meta)) || ! v.meta.broken )) (import ./. args);
+  shamilton = import ./. args;
+
+  onlyUnbroken = attrs:
+    lib.filterAttrs (n: v: n != "lib" && n != "modules" && n != "overlays" && (! (builtins.hasAttr "broken" (v.meta)) || ! v.meta.broken )) attrs;
+
+  onlyDerivations = attrs:
+    lib.filterAttrs (n: v: lib.isDerivation v) attrs;
 in 
- lib.attrValues shamilton
+lib.attrValues (onlyUnbroken (onlyDerivations shamilton))
