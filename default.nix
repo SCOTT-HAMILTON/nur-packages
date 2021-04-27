@@ -41,7 +41,7 @@ pkgs.lib.traceValFn (x:
   cdc-cognitoform-result-generator = pkgs.callPackage ./pkgs/CdC-cognitoform-result-generator {
     inherit (pkgs.python3Packages) buildPythonApplication pandas click setuptools;
   };
-  chart-cli = pkgs.haskellPackages.callPackage ./pkgs/chart-cli { };
+  # chart-cli = pkgs.haskellPackages.callPackage ./pkgs/chart-cli { };
   commix = with pkgs.python37Packages; pkgs.callPackage ./pkgs/commix {
     inherit buildPythonApplication;
   };
@@ -50,10 +50,10 @@ pkgs.lib.traceValFn (x:
     inherit (self) libfake;
     FakeMicWavPlayer = self.fake-mic-wav-player;
   };
-  create_ap = pkgs.callPackage ./pkgs/create_ap { };
-  csview = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/csview {
-    inherit buildRustPackage;
-  };
+  # create_ap = pkgs.callPackage ./pkgs/create_ap { };
+  # csview = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/csview {
+  #   inherit buildRustPackage;
+  # };
   day-night-plasma-wallpapers = with pkgs.python3Packages; pkgs.callPackage ./pkgs/day-night-plasma-wallpapers { 
     dbus-python = dbus-python;
   };
@@ -62,9 +62,9 @@ pkgs.lib.traceValFn (x:
   };
   freac = pkgs.callPackage ./pkgs/freac { inherit (self) boca smooth; };
   # geogebra = pkgs.callPackage ./pkgs/geogebra { };
-  graph-cli = with pkgs; python3Packages.callPackage ./pkgs/graph-cli {
-    inherit (python3Packages) buildPythonPackage fetchPypi matplotlib pandas;
-  };
+  # graph-cli = with pkgs; python3Packages.callPackage ./pkgs/graph-cli {
+  #   inherit (python3Packages) buildPythonPackage fetchPypi matplotlib pandas;
+  # };
   haste-client = pkgs.callPackage ./pkgs/haste-client { };
   inkscape = pkgs.callPackage ./pkgs/inkscape-1.0 { 
     lcms = pkgs.lcms2;
@@ -83,7 +83,7 @@ pkgs.lib.traceValFn (x:
   killbots = kdeApplications.callPackage ./pkgs/Killbots { };
   kirigami-gallery = kdeApplications.callPackage ./pkgs/KirigamiGallery { };
   ksmoothdock = pkgs.libsForQt5.callPackage ./pkgs/ksmoothdock { };
-  lerna = pkgs.callPackage ./pkgs/lerna { };
+  # lerna = pkgs.callPackage ./pkgs/lerna { };
   libfake = pkgs.callPackage ./pkgs/FakeLib { };
   lokalize = pkgs.libsForQt5.callPackage ./pkgs/Lokalize { };
   merge-keepass = with pkgs.python3Packages; pkgs.callPackage ./pkgs/merge-keepass { 
@@ -149,7 +149,7 @@ pkgs.lib.traceValFn (x:
   };
   # qradiopredict = pkgs.libsForQt5.callPackage ./pkgs/qradiopredict { };
   qtile = pkgs.callPackage ./pkgs/qtile { };
-  remark-lint = pkgs.callPackage ./pkgs/remark-lint { };
+  # remark-lint = pkgs.callPackage ./pkgs/remark-lint { };
   rustscan = pkgs.callPackage ./pkgs/rustscan { };
   semantik = pkgs.libsForQt5.callPackage ./pkgs/semantik { };
   scripts = with pkgs.python3Packages; pkgs.callPackage ./pkgs/Scripts {
