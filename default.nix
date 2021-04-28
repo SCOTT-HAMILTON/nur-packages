@@ -226,5 +226,5 @@ pkgs.lib.optionalAttrs (localUsage) (rec {
   };
 })
 )).extend (self: super: {
-  # overlays = import ./overlays { selfnur = self; }; # nixpkgs overlays
+  overlays = import ./overlays { selfnur = self; }; # nixpkgs overlays
 })
