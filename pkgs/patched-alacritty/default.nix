@@ -3,6 +3,7 @@
 , fetchFromGitHub
 , alacritty
 , writeScriptBin
+, nixosVersion
 }:
 let
   tabbed-alacritty = writeScriptBin "tabbed-alacritty"
@@ -26,7 +27,10 @@ alacritty.overrideAttrs (old: rec {
   doCheck = false;
   cargoDeps = old.cargoDeps.overrideAttrs (lib.const {
     inherit src;
-    outputHash = "0nbj4gw0qpv6l11rr2mf3sdz9a2qkgp7cfj9g7zkzzg4b53d9s6x";
+    
+    outputHash = if nixosVersion == "master" then
+      "0nbj4gw0qpv6l11rr2mf3sdz9a2qkgp7cfj9g7zkzzg4b53d9s6x" else
+      "1w32nslxz4qg8q4hbjk7rwyzp58zygk8p43n03wf92wn4jyk73lc";
     doCheck = false;
   });
 })

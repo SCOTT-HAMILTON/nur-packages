@@ -180,6 +180,7 @@ pkgs.lib.traceValFn (x:
     inherit buildPythonPackage click pandas numpy odfpy;
   };
   unoconvui = pkgs.libsForQt5.callPackage ./pkgs/UnoconvUI  { };
+  # voacap = pkgs.callPackage ./pkgs/voacap { };
   vokoscreen-ng = with pkgs; libsForQt5.callPackage ./pkgs/vokoscreenNG {
     gstreamer = gst_all_1.gstreamer;
     gst-plugins-base = gst_all_1.gst-plugins-base;
@@ -211,7 +212,7 @@ pkgs.lib.traceValFn (x:
 # to access them directly from the root repo
 {
   patched-alacritty = with pkgs; import ./pkgs/patched-alacritty {
-    inherit lib stdenvNoCC fetchFromGitHub alacritty writeScriptBin;
+    inherit lib stdenvNoCC fetchFromGitHub alacritty writeScriptBin nixosVersion;
   };
   patched-tabbed = with pkgs; import ./pkgs/patched-tabbed {
     inherit tabbed fetchFromGitHub libbsd;
