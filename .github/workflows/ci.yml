@@ -54,19 +54,7 @@ jobs:
           else
             export NIX_PATH=nixpkgs=channel:${{ matrix.channel-branch }}
           fi
-          nix-build --argstr nixosVersion "${{ matrix.channel-branch }}" all-unbroken.nix --show-trace; \
-              export NIX_BUILD_ERROR=$?
-          if [ $NIX_BUILD_ERROR -ne 0 ]; then
-            # Build errored, saving successful builds to the cache
-            nix-build --keep-going --argstr nixosVersion "${{ matrix.channel-branch }}" \
-                      all-unbroken.nix --show-trace | cachix push "${CACHIX_CACHE}"
-            exit $NIX_BUILD_ERROR
-          else
-            # Build passed 
-            nix eval --argstr nixosVersion "${{ matrix.channel-branch }}" -f default.nix 'lib' --show-trace
-            nix eval --argstr nixosVersion "${{ matrix.channel-branch }}" -f default.nix 'modules' --show-trace
-            nix eval --argstr nixosVersion "${{ matrix.channel-branch }}" -f default.nix 'overlays' --show-trace
-          fi
+          ./ci-scripts/build.sh "${{ matrix.channel-branch }}"
       - name: Push
         run: |
           if [ "${{ matrix.channel-branch }}" = "master" ]; then
