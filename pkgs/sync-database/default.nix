@@ -7,14 +7,7 @@
 , pykeepass
 , click
 }:
-let 
-  pyModuleDeps = [
-    parallel-ssh
-    pykeepass
-    click
-    merge-keepass
-  ];
-in
+
 buildPythonPackage rec {
   pname = "sync-database";
   version = "unstable";
@@ -26,8 +19,7 @@ buildPythonPackage rec {
     sha256 = "1fv60ysqcv6ssz9fvzncg4vcss4hjyfd9fj4dg78cr5vgva6m9wb";
   };
 
-  buildInputs = pyModuleDeps;
-  propagatedBuildInputs = pyModuleDeps ++ [ libssh2 ];
+  propagatedBuildInputs = [ libssh2 parallel-ssh merge-keepass pykeepass click ];
   
   doCheck = false;
   
@@ -40,6 +32,5 @@ buildPythonPackage rec {
     license = licenses.mit;
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
-    broken = true;
   };
 }

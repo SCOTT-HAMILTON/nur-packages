@@ -135,6 +135,17 @@ pkgs.lib.traceValFn (x:
   python-iconf = with pkgs.python3Packages; pkgs.callPackage ./pkgs/python-iconf {
     inherit buildPythonPackage fetchPypi pytest;
   };
+  # python-keepassx = with pkgs.python3Packages; pkgs.callPackage ./pkgs/python-keepassx {
+  #   inherit buildPythonPackage
+  #           prettytable
+  #           pycrypto
+  #           pyyaml
+  #           six
+  #           mock
+  #           pytest
+  #           pytest-cov
+  #           twine;
+  # };
   python3-xlib = with pkgs.python3Packages; pkgs.callPackage ./pkgs/python3-xlib {
     inherit buildPythonPackage fetchPypi;
   };
@@ -154,7 +165,7 @@ pkgs.lib.traceValFn (x:
   semantik = pkgs.libsForQt5.callPackage ./pkgs/semantik { };
   scripts = with pkgs.python3Packages; pkgs.callPackage ./pkgs/Scripts {
     eom = pkgs.mate.eom;
-    inherit (self) parallel-ssh;
+    inherit (self) parallel-ssh sync-database merge-keepass;
     inherit buildPythonPackage;
   };
   slick-greeter = with pkgs.gnome3; pkgs.callPackage ./pkgs/slick-greeter {
