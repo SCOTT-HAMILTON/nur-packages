@@ -8,7 +8,7 @@
 
 ## Using
 For more details, check the [NUR README](https://github.com/nix-community/nur#readme)
-### A package (see [the package list](packages-list))
+### A package (see [the package list](#packages-list))
 ```shell_session
 $ nix-shell -p <attribute path>
 ```
