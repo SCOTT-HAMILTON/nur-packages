@@ -15,8 +15,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "sync-database";
-    rev = "45824302a8e4064ca1714545313b2ac9e3fa8778";
-    sha256 = "1fv60ysqcv6ssz9fvzncg4vcss4hjyfd9fj4dg78cr5vgva6m9wb";
+    rev = "a05e95a5d65e328d6d0fa680a5d763090eed6183";
+    sha256 = "0nhbh174lv50l90rla3kyxic4gvz95v0dpcg9xzbiwz7i0a08jjc";
   };
 
   propagatedBuildInputs = [ libssh2 parallel-ssh merge-keepass pykeepass click ];

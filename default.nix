@@ -76,6 +76,7 @@ pkgs.lib.traceValFn (x:
     inherit (gst_all_1) gstreamer;
     inherit (gnome2) gtk;
   };
+  json-beautifier = pkgs.callPackage ./pkgs/json-beautifier { };
   juk = kdeApplications.callPackage ./pkgs/Juk { };
   kapptemplate = kdeApplications.callPackage ./pkgs/KAppTemplate { };
   kbreakout = kdeApplications.callPackage ./pkgs/KBreakOut { };
