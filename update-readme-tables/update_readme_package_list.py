@@ -26,7 +26,6 @@ def new_readme_with_package_list():
     new_readme_content = re.sub(r'(<!-- PACKAGE_LIST_START -->\n)(?:.*\n)*(<!-- PACKAGE_LIST_END -->)',
                                 r'\1'+table+r'\n\2',
                                 readme_content)
-    print(new_readme_content)
     return new_readme_content
 
 new_readme = new_readme_with_package_list()

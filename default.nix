@@ -30,11 +30,7 @@ pkgs.lib.traceValFn (x:
   modules = import ./modules; # NixOS modules
 
   android-platform-tools = pkgs.callPackage ./pkgs/android-platform-tools { };
-  anystyle-cli = pkgs.callPackage ./pkgs/anystyle-cli { };
   argparse = pkgs.callPackage ./pkgs/argparse { };
-  baobab = pkgs.callPackage ./pkgs/baobab { };
-  boca = pkgs.callPackage ./pkgs/boca { inherit (self) smooth; };
-  bomber = kdeApplications.callPackage ./pkgs/Bomber { };
   cargo-sort-ck = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/cargo-sort-ck {
     inherit buildRustPackage;
   };
@@ -60,15 +56,11 @@ pkgs.lib.traceValFn (x:
   fake-mic-wav-player = pkgs.libsForQt5.callPackage ./pkgs/FakeMicWavPlayer {
     inherit (self) libfake argparse;
   };
-  freac = pkgs.callPackage ./pkgs/freac { inherit (self) boca smooth; };
   # geogebra = pkgs.callPackage ./pkgs/geogebra { };
   # graph-cli = with pkgs; python3Packages.callPackage ./pkgs/graph-cli {
   #   inherit (python3Packages) buildPythonPackage fetchPypi matplotlib pandas;
   # };
   haste-client = pkgs.callPackage ./pkgs/haste-client { };
-  inkscape = pkgs.callPackage ./pkgs/inkscape-1.0 { 
-    lcms = pkgs.lcms2;
-  };
   instanttee = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/InstantTee {
     inherit buildRustPackage;
   };
@@ -78,27 +70,18 @@ pkgs.lib.traceValFn (x:
   };
   json-beautifier = pkgs.callPackage ./pkgs/json-beautifier { };
   juk = kdeApplications.callPackage ./pkgs/Juk { };
-  kapptemplate = kdeApplications.callPackage ./pkgs/KAppTemplate { };
-  kbreakout = kdeApplications.callPackage ./pkgs/KBreakOut { };
-  keysmith = kdeApplications.callPackage ./pkgs/keysmith { };
   killbots = kdeApplications.callPackage ./pkgs/Killbots { };
   kirigami-gallery = kdeApplications.callPackage ./pkgs/KirigamiGallery { };
-  ksmoothdock = pkgs.libsForQt5.callPackage ./pkgs/ksmoothdock { };
   # lerna = pkgs.callPackage ./pkgs/lerna { };
   libfake = pkgs.callPackage ./pkgs/FakeLib { };
   lokalize = pkgs.libsForQt5.callPackage ./pkgs/Lokalize { };
   merge-keepass = with pkgs.python3Packages; pkgs.callPackage ./pkgs/merge-keepass { 
     inherit buildPythonPackage pykeepass click pytest;
   };
-  mermaid-cli = pkgs.callPackage ./pkgs/mermaid-cli {
-    inherit (pkgs.nix-gitignore) gitignoreSource;
-  };
   mouseinfo = with pkgs.python38Packages; pkgs.callPackage ./pkgs/mouseinfo {
     inherit (self) python3-xlib;
     inherit buildPythonPackage fetchPypi pyperclip pillow;
   };
-  ncgopher = pkgs.callPackage ./pkgs/ncgopher { };
-  nikto = pkgs.callPackage ./pkgs/nikto { };
   numworks-udev-rules = pkgs.callPackage ./pkgs/numworks-udev-rules { };
   parallel-ssh = with pkgs.python3Packages; pkgs.callPackage ./pkgs/parallel-ssh {
     inherit (self) ssh2-python;
@@ -115,7 +98,6 @@ pkgs.lib.traceValFn (x:
   };
   pronote-timetable-fetch = pkgs.callPackage ./pkgs/pronote-timetable-fetch {
   };
-  ptouch-print = pkgs.callPackage ./pkgs/ptouch-print { };
   pyautogui = with pkgs.python3Packages; pkgs.callPackage ./pkgs/pyautogui {
     inherit (self)
       mouseinfo
@@ -160,10 +142,8 @@ pkgs.lib.traceValFn (x:
     inherit buildPythonPackage;
   };
   # qradiopredict = pkgs.libsForQt5.callPackage ./pkgs/qradiopredict { };
-  qtile = pkgs.callPackage ./pkgs/qtile { };
   # remark-lint = pkgs.callPackage ./pkgs/remark-lint { };
   rustscan = pkgs.callPackage ./pkgs/rustscan { };
-  semantik = pkgs.libsForQt5.callPackage ./pkgs/semantik { };
   scripts = with pkgs.python3Packages; pkgs.callPackage ./pkgs/Scripts {
     eom = pkgs.mate.eom;
     inherit (self) parallel-ssh sync-database merge-keepass;
@@ -172,14 +152,10 @@ pkgs.lib.traceValFn (x:
   slick-greeter = with pkgs.gnome3; pkgs.callPackage ./pkgs/slick-greeter {
     inherit gnome-common gtk slick-greeter;
   };
-  smooth = with pkgs.gnome3; pkgs.callPackage ./pkgs/smooth { inherit gtk; };
   spectacle-clipboard = pkgs.libsForQt5.callPackage ./pkgs/spectacle-clipboard { };
   splat = pkgs.callPackage ./pkgs/splat { };
   ssh2-python = with pkgs.python3Packages; pkgs.callPackage ./pkgs/ssh2-python {
     inherit buildPythonPackage fetchPypi cython setuptools pytest;
-  };
-  super-tux-kart = pkgs.callPackage ./pkgs/SuperTuxKart {
-    inherit (self) wiiuse;
   };
   sync-database = with pkgs.python3Packages; pkgs.callPackage ./pkgs/sync-database {
     inherit (self) parallel-ssh merge-keepass;
@@ -193,13 +169,6 @@ pkgs.lib.traceValFn (x:
   };
   unoconvui = pkgs.libsForQt5.callPackage ./pkgs/UnoconvUI  { };
   # voacap = pkgs.callPackage ./pkgs/voacap { };
-  vokoscreen-ng = with pkgs; libsForQt5.callPackage ./pkgs/vokoscreenNG {
-    gstreamer = gst_all_1.gstreamer;
-    gst-plugins-base = gst_all_1.gst-plugins-base;
-    gst-plugins-good = gst_all_1.gst-plugins-good;
-    gst-plugins-bad = gst_all_1.gst-plugins-bad;
-    gst-plugins-ugly = gst_all_1.gst-plugins-ugly;
-  };
   wavetrace = with pkgs; python3Packages.callPackage ./pkgs/Wavetrace {
     inherit (self) splat;
     inherit (python3Packages)
@@ -213,7 +182,6 @@ pkgs.lib.traceValFn (x:
       shapely
       urllib3;
   };
-  wiiuse = pkgs.callPackage ./pkgs/WiiUse { };
   yaml2probatree = with pkgs.python3Packages; pkgs.callPackage ./pkgs/Yaml2ProbaTree {
     inherit buildPythonPackage pyyaml click;
   };

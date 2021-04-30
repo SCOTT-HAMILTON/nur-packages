@@ -18,6 +18,7 @@
 , libuuid
 , pcre
 }:
+
 stdenv.mkDerivation rec {
   pname = "iptux";
   version = "0.7.6";
@@ -51,8 +52,8 @@ stdenv.mkDerivation rec {
   ];
 
   meta = with lib; {
-    description = "Gnome disk utility fixed icons for KDE";
-    homepage = "https://wiki.gnome.org/Apps/DiskUsageAnalyzer";
+    description = "A software for sharing in LAN";
+    homepage = "https://github.com/iptux-src/iptux";
     license = licenses.gpl2;
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
