@@ -78,7 +78,6 @@ $ popd
 | argparse-2.1                            | nur.repos.shamilton.argparse                         | Argument Parser for Modern C++                                                                                  |
 | baobab-3.34.0                           | nur.repos.shamilton.baobab                           | Gnome disk utility fixed icons for KDE                                                                          |
 | BoCA-1.0.3                              | nur.repos.shamilton.boca                             | A component library used by the fre:ac audio converter                                                          |
-| Bomber-19.12.3                          | nur.repos.shamilton.bomber                           | Arcade Bombing Game                                                                                             |
 | cargo-sort-ck-1.1                       | nur.repos.shamilton.cargo-sort-ck                    | Check if tables and items in a .toml file are lexically sorted                                                  |
 | CdC-cognitoform-result-generator-0.1    | nur.repos.shamilton.cdc-cognitoform-result-generator | Generates a latex formatted output from an xlsx cognitoform excel sheet, made for classes councils preparation. |
 | commix-3.2                              | nur.repos.shamilton.commix                           | Automated All-in-One OS Command Injection Exploitation Tool                                                     |
@@ -93,9 +92,6 @@ $ popd
 | iptux-0.7.6                             | nur.repos.shamilton.iptux                            | Gnome disk utility fixed icons for KDE                                                                          |
 | json-beautifier-1.0                     | nur.repos.shamilton.json-beautifier                  | Argument Parser for Modern C++                                                                                  |
 | juk-20.08.2                             | nur.repos.shamilton.juk                              | Audio jukebox app, supporting collections of MP3, Ogg Vorbis and FLAC audio files                               |
-| KAppTemplate-19.12.3                    | nur.repos.shamilton.kapptemplate                     | KDE App Code Template Generator                                                                                 |
-| KBreakOut-19.12.3                       | nur.repos.shamilton.kbreakout                        | KDE's Breakout-like Game                                                                                        |
-| keysmith-0.2                            | nur.repos.shamilton.keysmith                         | OTP client for Plasma Mobile and Desktop                                                                        |
 | Killbots-19.12.3                        | nur.repos.shamilton.killbots                         | Strategy Game with Robots                                                                                       |
 | KirigamiGallery-20.12.2                 | nur.repos.shamilton.kirigami-gallery                 | View examples of Kirigami components                                                                            |
 | KSmoothDock-6.2                         | nur.repos.shamilton.ksmoothdock                      | A cool desktop panel for KDE Plasma 5                                                                           |
@@ -131,13 +127,11 @@ $ popd
 | spectacle-clipboard-unstable            | nur.repos.shamilton.spectacle-clipboard              | KDE Spectacle fork to enable clipboard funcionnalities                                                          |
 | splat-1.4.2                             | nur.repos.shamilton.splat                            | Argument Parser for Modern C++                                                                                  |
 | python3.8-ssh2-python-0.17.0            | nur.repos.shamilton.ssh2-python                      | Super fast SSH2 protocol library                                                                                |
-| supertuxkart-1.1                        | nur.repos.shamilton.super-tux-kart                   | A Free 3D kart racing game                                                                                      |
 | python3.8-sync-database-unstable        | nur.repos.shamilton.sync-database                    | Keepass databases synching script to ssh servers and phone                                                      |
 | python3.8-tabula-py-2.2.0               | nur.repos.shamilton.tabula-py                        | Simple wrapper for tabula-java, read tables from PDF into DataFrame                                             |
 | python3.8-TimeTable2Header-1.0.0        | nur.repos.shamilton.timetable2header                 | Keepass Databases Merging script                                                                                |
 | UnoconvUI-unstable                      | nur.repos.shamilton.unoconvui                        | MS Office files conversion client for the Unoconv Web Service                                                   |
 | vokoscreen-ng-3.0.8                     | nur.repos.shamilton.vokoscreen-ng                    | User friendly Open Source screencaster for Linux and Windows                                                    |
 | python3.8-wavetrace-4.0.3               | nur.repos.shamilton.wavetrace                        | Pronote bot to open pronote or to open the physics and chemistry book at a specified page                       |
-| WiiUse-0.15.5                           | nur.repos.shamilton.wiiuse                           | Feature complete cross-platform Wii Remote access library                                                       |
 | python3.8-Yaml2ProbaTree-0.1            | nur.repos.shamilton.yaml2probatree                   | Converts a yaml structure to a LaTeX/TiKZ probability tree                                                      |
 <!-- PACKAGE_LIST_END -->
