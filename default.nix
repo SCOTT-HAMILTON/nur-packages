@@ -143,7 +143,6 @@ pkgs.lib.traceValFn (x:
   };
   # qradiopredict = pkgs.libsForQt5.callPackage ./pkgs/qradiopredict { };
   # remark-lint = pkgs.callPackage ./pkgs/remark-lint { };
-  rustscan = pkgs.callPackage ./pkgs/rustscan { };
   scripts = with pkgs.python3Packages; pkgs.callPackage ./pkgs/Scripts {
     eom = pkgs.mate.eom;
     inherit (self) parallel-ssh sync-database merge-keepass;
