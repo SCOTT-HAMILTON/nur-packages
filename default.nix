@@ -47,9 +47,9 @@ pkgs.lib.traceValFn (x:
     FakeMicWavPlayer = self.fake-mic-wav-player;
   };
   create_ap = pkgs.callPackage ./pkgs/create_ap { };
-  # csview = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/csview {
-  #   inherit buildRustPackage;
-  # };
+  csview = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/csview {
+    inherit buildRustPackage;
+  };
   day-night-plasma-wallpapers = with pkgs.python3Packages; pkgs.callPackage ./pkgs/day-night-plasma-wallpapers { 
     dbus-python = dbus-python;
   };
