@@ -73,7 +73,6 @@ pkgs.lib.traceValFn (x:
   keysmith = kdeApplications.callPackage ./pkgs/keysmith { };
   killbots = kdeApplications.callPackage ./pkgs/Killbots { };
   kirigami-gallery = kdeApplications.callPackage ./pkgs/KirigamiGallery { };
-  # lerna = pkgs.callPackage ./pkgs/lerna { };
   libfake = pkgs.callPackage ./pkgs/FakeLib { };
   lokalize = pkgs.libsForQt5.callPackage ./pkgs/Lokalize { };
   merge-keepass = with pkgs.python3Packages; pkgs.callPackage ./pkgs/merge-keepass { 
