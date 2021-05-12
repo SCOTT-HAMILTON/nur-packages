@@ -155,7 +155,7 @@ pkgs.lib.traceValFn (x:
     inherit buildPythonPackage click pandas numpy odfpy;
   };
   unoconvui = pkgs.libsForQt5.callPackage ./pkgs/UnoconvUI  { };
-  # voacap = pkgs.callPackage ./pkgs/voacap { };
+  voacap = pkgs.callPackage ./pkgs/voacap { };
   wavetrace = with pkgs; python3Packages.callPackage ./pkgs/Wavetrace {
     inherit (self) splat;
     inherit (python3Packages)
