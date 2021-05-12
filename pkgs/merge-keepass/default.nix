@@ -13,8 +13,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "merge-keepass";
-    rev = "730c64c8a53f8d3260d42f22b751e2fb3d874d45";
-    sha256 = "1rj1j5ck6rf3mb7dbhppwhr39ni301id973hgmrjs527vylsfd8c";
+    rev = "c9e2df22d0464b6d90ef3f47e1ba24d9a1b64495";
+    sha256 = "0nhjy0n9siw9s0cfnkvfzz11d4a7rd17vjpy5j62zn4jw3shqs89";
   };
 
   propagatedBuildInputs = [ pykeepass click ];
