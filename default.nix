@@ -169,6 +169,7 @@ pkgs.lib.traceValFn (x:
       shapely
       urllib3;
   };
+  xmltoman = pkgs.callPackage ./pkgs/xmltoman { };
   yaml2probatree = with pkgs.python3Packages; pkgs.callPackage ./pkgs/Yaml2ProbaTree {
     inherit buildPythonPackage pyyaml click;
   };
