@@ -8,16 +8,16 @@
 , kitemmodels
 , kactivities
 }:
-mkDerivation rec {
 
+mkDerivation rec {
   pname = "KirigamiGallery";
-  version = "20.12.2";
+  version = "21.04.0";
 
   src = fetchFromGitHub {
     owner = "KDE";
     repo = "kirigami-gallery";
     rev = "v${version}";
-    sha256 = "18jgbhjpbdh2qi7rxyx3bh72ig753bfggqh4l3xk191cv7c3i7g2";
+    sha256 = "084af9xbz86h0cdk6q2aywx99xc85pz6f8zmn3sw065050syr3iy";
   };
 
   nativeBuildInputs = [ extra-cmake-modules cmake  ];
