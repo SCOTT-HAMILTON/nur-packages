@@ -55,7 +55,6 @@ pkgs.lib.traceValFn (x:
   fake-mic-wav-player = pkgs.libsForQt5.callPackage ./pkgs/FakeMicWavPlayer {
     inherit (self) libfake argparse;
   };
-  # geogebra = pkgs.callPackage ./pkgs/geogebra { };
   graph-cli = with pkgs; python3Packages.callPackage ./pkgs/graph-cli {
     inherit (python3Packages) buildPythonPackage fetchPypi matplotlib pandas;
   };
