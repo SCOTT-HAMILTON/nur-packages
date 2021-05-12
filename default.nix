@@ -57,9 +57,9 @@ pkgs.lib.traceValFn (x:
     inherit (self) libfake argparse;
   };
   # geogebra = pkgs.callPackage ./pkgs/geogebra { };
-  # graph-cli = with pkgs; python3Packages.callPackage ./pkgs/graph-cli {
-  #   inherit (python3Packages) buildPythonPackage fetchPypi matplotlib pandas;
-  # };
+  graph-cli = with pkgs; python3Packages.callPackage ./pkgs/graph-cli {
+    inherit (python3Packages) buildPythonPackage fetchPypi matplotlib pandas;
+  };
   haste-client = pkgs.callPackage ./pkgs/haste-client { };
   instanttee = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/InstantTee {
     inherit buildRustPackage;
