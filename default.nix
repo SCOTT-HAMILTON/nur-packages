@@ -46,7 +46,7 @@ pkgs.lib.traceValFn (x:
     inherit (self) libfake;
     FakeMicWavPlayer = self.fake-mic-wav-player;
   };
-  # create_ap = pkgs.callPackage ./pkgs/create_ap { };
+  create_ap = pkgs.callPackage ./pkgs/create_ap { };
   # csview = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/csview {
   #   inherit buildRustPackage;
   # };
