@@ -131,7 +131,6 @@ pkgs.lib.traceValFn (x:
     inherit buildPythonPackage;
   };
   # qradiopredict = pkgs.libsForQt5.callPackage ./pkgs/qradiopredict { };
-  # remark-lint = pkgs.callPackage ./pkgs/remark-lint { };
   scripts = with pkgs.python3Packages; pkgs.callPackage ./pkgs/Scripts {
     eom = pkgs.mate.eom;
     inherit (self) parallel-ssh sync-database merge-keepass;
