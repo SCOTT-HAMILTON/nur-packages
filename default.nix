@@ -27,7 +27,6 @@ pkgs.lib.traceValFn (x:
 {
   # The `lib`, `modules`, and `overlay` names are special
   lib = import ./lib { inherit pkgs; }; # functions
-  modules = import ./modules; # NixOS modules
 
   android-platform-tools = pkgs.callPackage ./pkgs/android-platform-tools { };
   argparse = pkgs.callPackage ./pkgs/argparse { };
@@ -82,6 +81,7 @@ pkgs.lib.traceValFn (x:
     inherit (self) python3-xlib;
     inherit buildPythonPackage fetchPypi pyperclip pillow;
   };
+  MyVimConfig = pkgs.callPackage ./pkgs/MyVimConfig { };
   numworks-udev-rules = pkgs.callPackage ./pkgs/numworks-udev-rules { };
   parallel-ssh = with pkgs.python3Packages; pkgs.callPackage ./pkgs/parallel-ssh {
     inherit (self) ssh2-python;
@@ -155,6 +155,32 @@ pkgs.lib.traceValFn (x:
     inherit buildPythonPackage click pandas numpy odfpy;
   };
   unoconvui = pkgs.libsForQt5.callPackage ./pkgs/UnoconvUI  { };
+  vim-async = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-async {
+    inherit buildVimPluginFrom2Nix;
+  };
+  vim-asyncomplete = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-asyncomplete {
+    inherit buildVimPluginFrom2Nix;
+  };
+  vim-asyncomplete-lsp = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-asyncomplete-lsp {
+    inherit buildVimPluginFrom2Nix;
+  };
+  vim-lsp = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-lsp {
+    inherit (self) vim-async;
+    inherit buildVimPluginFrom2Nix;
+  };
+  vim-lsp-settings = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-lsp-settings {
+    inherit (self) vim-async vim-lsp vim-asyncomplete vim-asyncomplete-lsp;
+    inherit buildVimPluginFrom2Nix;
+  };
+  vim-myftplugins = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-myftplugins {
+    inherit buildVimPluginFrom2Nix;
+  };
+  vim-super-retab = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-super-retab {
+    inherit buildVimPluginFrom2Nix;
+  };
+  vim-vala = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-vala {
+    inherit buildVimPluginFrom2Nix;
+  };
   voacap = pkgs.callPackage ./pkgs/voacap { };
   wavetrace = with pkgs; python3Packages.callPackage ./pkgs/Wavetrace {
     inherit (self) splat;
@@ -194,5 +220,6 @@ pkgs.lib.optionalAttrs (localUsage) (rec {
   };
 })
 )).extend (self: super: {
+  modules = import ./modules { selfnur = self; };
   overlays = import ./overlays { selfnur = self; }; # nixpkgs overlays
 })

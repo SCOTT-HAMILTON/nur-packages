@@ -15,8 +15,6 @@ buildVimPluginFrom2Nix {
     sha256 = "0cdrc72342ys7p9mxvdsw57wvl9l2x64k3gs298yx3f4j4kpx2ja";
   };
 
-  patches = [ ~/GIT/vimconfig/patch.patch ];
-
   buildInputs = [ coreutils ];
 
   postPatch = ''

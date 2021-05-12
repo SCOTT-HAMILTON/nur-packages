@@ -1,3 +1,4 @@
+{ selfnur }:
 {
   # create-ap = ./create-ap.nix;
   day-night-plasma-wallpapers = ./day-night-plasma-wallpapers-nixos.nix;
@@ -5,7 +6,15 @@
   slick-greeter = ./slick-greeter.nix;
   hmModules = {
     day-night-plasma-wallpapers = ./day-night-plasma-wallpapers-home-manager.nix;
-    myvim = ./myvim.nix;
+    myvim = import ./myvim.nix {
+      inherit (selfnur) 
+          MyVimConfig
+          vim-lsp
+          vim-lsp-settings
+          vim-myftplugins
+          vim-super-retab
+          vim-vala;
+    };
     redshift-auto = ./redshift-auto.nix;
     sync-database = ./sync-database.nix;
     pronotebot = ./pronotebot.nix;
