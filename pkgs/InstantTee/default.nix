@@ -5,16 +5,16 @@
 
 buildRustPackage rec {
   pname = "InstantTee";
-  version = "unstable";
+  version = "2021-04-30";
 
   src = fetchFromGitHub {
     owner = "ArniDagur";
     repo = "InstantTee";
-    rev = "6ada9f50535c19dc20e596f848442e93312fe79b";
-    sha256 = "19dpjhjbws4qkdnv7lgzw3fgs7xaxns88xvmkakra027jsabzbn1";
+    rev = "8e2b2756ac29f06eca97a6a64e0d92c1bd6380ec";
+    sha256 = "1lp9jkajjkfwbdd27mrhr8zdiw9k9nh30r0j4053n2ghbyal9mcw";
   };
 
-  cargoSha256 = "0zfm6qqm2r6g54vkkdmiqacrp4zwy1zbr62h0p1dmb4vhmfnkb6m";
+  cargoSha256 = "1iavdivzl4a1d91pfl3cjn4hl20d0cajahq3y7cghv5fp05ll6mg";
   verifyCargoDeps = true;
 
   meta = with lib; {
