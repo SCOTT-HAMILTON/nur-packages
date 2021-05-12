@@ -9,8 +9,8 @@
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "tabbed";
-    rev = "802d64832595c77ac2a36e8ef28eada82ae6fa7b";
-    sha256 = "09h6y8s4r2mdm01vshnbrdyy4xi7bbvdwzpmv9b10y82mgsvx0n8";
+    rev = "823e2981830be93aa68e2aba7f3b1e13f2e6e0c0";
+    sha256 = "1w6zzf86wnx6dymgfi0samrxgwl23z1ghnd2gv3gv25kvwp72vxy";
   };
   buildInputs = (old.buildInputs or []) ++ [ libbsd ];
 })
