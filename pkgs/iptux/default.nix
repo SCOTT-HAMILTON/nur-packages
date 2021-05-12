@@ -21,6 +21,7 @@
 
 stdenv.mkDerivation rec {
   pname = "iptux";
+  # Can't update until glog cmake is fixed
   version = "0.7.6";
 
   src = fetchFromGitHub {
