@@ -17,8 +17,8 @@ alacritty.overrideAttrs (old: rec {
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "alacritty";
-    rev = "6890c6d47c276e6fa84f769a3fb8dc93add72e1e";
-    sha256 = "0gpacmqicbxbw3c674r6ydc0dnjqb9k06gnkxkadqijpkcnpri69";
+    rev = "49cd691555463305668fd5fcd57151bda2f389d8";
+    sha256 = "01w0qcq2dqhk7hyfv6aav5j5zh76p0pid407h1plcb59bgwk7ix5";
   };
   postPatch = ''
     sed -Ei 's|^Exec=alacritty|Exec=${tabbed-alacritty}/bin/tabbed-alacritty|g' "extra/linux/Alacritty.desktop"
