@@ -83,7 +83,7 @@ pkgs.lib.traceValFn (x:
   MyVimConfig = pkgs.callPackage ./pkgs/MyVimConfig { };
   numworks-udev-rules = pkgs.callPackage ./pkgs/numworks-udev-rules { };
   parallel-ssh = with pkgs.python3Packages; pkgs.callPackage ./pkgs/parallel-ssh {
-    inherit (self) ssh2-python;
+    inherit (self) ssh-python ssh2-python;
     inherit buildPythonPackage setuptools fetchPypi paramiko gevent;
   };
   pdf2timetable = pkgs.callPackage ./pkgs/Pdf2TimeTable {
