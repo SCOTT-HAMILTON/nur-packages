@@ -140,6 +140,9 @@ pkgs.lib.traceValFn (x:
   };
   spectacle-clipboard = pkgs.libsForQt5.callPackage ./pkgs/spectacle-clipboard { };
   splat = pkgs.callPackage ./pkgs/splat { };
+  ssh-python = with pkgs.python3Packages; pkgs.callPackage ./pkgs/ssh-python {
+    inherit buildPythonPackage fetchPypi;
+  };
   ssh2-python = with pkgs.python3Packages; pkgs.callPackage ./pkgs/ssh2-python {
     inherit buildPythonPackage fetchPypi cython setuptools pytest;
   };
