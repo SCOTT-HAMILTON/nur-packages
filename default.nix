@@ -70,6 +70,7 @@ pkgs.lib.traceValFn (x:
   };
   json-beautifier = pkgs.callPackage ./pkgs/json-beautifier { };
   juk = kdeApplications.callPackage ./pkgs/Juk { };
+  keysmith = kdeApplications.callPackage ./pkgs/keysmith { };
   killbots = kdeApplications.callPackage ./pkgs/Killbots { };
   kirigami-gallery = kdeApplications.callPackage ./pkgs/KirigamiGallery { };
   # lerna = pkgs.callPackage ./pkgs/lerna { };
