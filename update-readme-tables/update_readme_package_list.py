@@ -22,12 +22,12 @@ derivations = load(args.packages_list)
 table = derivations_to_dataframe(derivations).to_markdown(index=False)
 
 def new_readme_with_package_list():
-    readme_content = open('../README.md', 'r').read()
+    readme_content = open('README.md', 'r').read()
     new_readme_content = re.sub(r'(<!-- PACKAGE_LIST_START -->\n)(?:.*\n)*(<!-- PACKAGE_LIST_END -->)',
                                 r'\1'+table+r'\n\2',
                                 readme_content)
     return new_readme_content
 
 new_readme = new_readme_with_package_list()
-with open('../README.md', 'w') as readme:
+with open('README.md', 'w') as readme:
     readme.write(new_readme)

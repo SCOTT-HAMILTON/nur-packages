@@ -12,7 +12,7 @@ pkgs.mkShell {
   buildInputs = [ customPython ];
   shellHook = ''
     run(){
-      python update_readme_package_list.py ${packages-list}
+      python update-readme-tables/update_readme_package_list.py ${packages-list}
     }
   '';
 }
