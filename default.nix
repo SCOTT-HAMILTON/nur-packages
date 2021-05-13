@@ -124,7 +124,8 @@ pkgs.lib.traceValFn (x:
     inherit buildPythonPackage fetchPypi;
   };
   pyscreeze = with pkgs.python3Packages; pkgs.callPackage ./pkgs/pyscreeze {
-    inherit buildPythonPackage fetchPypi pillow;
+    xvfb-run = with pkgs; if nixosVersion == "master" then xvfb_run else xvfb-run;
+    inherit buildPythonPackage pillow pytest xlib;
   };
   pytweening = with pkgs.python3Packages; pkgs.callPackage ./pkgs/pytweening {
     inherit buildPythonPackage;
