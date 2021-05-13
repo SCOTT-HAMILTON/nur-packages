@@ -17,7 +17,7 @@ config = args.config.read().strip()
 derivation = args.derivation.read()
 access_token = config
 headers = {
-        'User-Agent': 'SCOTT-HAMILTON',
+        'User-Agent': 'SCOTT-HAMILTON <sgn.hamilton+github@protonmail.com>',
         'Accept': 'application/vnd.github.v3+json',
         'Authorization': f'token {access_token}',
 }
