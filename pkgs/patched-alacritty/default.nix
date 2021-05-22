@@ -30,7 +30,7 @@ alacritty.overrideAttrs (old: rec {
     
     outputHash = if nixosVersion == "master" then
       "0nbj4gw0qpv6l11rr2mf3sdz9a2qkgp7cfj9g7zkzzg4b53d9s6x" else
-      "1w32nslxz4qg8q4hbjk7rwyzp58zygk8p43n03wf92wn4jyk73lc";
+      "1dd06mhk3fp67wjyfp5b3pwvxz2lw4vim14q61s2i9icvrdnh6hh";
     doCheck = false;
   });
 })
