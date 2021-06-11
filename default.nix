@@ -16,7 +16,7 @@ let
       });
     };
   };
-  kdeApplications = if nixosVersion == "master" then pkgs.kdeApplications else pkgs.libsForQt5.kdeApplications;
+  kdeApplications = pkgs.libsForQt5.kdeApplications;
 in
 pkgs.lib.traceValFn (x:
  "Nixpkgs version : ${pkgs.lib.version},
@@ -211,6 +211,9 @@ pkgs.lib.traceValFn (x:
 # by the CI, it's also convenient to be able
 # to access them directly from the root repo
 {
+  patched-rofi = with pkgs; import ./pkgs/patched-rofi {
+    inherit rofi-unwrapped;
+  };
   patched-alacritty = with pkgs; import ./pkgs/patched-alacritty {
     inherit lib stdenvNoCC fetchFromGitHub alacritty writeScriptBin nixosVersion;
   };
