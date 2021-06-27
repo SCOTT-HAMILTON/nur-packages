@@ -16,8 +16,8 @@ mkDerivation {
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "Protify";
-    rev = "0e5d651c7e5e1bac8769f61454a22cadc4cca679";
-    sha256 = "0rk3cx92i4l5x1ncrwrbicglr3bljc368s7gwhi7zzd3n5laky3d";
+    rev = "dad9d1248b2677d125faba94817de93af4c6391f";
+    sha256 = "0j5j5y4ywirr9jdjy25q9mzkfd1rfx10gw1priw15sz36i4wg0lp";
     fetchSubmodules = true;
   };
 
