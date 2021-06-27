@@ -6,6 +6,7 @@
 , pkg-config
 , qtbase
 , qttools
+, qtquickcontrols2
 , avahi
 }:
 
@@ -22,7 +23,7 @@ mkDerivation {
   };
 
   nativeBuildInputs = [ qmake qtbase pkg-config qttools ];
-  buildInputs = [ qtbase avahi ];
+  buildInputs = [ qtquickcontrols2 qtbase avahi ];
     
   installFlags = [ "INSTALL_ROOT=$(out)" ];
 
