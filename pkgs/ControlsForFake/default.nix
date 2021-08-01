@@ -21,13 +21,12 @@ mkDerivation {
   pname = "ControlsForFake";
   version = "unstable";
 
-  # src = fetchFromGitHub {
-  #   owner = "SCOTT-HAMILTON";
-  #   repo = "ControlsForFake";
-  #   rev = "9b69a878d155b2a3b8f4a61ba09780b153f01779";
-  #   sha256 = "0mqpb4shxk2nyhiy13aszhgax96zfh445945hr8k6rx9vv8mgpk6";
-  # };
-  src = ~/GIT/ControlsForFake.tar.gz;
+  src = fetchFromGitHub {
+    owner = "SCOTT-HAMILTON";
+    repo = "ControlsForFake";
+    rev = "3b73b853e1c921dfbecb5e09e7c4a9b66286597e";
+    sha256 = "037aql790yy1ch73gf81j5kls4ilkh7hls4qxdijx527xzpa9d5a";
+  };
 
   nativeBuildInputs = [ qttranslations qtbase pkg-config ninja meson ];
 
