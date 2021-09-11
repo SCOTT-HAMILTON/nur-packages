@@ -5,6 +5,7 @@
 , ninja
 , pkg-config
 , cmake
+, argparse
 , brotli
 , c-ares
 , drogon
@@ -13,21 +14,22 @@
 , openssl
 , sqlite
 }:
+
 stdenv.mkDerivation {
   pname = "rpi-fan-serve";
   version = "unstable";
 
-  # src = fetchFromGitHub {
-  #   owner = "SCOTT-HAMILTON";
-  #   repo = "rpi-fan-serve";
-  #   rev = "c0869235ad5eda2b40d0e8691742a74f65724d88";
-  #   sha256 = "0iw3szycraam4whg2sc3riw3rh3pc0d10cn7i836bjq7fla6vgai";
-  # };
-  src = ~/GIT/src.tar.gz;
+  src = fetchFromGitHub {
+    owner = "SCOTT-HAMILTON";
+    repo = "rpi-fan-serve";
+    rev = "3c7edbe0147b1beb9617f213416280c6eb828179";
+    sha256 = "1kxd8ssx9sv4whg7w3i5rxhnl8i9apbn5zwnw5sv8gk0sn37f8gd";
+  };
 
   nativeBuildInputs = [ pkg-config ninja meson cmake ];
 
   buildInputs = [
+    argparse
     brotli
     c-ares
     drogon

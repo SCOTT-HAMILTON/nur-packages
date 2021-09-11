@@ -109,7 +109,9 @@ pkgs.lib.traceValFn (x:
   pyscreeze = pkgs.callPackage ./pkgs/pyscreeze { };
   pytweening = pkgs.callPackage ./pkgs/pytweening { };
   rpi-fan = pkgs.callPackage ./pkgs/rpi-fan { };
-  rpi-fan-serve = drogonNixPkgs.callPackage ./pkgs/rpi-fan-serve { };
+  rpi-fan-serve = drogonNixPkgs.callPackage ./pkgs/rpi-fan-serve {
+    inherit (self) argparse;
+  };
   # qradiopredict = pkgs.libsForQt5.callPackage ./pkgs/qradiopredict { };
   scripts = with pkgs; callPackage ./pkgs/Scripts {
     eom = mate.eom;
