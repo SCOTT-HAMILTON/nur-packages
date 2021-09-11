@@ -17,6 +17,10 @@ let
     };
   };
   kdeApplications = pkgs.libsForQt5.kdeApplications;
+  drogonNixPkgs = import (fetchTarball {
+    url = "https://github.com/NixOS/NixPkgs/archive/cd0fa6156f486c583988d334202946ffa4b9ebe8.tar.gz";
+    sha256 = "003vg8gz99spbmdvff06y36icn4by2yv4kb3s1m73q5z73bb2dy7";
+  }) {};
 in
 pkgs.lib.traceValFn (x:
  "Nixpkgs version : ${pkgs.lib.version},
@@ -63,7 +67,7 @@ pkgs.lib.traceValFn (x:
   juk = kdeApplications.callPackage ./pkgs/Juk { };
   keysmith = kdeApplications.callPackage ./pkgs/keysmith { };
   killbots = kdeApplications.callPackage ./pkgs/Killbots { };
-  kirigami-gallery = kdeApplications.callPackage ./pkgs/KirigamiGallery { };
+  kirigami-gallery = pkgs.libsForQt5.callPackage ./pkgs/KirigamiGallery { };
   kotlin-vim = with pkgs.vimUtils; pkgs.callPackage ./pkgs/kotlin-vim {
     inherit buildVimPluginFrom2Nix;
   };
@@ -105,6 +109,7 @@ pkgs.lib.traceValFn (x:
   pyscreeze = pkgs.callPackage ./pkgs/pyscreeze { };
   pytweening = pkgs.callPackage ./pkgs/pytweening { };
   rpi-fan = pkgs.callPackage ./pkgs/rpi-fan { };
+  rpi-fan-serve = drogonNixPkgs.callPackage ./pkgs/rpi-fan-serve { };
   # qradiopredict = pkgs.libsForQt5.callPackage ./pkgs/qradiopredict { };
   scripts = with pkgs; callPackage ./pkgs/Scripts {
     eom = mate.eom;
@@ -126,7 +131,9 @@ pkgs.lib.traceValFn (x:
   tfk-api-unoconv = pkgs.callPackage ./pkgs/tfk-api-unoconv { };
   timetable2header = pkgs.callPackage ./pkgs/TimeTable2Header { };
   tg = pkgs.callPackage ./pkgs/tg  { };
-  unoconvui = pkgs.libsForQt5.callPackage ./pkgs/UnoconvUI  { };
+  unoconvui = with pkgs.libsForQt5; pkgs.enableDebugging (pkgs.callPackage ./pkgs/UnoconvUI  {
+    inherit qmake qtbase qttools qtquickcontrols2 qtdeclarative;
+  });
   vim-async = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-async {
     inherit buildVimPluginFrom2Nix;
   };
