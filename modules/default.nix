@@ -15,6 +15,10 @@ rec {
   };
   unoconv = ./unoconv.nix;
   simplehaproxy = ./simplehaproxy.nix;
+  rpi-fan-serve = import ./rpi-fan-serve.nix {
+    inherit simplehaproxy;
+    inherit (selfnur) rpi-fan-serve;
+  };
   unoconvservice = import ./unoconvservice.nix {
     inherit tfk-api-unoconv unoconv simplehaproxy;
   };
