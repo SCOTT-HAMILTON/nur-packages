@@ -41,6 +41,7 @@ check_overlay
 # Main loop
 last_cpu_temp=-100
 last_level=0
+count=0
 while true
 do
 	check_overlay
@@ -74,7 +75,7 @@ do
 
 	level=0
 	if ((delta_temp >= 2)); then
-		echo "fan_speed : $fan_speed" >> $LOG_FILE
+		# echo "fan_speed : $fan_speed" >> $LOG_FILE
 		last_cpu_temp=$cpu_temp
 		if ((fan_speed >= 0 && fan_speed < 51)); then
 			level=0
@@ -96,7 +97,11 @@ do
 	echo $last_level > /sys/class/thermal/cooling_device0/cur_state
 
 	# echo CPU status
-	echo "$(date '+%D %R') CPU $cpu_state with $cpu_temp_string, Δ$delta_temp°C, level is `cat /sys/class/thermal/cooling_device0/cur_state`." >> $LOG_FILE
+	count=$((count+1))
+	if [ $count -ge 30 ]; then
+		echo "$(date '+%D %R') CPU $cpu_state with $cpu_temp_string, Δ$delta_temp°C, level is `cat /sys/class/thermal/cooling_device0/cur_state`." >> $LOG_FILE
+		count=0
+	fi
 
 	sleep 3
 done
