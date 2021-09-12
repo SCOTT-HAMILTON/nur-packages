@@ -22,8 +22,8 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "rpi-fan-serve";
-    rev = "3c7edbe0147b1beb9617f213416280c6eb828179";
-    sha256 = "1kxd8ssx9sv4whg7w3i5rxhnl8i9apbn5zwnw5sv8gk0sn37f8gd";
+    rev = "8c4cf2e5c15dc232eba36428d682b9f702cb78e1";
+    sha256 = "0fqpwpdkjlr0q8zi2ipil97ahvafmk4gwpjlx48qg6vmi41fnm8h";
   };
 
   nativeBuildInputs = [ pkg-config ninja meson cmake ];
