@@ -99,7 +99,7 @@ do
 	# echo CPU status
 	count=$((count+1))
 	if [ $count -ge 30 ]; then
-		echo "$(date '+%D %R') CPU $cpu_state with $cpu_temp_string, Δ$delta_temp°C, level is `cat /sys/class/thermal/cooling_device0/cur_state`." >> $LOG_FILE
+		echo "$(date --iso-8601=s) CPU $cpu_state with $cpu_temp_string, Δ$delta_temp°C, level is `cat /sys/class/thermal/cooling_device0/cur_state`." >> $LOG_FILE
 		count=0
 	fi
 
