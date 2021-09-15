@@ -25,6 +25,11 @@ with lib; {
       example = "rpi-fan.log";
       description = "The filename of the base log file to analyze and serve";
     };
+    maxJobs = mkOption {
+      type = types.ints.unsigned;
+      default = 4;
+      description = "Max number of threads to use";
+    };
   };
   config = mkIf cfg.enable {
     services.simplehaproxy = {
@@ -57,7 +62,7 @@ with lib; {
             wantedBy = [ "multi-user.target" ];
             serviceConfig = {
               Type = "simple";
-              ExecStart = "${rpi-fan-serve}/bin/rpi-fan-serve ${toString cfg.port} ${containerLogsDir}/${cfg.logBaseFileName}";
+              ExecStart = "${rpi-fan-serve}/bin/rpi-fan-serve ${toString cfg.port} ${containerLogsDir}/${cfg.logBaseFileName} ${toString cfg.maxJobs}";
             };
           };
         };
