@@ -133,9 +133,9 @@ pkgs.lib.traceValFn (x:
   tfk-api-unoconv = pkgs.callPackage ./pkgs/tfk-api-unoconv { };
   timetable2header = pkgs.callPackage ./pkgs/TimeTable2Header { };
   tg = pkgs.callPackage ./pkgs/tg  { };
-  unoconvui = with pkgs.libsForQt5; pkgs.enableDebugging (pkgs.callPackage ./pkgs/UnoconvUI  {
-    inherit qmake qtbase qttools qtquickcontrols2 qtdeclarative;
-  });
+  unoconvui = with pkgs.libsForQt5; callPackage ./pkgs/UnoconvUI  {
+    inherit qmake qtbase qttools qtquickcontrols2;
+  };
   vim-async = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-async {
     inherit buildVimPluginFrom2Nix;
   };
