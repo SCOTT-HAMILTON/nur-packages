@@ -77,6 +77,7 @@ pkgs.lib.traceValFn (x:
   mouseinfo = pkgs.callPackage ./pkgs/mouseinfo {
     inherit (self) python3-xlib;
   };
+  mobiledemo = pkgs.callPackage ./pkgs/MobileDemo { };
   MyVimConfig = pkgs.callPackage ./pkgs/MyVimConfig { };
   numworks-udev-rules = pkgs.callPackage ./pkgs/numworks-udev-rules { };
   parallel-ssh = pkgs.callPackage ./pkgs/parallel-ssh {
