@@ -1,6 +1,7 @@
 { lib
 , stdenvNoCC
 , ffmpeg
+, gifsicle
 }:
 let
 in
@@ -26,7 +27,7 @@ stdenvNoCC.mkDerivation rec {
     runHook postInstall
   '';
 
-  propagatedBuildInputs = [ ffmpeg ];
+  propagatedBuildInputs = [ ffmpeg gifsicle ];
 
   meta = with lib; {
     description = "Argument Parser for Modern C++";
