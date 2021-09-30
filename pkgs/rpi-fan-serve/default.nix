@@ -22,8 +22,8 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "rpi-fan-serve";
-    rev = "0aee166038f5182ee79d81e923f0a3fb0ee08efc";
-    sha256 = "07s9l4pvh29z2gswkhqm6d8w83rid8z18m2w6mvpq5dfh7mgng31";
+    rev = "2b6217b5a3191fdb328401af94cb5e66f93e2efd";
+    sha256 = "063dbrg1jpnj8qk2za5335bfrhdg72kzas463vw8wy0jwxwn95kp";
     fetchSubmodules = true;
   };
 
