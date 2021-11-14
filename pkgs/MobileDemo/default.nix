@@ -1,10 +1,10 @@
 { lib
 , stdenvNoCC
+, makeWrapper
 , ffmpeg
 , gifsicle
 }:
-let
-in
+
 stdenvNoCC.mkDerivation rec {
   pname = "MobileDemo";
   version = "unstable";
@@ -12,6 +12,8 @@ stdenvNoCC.mkDerivation rec {
   mobiledemo = ./mobiledemo.sh;
   maquette = ./maquette.png;
   dontUnpack = true;
+
+  nativeBuildInputs = [ makeWrapper ];
 
   postPatch = ''
     cp $mobiledemo mobiledemo.sh
@@ -25,6 +27,11 @@ stdenvNoCC.mkDerivation rec {
     install -Dm 755 mobiledemo.sh "$out/bin/mobiledemo"
     install -Dm 644 maquette.png "$out/share/maquette.png"
     runHook postInstall
+  '';
+
+  postInstall = ''
+    wrapProgram "$out/bin/mobiledemo" \
+      --prefix PATH : ${lib.makeBinPath [ ffmpeg gifsicle ]}
   '';
 
   propagatedBuildInputs = [ ffmpeg gifsicle ];
