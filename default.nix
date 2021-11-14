@@ -71,6 +71,10 @@ pkgs.lib.traceValFn (x:
   kotlin-vim = with pkgs.vimUtils; pkgs.callPackage ./pkgs/kotlin-vim {
     inherit buildVimPluginFrom2Nix;
   };
+  lbstanza = pkgs.callPackage ./pkgs/lbstanza {
+    inherit (self) lbstanza-bin;
+  };
+  lbstanza-bin = pkgs.callPackage ./pkgs/lbstanza-bin { };
   libfake = pkgs.callPackage ./pkgs/FakeLib { };
   lokalize = pkgs.libsForQt5.callPackage ./pkgs/Lokalize { };
   merge-keepass = pkgs.callPackage ./pkgs/merge-keepass { };
@@ -155,6 +159,9 @@ pkgs.lib.traceValFn (x:
     inherit buildVimPluginFrom2Nix;
   };
   vim-myftplugins = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-myftplugins {
+    inherit buildVimPluginFrom2Nix;
+  };
+  vim-stanza = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-stanza {
     inherit buildVimPluginFrom2Nix;
   };
   vim-super-retab = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-super-retab {
