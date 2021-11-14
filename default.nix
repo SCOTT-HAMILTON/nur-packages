@@ -193,7 +193,7 @@ pkgs.lib.traceValFn (x:
 # to access them directly from the root repo
 {
   patched-rofi = with pkgs; import ./pkgs/patched-rofi {
-    inherit rofi-unwrapped;
+    inherit rofi-unwrapped nixosVersion;
   };
   patched-alacritty = with pkgs; import ./pkgs/patched-alacritty {
     inherit lib stdenvNoCC fetchFromGitHub alacritty writeScriptBin nixosVersion;
