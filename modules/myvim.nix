@@ -3,6 +3,7 @@
 , vim-lsp
 , vim-lsp-settings
 , vim-myftplugins
+, vim-stanza
 , vim-super-retab
 , vim-vala
 }:
@@ -31,6 +32,7 @@ in
         vim-lsp
         vim-lsp-settings
         vim-myftplugins
+        vim-stanza
         vim-super-retab
         vim-vala
       ];
