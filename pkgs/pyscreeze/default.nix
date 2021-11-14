@@ -12,8 +12,8 @@ python3Packages.buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "asweigart";
     repo = "pyscreeze";
-    rev = "0446e87235e0079f591f0c49ece7d487dedc2f9a";
-    sha256 = "1dhcmvdlsv7y3mggmk7g4jsdwkjagfw7slmg3zln64f1ksvkfv7g";
+    rev = "28ab707dceecbdd135a9491c3f8effd3a69680af";
+    sha256 = "16v16r1yw14zmy1nga5lbk448f7s99c1mq0r49hwg6pz6xvg4zc2";
   };
 
   nativeBuildInputs = [ xvfb-run ];
