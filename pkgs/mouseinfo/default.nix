@@ -11,8 +11,8 @@ python3Packages.buildPythonApplication rec {
   src = fetchFromGitHub {
     owner = "asweigart";
     repo = "mouseinfo";
-    rev = "a323c0e7253e01366f12d023cb5e481c5a08eb5c";
-    sha256 = "0r6mngbapiccgpm8axbh8m9c5bv0chhf3r4700hddrgxrwyi3909";
+    rev = "27d4059a20180344bbfaed4b679f193d44c9f366";
+    sha256 = "1ylnsr5ffh7lb4yr5m79jcnfkdyz79yq06r21ccd1yqdnmaf7p4w";
   };
 
   propagatedBuildInputs = with python3Packages; [
