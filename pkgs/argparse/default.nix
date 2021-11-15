@@ -6,13 +6,13 @@
 stdenv.mkDerivation rec {
 
   pname = "argparse";
-  version = "2.1";
+  version = "2.2";
 
   src = fetchFromGitHub {
     owner = "p-ranav";
     repo = "argparse";
     rev = "v${version}";
-    sha256 = "09wp0i835g6a80w67a0qa2mlsn81m4661adlccyrkj7rby5hnz3c";
+    sha256 = "1vmn71c2frbhybli8k06kcmb5qdzgqf5gzz90aqf818s6xpv5j0n";
   };
 
   nativeBuildInputs = [ cmake ];
