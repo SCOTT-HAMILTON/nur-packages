@@ -13,8 +13,8 @@ python3Packages.buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "sync-database";
-    rev = "cd57461009298229762b27e5ae3bf6100b6196cb";
-    sha256 = "0m9gac1b6haaifi69lwybq1hlp631jbxyj79ccfxchfjxanhjhrr";
+    rev = "459bd88fbe3d9cfb22acc04e60025d23cdb58be1";
+    sha256 = "0qix2xrbwfaawd77gy3kpwkbhq6pc774b0567bsv9zc7p9h129nc";
   };
 
   propagatedBuildInputs = with python3Packages; [
