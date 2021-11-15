@@ -83,6 +83,7 @@ pkgs.lib.traceValFn (x:
   };
   mobiledemo = pkgs.callPackage ./pkgs/MobileDemo { };
   MyVimConfig = pkgs.callPackage ./pkgs/MyVimConfig { };
+  nix-bisect = pkgs.callPackage ./pkgs/nix-bisect { };
   numworks-udev-rules = pkgs.callPackage ./pkgs/numworks-udev-rules { };
   parallel-ssh = pkgs.callPackage ./pkgs/parallel-ssh {
     inherit (self) ssh-python ssh2-python;
