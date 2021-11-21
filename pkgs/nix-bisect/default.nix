@@ -2,24 +2,17 @@
 , fetchFromGitHub
 , python3Packages
 }:
-let
-  good-setup-py = ./setup.py;
-in
+
 python3Packages.buildPythonApplication rec {
   pname = "nix-bisect";
-  version = "0.2.0";
+  version = "2020-09-22";
 
   src = fetchFromGitHub {
-    owner = "timokau";
+    owner = "SCOTT-HAMILTON";
     repo = "nix-bisect";
-    rev = "v${version}";
-    sha256 = "0rg7ndwbn44kximipabfbvvv5jhgi6vs87r64wfs5by81iw0ivam";
+    rev = "e68fbdede0ad3a5ab9d80850cbee92d8f1823cd1";
+    sha256 = "094q3gpixiyn65bz9pqc6ir2abf69i2lgh40ksnbzj0x21y8x1ns";
   };
-
-  postPatch = ''
-    ls -lh
-    cp ${good-setup-py} setup.py
-  '';
 
   propagatedBuildInputs = with python3Packages; [
     appdirs
