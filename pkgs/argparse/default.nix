@@ -15,6 +15,12 @@ stdenv.mkDerivation rec {
     sha256 = "1vmn71c2frbhybli8k06kcmb5qdzgqf5gzz90aqf818s6xpv5j0n";
   };
 
+  postPatch = ''
+    sed -i '/string(REPLACE/d' CMakeLists.txt
+    substituteInPlace 'CMakeLists.txt' \
+      --replace 'CMAKE_INSTALL_LIBDIR_ARCHIND' 'CMAKE_INSTALL_LIBDIR'
+  '';
+
   nativeBuildInputs = [ cmake ];
 
   meta = with lib; {
