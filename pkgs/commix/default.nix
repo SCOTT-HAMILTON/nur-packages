@@ -1,20 +1,20 @@
 { lib
 , fetchFromGitHub
-, python37Packages
+, python3Packages
 }:
 
-python37Packages.buildPythonApplication rec {
+python3Packages.buildPythonApplication rec {
   pname = "commix";
-  version = "3.2";
+  version = "3.3";
 
   src = fetchFromGitHub {
     owner = "commixproject";
     repo = "commix";
     rev = "v${version}";
-    sha256 = "0dnjwvqskyk04sv296lfvwyiahdqfq5h9klmp8lr8lp8fg329afq";
+    sha256 = "1029pirwjy57rvgbw7a8csvvcjcrlndgp77i2ykw3k1fzl0v026v";
   };
 
-  propagatedBuildInputs = with python37Packages; [ tornado_4 python-daemon ];
+  propagatedBuildInputs = with python3Packages; [ tornado_4 python-daemon ];
 
   doCheck = true;
 
