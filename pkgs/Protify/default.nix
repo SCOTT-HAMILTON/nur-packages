@@ -30,6 +30,10 @@ mkDerivation {
   qmakeFlags = [ "QMAKE_CXX=clang++" ];
   installFlags = [ "INSTALL_ROOT=$(out)" ];
 
+  preFixup = ''
+    qtWrapperArgs+=(--run "export XDG_CACHE_HOME=\$HOME/.local/cache")
+  '';
+
   meta = with lib; {
     description = "The Qt gui frontend for FakeMicWavPlayer";
     license = licenses.mit;
