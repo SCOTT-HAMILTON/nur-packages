@@ -44,9 +44,8 @@ stdenvNoCC.mkDerivation rec {
   propagatedBuildInputs = [ bc coreutils libraspberrypi ];
 
   meta = with lib; {
-    description = "Argument Parser for Modern C++";
+    description = "Little bash script to that controls the rpi fans";
     license = licenses.mit;
-    homepage = "https://github.com/p-ranav/argparse";
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
   };
