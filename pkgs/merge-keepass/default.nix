@@ -25,6 +25,7 @@ python3Packages.buildPythonPackage rec {
 
   meta = with lib; {
     description = "Keepass Databases Merging script";
+    homepage = "http://github.com/SCOTT-HAMILTON/merge-keepass";
     license = licenses.mit;
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
