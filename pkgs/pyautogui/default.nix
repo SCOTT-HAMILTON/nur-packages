@@ -30,8 +30,8 @@ python3Packages.buildPythonPackage rec {
   doCheck = false;
 
   meta = with lib; {
-    longDescription = ''A cross-platform GUI automation Python module for
-    human beings. Used to programmatically control the mouse & keyboard.'';
+    description = ''GUI automation Python module for human beings'';
+    homepage = "https://github.com/asweigart/pyautogui";
     license = licenses.bsd3;
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
