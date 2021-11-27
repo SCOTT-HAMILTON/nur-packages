@@ -15,6 +15,7 @@ python3Packages.buildPythonPackage rec {
 
   meta = with lib; {
     description = "Simple module with a Rect class for Pygame-like rectangular areas";
+    homepage = "https://github.com/asweigart/pyrect";
     license = licenses.bsd3;
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
