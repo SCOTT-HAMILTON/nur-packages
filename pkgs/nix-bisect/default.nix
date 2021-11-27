@@ -10,8 +10,8 @@ python3Packages.buildPythonApplication rec {
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "nix-bisect";
-    rev = "e68fbdede0ad3a5ab9d80850cbee92d8f1823cd1";
-    sha256 = "094q3gpixiyn65bz9pqc6ir2abf69i2lgh40ksnbzj0x21y8x1ns";
+    rev = "9f5d8b36e97e723460e5e3ba3fc4e8102adc79a1";
+    sha256 = "0gfq9vglwgh8jjb5il9nkrspz1hpyav2x742152p4zckvwd5n9dm";
   };
 
   propagatedBuildInputs = with python3Packages; [
