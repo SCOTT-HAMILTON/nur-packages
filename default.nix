@@ -121,6 +121,7 @@ pkgs.lib.traceValFn (x:
     eom = mate.eom;
     inherit (self) sync-database parallel-ssh merge-keepass;
   };
+  sdbusplus-tools = pkgs.callPackage ./pkgs/sdbusplus-tools { };
   slick-greeter = with pkgs.gnome3; pkgs.callPackage ./pkgs/slick-greeter {
     inherit gnome-common gtk slick-greeter;
   };
