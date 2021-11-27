@@ -26,6 +26,7 @@ python3Packages.buildPythonPackage rec {
 
   meta = with lib; {
     description = "Bindings for libssh C library";
+    homepage = "https://github.com/ParallelSSH/ssh-python";
     license = licenses.lgpl21Plus;
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
