@@ -18,6 +18,7 @@ python3Packages.buildPythonPackage rec {
 
   meta = with lib; {
     description = "A set of tweening / easing functions implemented in Python";
+    homepage = "https://github.com/asweigart/pytweening";
     license = licenses.bsd3;
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
