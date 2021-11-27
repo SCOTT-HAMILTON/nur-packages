@@ -29,6 +29,7 @@ buildPythonPackage rec {
 
   meta = with lib; {
     description = "Simple wrapper for tabula-java, read tables from PDF into DataFrame";
+    homepage = "https://github.com/chezou/tabula-py";
     license = licenses.mit;
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
