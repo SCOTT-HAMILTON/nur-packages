@@ -26,7 +26,8 @@ python3Packages.buildPythonPackage rec {
 
   meta = with lib; {
     description = "Asynchronous parallel SSH client library";
-    license = licenses.mit;
+    homepage = "https://parallel-ssh.org/";
+    license = licenses.lgpl21Plus;
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
   };
