@@ -17,9 +17,9 @@ python3Packages.buildPythonPackage rec {
   doCheck = true;
 
   meta = with lib; {
-    description = "Rtree: spatial index for Python GIS";
-    homepage = "https://rtree.readthedocs.io/en/latest/";
-    license = licenses.mit;
+    description = "CLI utility to create graphs from CSV files";
+    homepage = "https://github.com/mcastorina/graph-cli";
+    license = licenses.gpl3Plus;
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
   };
