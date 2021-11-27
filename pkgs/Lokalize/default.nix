@@ -29,9 +29,17 @@ mkDerivation rec {
   buildInputs = [ kross qtscript hunspell kactivities qtbase ];
 
   meta = with lib; {
-    description = "Computer-aided translation system that focuses on productivity and quality assurance";
-    homepage = "https://dangvd.github.io/ksmoothdock/";
-    license = licenses.mit;
+    description = "Computer-aided translation system";
+    longDescription = ''
+      Lokalize is the localization tool for KDE software and other
+      free and open source software. It is also a general computer-aided
+      translation system (CAT) with which you can translate OpenDocument
+      files (*.odt). Translate-Toolkit is used internally to extract text
+      for translation from .odt to .xliff files and to merge translation
+      back into .odt file.
+    '';
+    homepage = "https://apps.kde.org/lokalize/";
+    license = licenses.gpl2Plus;
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
   };
