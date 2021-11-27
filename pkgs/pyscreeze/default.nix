@@ -30,6 +30,7 @@ python3Packages.buildPythonPackage rec {
 
   meta = with lib; {
     description = "Simple, cross-platform screenshot module for Python 2 and 3";
+    homepage = "https://github.com/asweigart/pyscreeze";
     license = licenses.bsd3;
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
