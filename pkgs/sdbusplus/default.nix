@@ -1,6 +1,7 @@
 { lib
 , stdenv
 , fetchFromGitHub
+, fetchpatch
 , meson
 , ninja
 , pkg-config
@@ -22,7 +23,15 @@ stdenv.mkDerivation {
     sha256 = "1vwx51spyvax31nd1aazvs9r88ki3fp5kjbvhnxchd91lqbbg65q";
   };
 
-  patches = [ /tmp/good.patch ];
+  patches = [
+    # PR opened to remove usage of deprecated
+    # sdbus++-gendir tool in examples and tests.
+    # cf https://github.com/openbmc/sdbusplus/pull/70
+    (fetchpatch {
+      url = "https://github.com/openbmc/sdbusplus/commit/36dfb7ae62768570994066f73a045e3b4b74bfd5.patch";
+      sha256 = "14i6gf5m4d8asl5lwn3fdkxl12kgcy15mgwfk5jy3glwfyx4g9fm";
+    })
+  ];
 
   postPatch = ''
     find . -executable -type f \( ! -iname "setup.py" \) -exec rm {} \;
