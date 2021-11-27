@@ -28,6 +28,7 @@ python3Packages.buildPythonPackage rec {
 
   meta = with lib; {
     description = "Super fast SSH2 protocol library";
+    homepage = "https://github.com/ParallelSSH/ssh2-python";
     license = licenses.lgpl2;
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
