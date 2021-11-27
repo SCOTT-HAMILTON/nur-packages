@@ -108,7 +108,6 @@ pkgs.lib.traceValFn (x:
   pygetwindow = pkgs.callPackage ./pkgs/pygetwindow {
     inherit (self) pyrect;
   };
-  python-iconf = pkgs.callPackage ./pkgs/python-iconf { };
   python3-xlib = pkgs.callPackage ./pkgs/python3-xlib { };
   pyrect = pkgs.callPackage ./pkgs/pyrect { };
   pyscreeze = pkgs.callPackage ./pkgs/pyscreeze { };
