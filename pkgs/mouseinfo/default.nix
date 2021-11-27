@@ -22,17 +22,11 @@ python3Packages.buildPythonApplication rec {
     setuptools
   ];
 
-  # preBuild = ''
-  #   export PYTHONPATH=$PYTHONPATH:${makePythonPath propagatedBuildInputs}
-  # '';
-
   doCheck = false;
 
   meta = with lib; {
-    longDescription = ''
-      An application to display XY position and RGB color information for the
-      pixel currently under the mouse. Works on Python 2 and 3.
-    '';
+    description = "Displays XY position and RGB color under the mouse";
+    homepage = "https://github.com/asweigart/mouseinfo";
     license = licenses.gpl3;
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
