@@ -35,9 +35,9 @@ mkDerivation {
   '';
 
   meta = with lib; {
-    description = "The Qt gui frontend for FakeMicWavPlayer";
+    description = "Desktop client for Protify";
     license = licenses.mit;
-    homepage = "https://github.com/SCOTT-HAMILTON/ControlsForFake";
+    homepage = "https://github.com/SCOTT-HAMILTON/Protify";
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
   };
