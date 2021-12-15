@@ -113,8 +113,29 @@ pkgs.lib.traceValFn (x:
   pyscreeze = pkgs.callPackage ./pkgs/pyscreeze { };
   pytweening = pkgs.callPackage ./pkgs/pytweening { };
   rpi-fan = pkgs.callPackage ./pkgs/rpi-fan { };
-  rpi-fan-serve = drogonNixPkgs.callPackage ./pkgs/rpi-fan-serve {
+  rpi-fan-serve = let
+    patchedDrogon = with drogonNixPkgs; drogon.overrideAttrs (old: {
+      patches = (old.patches or []) ++ [
+        (fetchpatch {
+          url = "https://github.com/drogonframework/drogon/pull/1094/commits/52c4dcc1bda865a924a112249fd845ac5ea9c9a7.patch";
+          sha256 = "09rbh31lwmkv8pjysvd11vz9qnrmga7iw9jn3f9i39q0y1yvrfw6";
+        })
+      ];
+    });
+    patchedMeson = with drogonNixPkgs; meson.overrideAttrs (old: rec {
+      pname = "patched-meson";
+      version = "0.58.1";
+      name = "${pname}-${version}";
+      src = python3Packages.fetchPypi {
+        inherit (old) pname;
+        inherit version;
+        sha256 = "0padn0ykwz8azqiwkhi8p97bl742y8lsjbv0wpqpkkrgcvda6i1i";
+      };
+    });
+  in drogonNixPkgs.libsForQt5.callPackage ./pkgs/rpi-fan-serve {
     inherit (self) argparse;
+    drogon = patchedDrogon;
+    meson = patchedMeson;
   };
   # qradiopredict = pkgs.libsForQt5.callPackage ./pkgs/qradiopredict { };
   scripts = with pkgs; callPackage ./pkgs/Scripts {
@@ -199,7 +220,13 @@ pkgs.lib.traceValFn (x:
     inherit rofi-unwrapped nixosVersion;
   };
   patched-alacritty = with pkgs; import ./pkgs/patched-alacritty {
-    inherit lib stdenvNoCC fetchFromGitHub alacritty writeScriptBin nixosVersion;
+    inherit
+      lib
+      stdenvNoCC
+      fetchFromGitHub
+      alacritty
+      writeScriptBin
+      nixosVersion;
   };
   patched-tabbed = with pkgs; import ./pkgs/patched-tabbed {
     inherit tabbed fetchFromGitHub libbsd;
@@ -208,6 +235,7 @@ pkgs.lib.traceValFn (x:
 # Derivations not supported on NUR
 pkgs.lib.optionalAttrs (localUsage) (rec {
   mvn2nix = pkgs.callPackage ./pkgs/mvn2nix { };
+  nixgl = pkgs.callPackage ./pkgs/nixgl { };
   xtreme-download-manager = pkgs.callPackage ./pkgs/xtreme-download-manager {
     inherit mvn2nix localUsage;
   };

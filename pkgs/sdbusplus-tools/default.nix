@@ -1,6 +1,7 @@
 { lib
 , python3Packages
 , fetchFromGitHub
+, getopt
 }:
 
 python3Packages.buildPythonApplication rec {
@@ -16,10 +17,17 @@ python3Packages.buildPythonApplication rec {
 
   sourceRoot = "source/tools";
 
+  postPatch = ''
+    substituteInPlace sdbus++-gen-meson \
+      --replace '#!/usr/bin/env bash' '#!/bin/bash'
+    patchShebangs sdbus++-gen-meson
+  '';
+
   propagatedBuildInputs = with python3Packages; [
     Mako
     pyyaml
     inflection
+    getopt
   ];
 
   meta = with lib; {

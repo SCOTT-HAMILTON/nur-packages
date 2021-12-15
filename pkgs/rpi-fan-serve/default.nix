@@ -1,29 +1,35 @@
 { lib
-, stdenv
+, mkDerivation
 , fetchFromGitHub
 , meson
 , ninja
 , pkg-config
 , cmake
+, qtbase
 , argparse
 , brotli
 , c-ares
+, cppzmq
 , drogon
 , jsoncpp
+, libconfig
 , libuuid
 , openssl
 , sqlite
+, systemd
+, tbb
+, zeromq
 }:
 
-stdenv.mkDerivation {
+mkDerivation {
   pname = "rpi-fan-serve";
   version = "unstable";
 
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "rpi-fan-serve";
-    rev = "2b6217b5a3191fdb328401af94cb5e66f93e2efd";
-    sha256 = "063dbrg1jpnj8qk2za5335bfrhdg72kzas463vw8wy0jwxwn95kp";
+    rev = "591353ef1aedd1a5123a34bd869c1eb42eccb9b2";
+    sha256 = "041qmkvz60qddhdqwl7n9xnsmbj10jmjfgv1rhz7zbaxbja87r57";
     fetchSubmodules = true;
   };
 
@@ -33,12 +39,20 @@ stdenv.mkDerivation {
     argparse
     brotli
     c-ares
+    cppzmq
     drogon
     jsoncpp
+    libconfig
     libuuid
     openssl
     sqlite
+    systemd
+    tbb
+    zeromq
+    qtbase
   ];
+
+  dontWrapQtApps = true;
 
   meta = with lib; {
     description = "A web service to access rpi-fan data";

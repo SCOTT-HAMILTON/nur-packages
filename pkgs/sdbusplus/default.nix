@@ -37,6 +37,8 @@ stdenv.mkDerivation {
     find . -executable -type f \( ! -iname "setup.py" \) -exec rm {} \;
   '';
 
+  mesonFlags = [ "-Dtests=disabled" ];
+
   nativeBuildInputs = [ sdbusplus-tools pkg-config ninja meson breakpointHook ];
   buildInputs = [ gtest systemd boost ];
   propagatedBuildInputs = [
