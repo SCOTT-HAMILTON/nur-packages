@@ -5,6 +5,8 @@ let
   hostAddress = "192.168.100.18";
   containerAddress = "192.168.100.19";
   containerLogsDir = "/logs";
+  containerSocketsDir = "/run/rpi-fan-serve";
+  hostSocketsDir = "/run/rpi-fan-serve";
 in
 with lib; {
   imports = [ simplehaproxy ];
@@ -32,6 +34,9 @@ with lib; {
     };
   };
   config = mkIf cfg.enable {
+    services.dbus.packages = [ rpi-fan-serve ];
+    users.groups.rpi-fan-serve = {};
+    environment.systemPackages = [ rpi-fan-serve ];
     services.simplehaproxy = {
       enable = true;
       proxies.rpi-fan-serve = {
@@ -49,6 +54,10 @@ with lib; {
         "${containerLogsDir}" = {
           hostPath = cfg.logBaseFileDir;
         };
+        "${containerSocketsDir}" = {
+          hostPath = hostSocketsDir;
+          isReadOnly = false;
+        };
       };
       config =
         { config, pkgs, ... }:
@@ -62,7 +71,7 @@ with lib; {
             wantedBy = [ "multi-user.target" ];
             serviceConfig = {
               Type = "simple";
-              ExecStart = "${rpi-fan-serve}/bin/rpi-fan-serve ${toString cfg.port} ${containerLogsDir}/${cfg.logBaseFileName} ${toString cfg.maxJobs}";
+              ExecStart = "${rpi-fan-serve}/bin/rpi-fan-serve -p ${toString cfg.port} -l ${containerLogsDir}/${cfg.logBaseFileName} -j ${toString cfg.maxJobs}";
             };
           };
         };

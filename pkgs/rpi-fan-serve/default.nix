@@ -28,8 +28,8 @@ mkDerivation {
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "rpi-fan-serve";
-    rev = "591353ef1aedd1a5123a34bd869c1eb42eccb9b2";
-    sha256 = "041qmkvz60qddhdqwl7n9xnsmbj10jmjfgv1rhz7zbaxbja87r57";
+    rev = "45818cbd03e94f672f4c82ceb4d715bc87b1cb78";
+    sha256 = "1y2vrfyj7hi415dh6kyc3dyd9k9mg9dqhlha51lg0iqnvnp02zl0";
     fetchSubmodules = true;
   };
 
