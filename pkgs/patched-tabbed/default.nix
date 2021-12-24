@@ -1,6 +1,7 @@
 { tabbed
 , fetchFromGitHub
 , libbsd
+, zeromq
 }:
 (tabbed.override {
   patches = [ ./keys.patch ];
@@ -9,8 +10,8 @@
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "tabbed";
-    rev = "823e2981830be93aa68e2aba7f3b1e13f2e6e0c0";
-    sha256 = "1w6zzf86wnx6dymgfi0samrxgwl23z1ghnd2gv3gv25kvwp72vxy";
+    rev = "cea0ecb0ea8b4bda8b0aacf6eefb48dade9853d9";
+    sha256 = "1jjfkjlpc7ig71ppxg8a5amsshmsvg58dgdimr2pc5n13zcl4hxv";
   };
-  buildInputs = (old.buildInputs or []) ++ [ libbsd ];
+  buildInputs = (old.buildInputs or []) ++ [ libbsd zeromq ];
 })

@@ -226,10 +226,24 @@ pkgs.lib.traceValFn (x:
       fetchFromGitHub
       alacritty
       writeScriptBin
-      nixosVersion;
+      nixosVersion
+      expat
+      fontconfig
+      freetype
+      libGL
+      wayland
+      libxkbcommon
+      zeromq;
+    inherit (xlibs)
+      libX11
+      libXcursor
+      libXi
+      libXrandr
+      libXxf86vm
+      libxcb;
   };
   patched-tabbed = with pkgs; import ./pkgs/patched-tabbed {
-    inherit tabbed fetchFromGitHub libbsd;
+    inherit tabbed fetchFromGitHub libbsd zeromq;
   };
 } //
 # Derivations not supported on NUR
