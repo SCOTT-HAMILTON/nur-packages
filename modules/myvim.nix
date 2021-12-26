@@ -7,11 +7,8 @@
 , vim-super-retab
 , vim-vala
 }:
-{ config, lib, pkgs, options,
-home, modulesPath, specialArgs
-}:
+{ config, lib, pkgs, options, ... }:
 with lib;
-
 let
   cfg = config.myvim;
 in 
