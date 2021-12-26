@@ -61,7 +61,7 @@ alacritty.overrideAttrs (old: rec {
     inherit src;
     outputHash = if nixosVersion == "master"
       then "1cvjg840y1gnxhiw9rjhq27g49ap5vb795qvn9fblqfk3w545z5l"
-      else "1cvjg840y1gnxhiw9rjhq27g49ap5vb795qvn9fblqfk3w545z5l";
+      else "sha256-DojSnIec0neou1ibx98DLuRHjOBbahyiB1V9SHqOXeo=";
     doCheck = false;
   });
 })
