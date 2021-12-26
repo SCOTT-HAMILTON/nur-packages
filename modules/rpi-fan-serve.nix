@@ -56,6 +56,7 @@ with lib; {
         };
         "${containerSocketsDir}" = {
           hostPath = hostSocketsDir;
+          forceHostPath = true;
           isReadOnly = false;
         };
       };
