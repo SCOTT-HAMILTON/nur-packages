@@ -8,13 +8,13 @@
 
 python3Packages.buildPythonPackage rec {
   pname = "sync-database";
-  version = "unstable";
+  version = "2021-12-27";
 
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "sync-database";
-    rev = "459bd88fbe3d9cfb22acc04e60025d23cdb58be1";
-    sha256 = "0qix2xrbwfaawd77gy3kpwkbhq6pc774b0567bsv9zc7p9h129nc";
+    rev = "4472503bc6fc6c63478bf777dd4d2a813ada8e26";
+    sha256 = "1c4afwbk46v5x8kfbpf9pkcrm95wwr9lj69kx949ywys5vij5awi";
   };
 
   propagatedBuildInputs = with python3Packages; [

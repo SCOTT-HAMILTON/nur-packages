@@ -76,7 +76,9 @@ pkgs.lib.traceValFn (x:
   lbstanza-bin = pkgs.callPackage ./pkgs/lbstanza-bin { };
   libfake = pkgs.callPackage ./pkgs/FakeLib { };
   lokalize = pkgs.libsForQt5.callPackage ./pkgs/Lokalize { };
-  merge-keepass = pkgs.callPackage ./pkgs/merge-keepass { };
+  merge-keepass = pkgs.callPackage ./pkgs/merge-keepass {
+    inherit nixosVersion;
+  };
   mouseinfo = pkgs.callPackage ./pkgs/mouseinfo {
     inherit (self) python3-xlib;
   };
