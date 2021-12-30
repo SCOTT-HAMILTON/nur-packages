@@ -47,6 +47,9 @@ with lib; {
             # unoconv
             tfk-api-unoconv
           ];
+          services.journald.extraConfig = ''
+            SystemMaxUse=20M
+          '';
           networking.firewall = {
             enable = true;
             allowedTCPPorts = [ cfg.port ];
