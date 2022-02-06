@@ -5,13 +5,13 @@
 
 buildRustPackage rec {
   pname = "csview";
-  version = "0.3.8";
+  version = "1.0.0-rc.1";
 
   src = fetchFromGitHub {
     owner = "wfxr";
     repo = "csview";
     rev = "v${version}";
-    sha256 = "18bz12yn85h9vj0b18iaziix9km2iwh8gwfs93fddjv6kg87p38q";
+    sha256 = "1jamy7jy8ff7xdglnwbl7839hqamihsl95m1q077xl7l5brc6sm7";
   };
 
   cargoSha256 = "1my6gl8zq5k7clzapgbf1mmcgq8mmdbhl250rdd1fvfd59wkrwra";
@@ -23,5 +23,7 @@ buildRustPackage rec {
     license = licenses.asl20;
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
+    # needs newer cargo
+    broken = true;
   };
 }
