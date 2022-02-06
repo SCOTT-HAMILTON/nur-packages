@@ -3,16 +3,16 @@
 , fetchFromGitHub
 , coreutils
 }:
-buildVimPluginFrom2Nix {
 
+buildVimPluginFrom2Nix {
   pname = "vim-async";
-  version = "2020-06-27";
+  version = "2022-01-04";
 
   src = fetchFromGitHub {
     owner = "prabirshrestha";
     repo = "async.vim";
-    rev = "0fb846e1eb3c2bf04d52a57f41088afb3395212e";
-    sha256 = "1glzg0i53wkm383y1vbddbyp1ivlsx2hivjchiw60sr9gccn8f8l";
+    rev = "f20569020d65bec3249222606c073c0943045b5e";
+    sha256 = "0lff0v2vd06amcjirnpa4wc4l4nsbngcrdqcv34kszyqgzd7phka";
   };
 
   meta = with lib; {
