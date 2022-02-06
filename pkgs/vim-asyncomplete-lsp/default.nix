@@ -6,13 +6,13 @@
 
 buildVimPluginFrom2Nix {
   pname = "vim-asyncomplete-lsp";
-  version = "2020-06-27";
+  version = "2021-12-17";
 
   src = fetchFromGitHub {
     owner = "prabirshrestha";
     repo = "asyncomplete-lsp.vim";
-    rev = "684c34453db9dcbed5dbf4769aaa6521530a23e0";
-    sha256 = "0vqx0d6iks7c0liplh3x8vgvffpljfs1j3g2yap7as6wyvq621rq";
+    rev = "f6d6a6354ff279ba707c20292aef0dfaadc436a3";
+    sha256 = "1y0wpq982nw0ibqhvcvb7md58jvadygkxc1ibg99zxw1kznfpla6";
   };
 
   meta = with lib; {
