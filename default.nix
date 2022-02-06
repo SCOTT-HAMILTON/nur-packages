@@ -144,10 +144,6 @@ pkgs.lib.traceValFn (x:
     eom = mate.eom;
     inherit (self) sync-database parallel-ssh merge-keepass;
   };
-  sdbusplus = pkgs.callPackage ./pkgs/sdbusplus {
-    inherit (self) sdbusplus-tools;
-  };
-  sdbusplus-tools = pkgs.callPackage ./pkgs/sdbusplus-tools { };
   slick-greeter = with pkgs.gnome3; pkgs.callPackage ./pkgs/slick-greeter {
     inherit gnome-common gtk slick-greeter;
   };
@@ -256,7 +252,11 @@ pkgs.lib.optionalAttrs (localUsage) (rec {
     inherit mvn2nix localUsage;
   };
 })
-)).extend (self: super: {
+)).extend (self: super: rec {
   modules = import ./modules { selfnur = self; };
   overlays = import ./overlays { selfnur = self; }; # nixpkgs overlays
+  tests = import ./tests {
+    inherit modules;
+    selfnur = self;
+  };
 })
