@@ -6,11 +6,11 @@
 
 stdenv.mkDerivation rec {
   pname = "lbstanza-bin";
-  version = "0.14.33";
+  version = "0.15.11";
 
   src = fetchzip {
     url = "http://lbstanza.org/resources/stanza/lstanza_${lib.replaceStrings ["."] ["_"] version}.zip";
-    sha256 = "1az9pddxh5kjqkkxsl3ffc23zjawilpisnvy9sy7ymnsp3b791lf";
+    sha256 = "1gnbwk0wnbys873c7mxzf1i82v9fnb1iycxawaijicy7yl7c3ff2";
     stripRoot=false;
   };
 
