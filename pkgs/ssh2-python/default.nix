@@ -6,11 +6,11 @@
 }:
 python3Packages.buildPythonPackage rec {
   pname = "ssh2-python";
-  version = "0.26.0";
+  version = "0.27.0";
 
   src = python3Packages.fetchPypi {
     inherit pname version;
-    sha256 = "17llrzzmsfdd2sv4mhvx40azd28yihay33qspncvrlhjq68i4mgq";
+    sha256 = "0fv216a2nz8divgm1b3dww3is36k8kk0vbvh1klmr85p8kzi8nx6";
   };
   
   nativeBuildInputs = with python3Packages; [ cmake setuptools ];
