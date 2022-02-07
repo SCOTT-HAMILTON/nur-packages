@@ -145,8 +145,8 @@ pkgs.lib.traceValFn (x:
     eom = mate.eom;
     inherit (self) sync-database parallel-ssh merge-keepass;
   };
-  slick-greeter = with pkgs.gnome3; pkgs.callPackage ./pkgs/slick-greeter {
-    inherit gnome-common gtk slick-greeter;
+  slick-greeter = with pkgs; pkgs.callPackage ./pkgs/slick-greeter {
+    inherit (gnome3) gnome-common slick-greeter;
   };
   spectacle-clipboard = pkgs.libsForQt5.callPackage ./pkgs/spectacle-clipboard { };
   splat = pkgs.callPackage ./pkgs/splat { };

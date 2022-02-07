@@ -4,7 +4,7 @@
 , slick-greeter
 , python3
 , gnome-common
-, gtk
+, gtk3
 , intltool
 , libcanberra_gtk3
 , lightdm
@@ -41,7 +41,7 @@ stdenv.mkDerivation rec {
   ];
 
   buildInputs = [
-    gtk
+    gtk3
     (lib.getDev lightdm)
     libcanberra_gtk3
   ];
