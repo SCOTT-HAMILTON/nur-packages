@@ -79,5 +79,6 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/SCOTT-HAMILTON/Scripts";
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
+    broken = true;
   };
 }
