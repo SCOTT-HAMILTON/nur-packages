@@ -4,17 +4,18 @@
 , parallel-ssh
 , libssh2
 , merge-keepass
+, nixosVersion
 }:
 
 python3Packages.buildPythonPackage rec {
   pname = "sync-database";
-  version = "2021-12-27";
+  version = "2022-02-07";
 
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "sync-database";
-    rev = "4472503bc6fc6c63478bf777dd4d2a813ada8e26";
-    sha256 = "1c4afwbk46v5x8kfbpf9pkcrm95wwr9lj69kx949ywys5vij5awi";
+    rev = "b1c0b00a1a3f1bb23e76d43d2b8f1d2b24baf009";
+    sha256 = "1jvxp0rx7jsb574h3hfa5q1rmxd1fnxmjxbj183iairf3gfip8c6";
   };
 
   propagatedBuildInputs = with python3Packages; [
@@ -38,5 +39,6 @@ python3Packages.buildPythonPackage rec {
     license = licenses.mit;
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
+    broken = nixosVersion == "master";
   };
 }
