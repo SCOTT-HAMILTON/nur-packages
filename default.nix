@@ -159,7 +159,9 @@ pkgs.lib.traceValFn (x:
   tabula-py = pkgs.callPackage ./pkgs/tabula-py {
     inherit (python_with_openpyxl305.pkgs) buildPythonPackage fetchPypi distro numpy pandas setuptools_scm setuptools;
   };
-  tfk-api-unoconv = pkgs.callPackage ./pkgs/tfk-api-unoconv { };
+  tfk-api-unoconv = pkgs.callPackage ./pkgs/tfk-api-unoconv {
+    inherit nixosVersion;
+  };
   timetable2header = pkgs.callPackage ./pkgs/TimeTable2Header { };
   tg = pkgs.callPackage ./pkgs/tg  { };
   unoconvui = with pkgs.libsForQt5; callPackage ./pkgs/UnoconvUI  {
