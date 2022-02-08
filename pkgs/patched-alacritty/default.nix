@@ -57,11 +57,16 @@ alacritty.overrideAttrs (old: rec {
   postFixup = ''
     patchelf --set-rpath "${lib.makeLibraryPath rpathLibs}" "$out/bin/alacritty"
   '';
+  postInstall = lib.concatStringsSep "\n" (
+    lib.filter (l: builtins.match ".*gzip -c.*extra/alacritty-msg.man.*" l == null)
+    (lib.splitString "\n" old.postInstall)
+  );
+
   cargoDeps = old.cargoDeps.overrideAttrs (lib.const {
     inherit src;
     outputHash = if nixosVersion == "master"
       then "1cvjg840y1gnxhiw9rjhq27g49ap5vb795qvn9fblqfk3w545z5l"
-      else "sha256-DojSnIec0neou1ibx98DLuRHjOBbahyiB1V9SHqOXeo=";
+      else "sha256-zDDRQqShiu5C6KNiLeMhLWgez2+WkV2r+hGj9nZXddk=";
     doCheck = false;
   });
 })
