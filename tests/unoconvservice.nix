@@ -33,6 +33,7 @@ import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
           services.unoconvservice = {
             enable = true;
             timeout = 30000;
+            timeoutStartSec = "10min";
             port = 8080;
           };
           networking.firewall = {
