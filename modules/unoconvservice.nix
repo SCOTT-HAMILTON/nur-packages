@@ -52,12 +52,15 @@ with lib; {
           '';
           networking.firewall = {
             enable = true;
-            allowedTCPPorts = [ cfg.port ];
+            allowedTCPPorts = [ cfg.port 3000 ];
           };
           environment.systemPackages = [
             pkgs.unoconv
           ];
-          services.tfk-api-unoconv.enable = true;
+          services.tfk-api-unoconv = {
+            enable = true;
+            port = 3000;
+          };
           services.nginx = traceValFn (x: "regexFormats: ${regexFormats}") {
             enable = true;
             logError = "stderr debug";
@@ -80,7 +83,7 @@ with lib; {
                 return = "200 'User-agent: *\nDisallow: /\n'";
               };
               locations."~ \"/unoconv/${regexFormats}\"" = {
-                proxyPass = "http://unoconvserver:3000/unoconv/$1";
+                proxyPass = "http://0.0.0.0:3000/unoconv/$1";
                 # Protect from slow loris, 2 connections per IP max
                 extraConfig = ''
                   limit_conn addr 2;
@@ -91,12 +94,12 @@ with lib; {
                 '';
               };
               locations."/unoconv/versions" = {
-                proxyPass = "http://unoconvserver:3000/unoconv/versions";
+                proxyPass = "http://0.0.0.0:3000/unoconv/versions";
                 # Protect from slow loris, 2 connections per IP max
                 extraConfig = "limit_conn addr 2;";
               };
               locations."/unoconv/formats" = {
-                proxyPass = "http://unoconvserver:3000/unoconv/formats";
+                proxyPass = "http://0.0.0.0:3000/unoconv/formats";
                 # Protect from slow loris, 2 connections per IP max
                 extraConfig = "limit_conn addr 2;";
               };

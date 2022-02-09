@@ -15,5 +15,8 @@ in rec {
     inherit modules home-manager nixpkgs pkgs;
     inherit (selfnur) sync-database android-platform-tools;
   };
+  unoconvservice = pkgs.callPackage ./unoconvservice.nix {
+    inherit modules home-manager nixpkgs pkgs;
+  };
 }
 
