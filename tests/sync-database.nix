@@ -108,6 +108,7 @@ import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
 
       client.succeed("touch /home/bob/.ssh/known_hosts 1>&2")
       client.succeed("${runAsBob "ssh server1 'true' 1>&2"}")
+      client.succeed("${runAsBob "systemctl status home-manager-bob.service -l"} 1>&2")
       client.succeed("${runAsBob "cat /home/bob/.config/sync-database.conf"} 1>&2")
       client.succeed("${runAsBob "HOME=/home/bob ${sync-database}/bin/sync_database -m test 1>&2"}")
     '';
