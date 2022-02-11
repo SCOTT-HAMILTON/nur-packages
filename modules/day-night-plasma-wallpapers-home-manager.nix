@@ -22,8 +22,8 @@ in {
   };
   config = mkIf cfg.enable (mkMerge ([
     {
-      home.file.".config/autostart-scripts/update-day-night-plasma-wallpapers.sh".source 
-      = "${day-night-plasma-wallpapers}/.config/autostart-scripts/update-day-night-plasma-wallpapers.sh";
+      home.file.".config/autostart-scripts/update-day-night-plasma-wallpapers".source 
+      = "${day-night-plasma-wallpapers}/.config/autostart-scripts/update-day-night-plasma-wallpapers";
 
       # Writing JSON configuration file.
       home.file.".config/day-night-plasma-wallpapers.conf".text = builtins.toJSON cfg;
@@ -36,7 +36,7 @@ in {
 
         Service = {
           Type = "oneshot";
-          ExecStart = "${pkgs.coreutils}/bin/env PATH=\"${pkgs.coreutils}/bin:${pkgs.qt5.qttools.bin}/bin\" ${day-night-plasma-wallpapers}/bin/update-day-night-plasma-wallpapers.sh";
+          ExecStart = "${pkgs.coreutils}/bin/env PATH=\"${pkgs.coreutils}/bin:${pkgs.qt5.qttools.bin}/bin\" ${day-night-plasma-wallpapers}/bin/update-day-night-plasma-wallpapers";
         };
       };
     }

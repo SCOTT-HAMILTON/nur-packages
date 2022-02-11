@@ -1,24 +1,26 @@
 { lib
+, stdenv
+, fetchFromGitHub
 , python3Packages
-, fetchFromGitHub 
+, coreutils
 }:
 
-python3Packages.buildPythonPackage rec {
+stdenv.mkDerivation rec {
   pname = "day-night-plasma-wallpapers";
   version = "2020-05-30";
 
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "Day-night-plasma-wallpapers";
-    rev = "aae28f1267c5f6820719e87932b670233ed3bbfa";
-    sha256 = "1w1m0jrfdzvmrbvn0c1adysqcnl6qbcahkfbxp9gv85cvy42hqdl";
+    rev = "1f6124fbc4f1297ada77d6d3155b5b494455c316";
+    sha256 = "0ribzd0svp9sp0j87lhfqb7kivh3hw38ldvr5ps8qkr778460fdl";
   };
 
-  propagatedBuildInputs = with python3Packages; [ dbus-next ];
+  propagatedBuildInputs = with python3Packages; [ dbus-python ];
 
-  postInstall = ''
-    mkdir -p "$out/.config/autostart-scripts"
-    ln -s "$out/bin/update-day-night-plasma-wallpapers" "$out/.config/autostart-scripts/update-day-night-plasma-wallpapers"
+  installPhase = ''
+    install -Dm 555 update-day-night-plasma-wallpapers.py $out/bin/update-day-night-plasma-wallpapers.py
+    install -Dm 555 update-day-night-plasma-wallpapers.py $out/.config/autostart-scripts/update-day-night-plasma-wallpapers.py
   '';
 
   meta = with lib; {
