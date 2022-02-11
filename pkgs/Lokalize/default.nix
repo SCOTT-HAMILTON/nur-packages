@@ -21,7 +21,7 @@ mkDerivation rec {
     owner = "KDE";
     repo = "lokalize";
     rev = "v${version}";
-    sha256 = "0qm9qgrgffacpd303slf8plq9qqx6sf8m1gih3cg2gbwpv5k9y9x";
+    sha256 = "0kj2k40c4hzfvm7acxlwh7w5kq58mps9qcmz2829cp79waihxi17";
   };
 
   nativeBuildInputs = [ breakpointHook pkg-config extra-cmake-modules cmake  ];
