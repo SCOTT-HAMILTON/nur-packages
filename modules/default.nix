@@ -28,7 +28,9 @@ rec {
   hamiltonsamba = ./hamiltonsamba.nix;
   scottslounge = ./scottslounge.nix;
   hmModules = {
-    day-night-plasma-wallpapers = ./day-night-plasma-wallpapers-home-manager.nix;
+    day-night-plasma-wallpapers = import ./day-night-plasma-wallpapers-home-manager.nix {
+      inherit (selfnur) day-night-plasma-wallpapers;
+    };
     myvim = import ./myvim.nix {
       inherit (selfnur) 
           MyVimConfig
