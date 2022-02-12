@@ -7,8 +7,11 @@ code=$(cat << EOF
 import json
 
 package_json = json.load(open('package.json', 'r'))
-package_json["dependencies"].update(package_json["devDependencies"])
-del package_json["devDependencies"]
+devDeps = package_json["devDependencies"] \
+	if "devDependencies" in package_json.keys() else {}
+package_json["dependencies"].update(devDeps)
+if devDeps != {}:
+	del package_json["devDependencies"]
 with open("package.json", "w+") as file:
     file.write(json.dumps(package_json, indent = 2))
 EOF
@@ -17,7 +20,7 @@ python -c "$code"
 npm install
 rm -rf node_modules
 mv default.nix default.nix.save
-node2nix -l package-lock.json
+node2nix --nodejs-16 -l package-lock.json
 rm default.nix
 mv default.nix.save default.nix
 

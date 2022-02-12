@@ -3,13 +3,14 @@
 { nixosVersion
 , pkgs ? import <nixpkgs> {
     inherit system;
-  }, system ? builtins.currentSystem, nodejs ? pkgs."nodejs-12_x"
-
+},
+system ? builtins.currentSystem,
+nodejs ? pkgs."nodejs-14_x"
 }:
 
 let
   nodeEnv = import ./node-env.nix {
-    inherit (pkgs) stdenv lib python2 runCommand writeTextFile;
+    inherit (pkgs) stdenv lib python2 runCommand writeTextFile writeShellScript;
     inherit pkgs nodejs;
     libtool = if pkgs.stdenv.isDarwin then pkgs.darwin.cctools else null;
   };
@@ -31,7 +32,6 @@ in
     chmod +x "$out/lib/node_modules/tfk-api-unoconv/standalone.js"
     ln -s "$out/lib/node_modules/tfk-api-unoconv/standalone.js" "$out/bin/tfk-api-unoconv"
   '';
-  meta.broken = nixosVersion == "master";
 })
 
 

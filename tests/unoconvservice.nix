@@ -3,30 +3,15 @@
 , pkgs
 , nixpkgs
 }:
+
 import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
-    meta.broken = true;
     system = "x86_64-linux";
 
     nodes = let
-      # usersConfig = { ... }: {
-      #   users.users.bob =
-      #   { isNormalUser = true;
-      #     description = "Bob Foobar";
-      #     password = "foobar";
-      #   };
-      # };
     in {
-      client =
-        { ... }: {
-          # imports = [ "${home-manager}/nixos" usersConfig ];
-          # environment.systemPackages = with pkgs; [
-          #   curl
-          # ];
-
-        };
+      client = { ... }: {};
       server1 =
         { ... }:
-
         {
           imports = [ modules.unoconvservice ]; 
           services.unoconvservice = {
