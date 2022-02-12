@@ -10,26 +10,32 @@ let
     rev = "63dccc4e60422c1db2c3929b2fd1541f36b7e664";
     sha256 = "0caa4746rg0ip2fkhwi1jklavk4lfgx1qvillrya6r3c2hbyx4rm";
   };
+  callTest = t: t.test;
   hmTest = p: hm-module-test: 
-    pkgs.callPackage (import p {
+    (import p {
       inherit modules hm-module-test;
     }) {
       inherit home-manager pkgs nixpkgs;
     };
+  handleHmTest = p: hm-module-test:
+    callTest ((hmTest p hm-module-test) {});
+  handleTest = p: args:
+    callTest ((import p args) {});
 in rec {
-  sync-database = pkgs.callPackage ./sync-database.nix {
+  sync-database = handleTest ./sync-database.nix {
     inherit modules home-manager nixpkgs pkgs;
     inherit (selfnur) sync-database android-platform-tools;
   };
-  unoconvservice = pkgs.callPackage ./unoconvservice.nix {
+  unoconvservice = handleTest ./unoconvservice.nix {
     inherit modules home-manager nixpkgs pkgs;
   };
   hm-module-test = import ./hm-module-test.nix;
-  myvim = hmTest ./myvim.nix hm-module-test;
+  myvim = handleHmTest ./myvim.nix hm-module-test;
   day-night-plasma-wallpapers =
-    hmTest ./day-night-plasma-wallpapers.nix hm-module-test;
-  redshift-auto = hmTest ./redshift-auto.nix hm-module-test;
-  pronotebot = hmTest ./pronotebot.nix hm-module-test;
-  pronote-timetable-fetch = hmTest ./pronote-timetable-fetch.nix hm-module-test;
+    handleHmTest ./day-night-plasma-wallpapers.nix hm-module-test;
+  redshift-auto = handleHmTest ./redshift-auto.nix hm-module-test;
+  pronotebot = handleHmTest ./pronotebot.nix hm-module-test;
+  pronote-timetable-fetch =
+    handleHmTest ./pronote-timetable-fetch.nix hm-module-test;
 }
 
