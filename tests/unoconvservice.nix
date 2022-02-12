@@ -3,9 +3,8 @@
 , pkgs
 , nixpkgs
 }:
-let
-in
 import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
+    meta.broken = true;
     system = "x86_64-linux";
 
     nodes = let
