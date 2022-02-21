@@ -1,5 +1,21 @@
 { system ? "${builtins.currentSystem}"
-, pkgs ? import <nixpkgs> { inherit system; }
+, pkgs ? import <nixpkgs> {
+  inherit system;
+  overlays = [
+    (self: super: rec {
+      python3 = super.python3.override {
+        packageOverrides = pself: psuper: rec {
+          argon2_cffi = psuper.argon2_cffi.overrideAttrs (old: {
+            propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [
+              psuper.argon2-cffi-bindings
+            ];
+          });
+        };
+      };
+      python3Packages = python3.pkgs;
+    })
+  ];
+}
 , localUsage ? false
 , nixosVersion ? "master"
 }:
