@@ -1,7 +1,8 @@
 { system ? "${builtins.currentSystem}"
+, nixosVersion ? "master"
 , pkgs ? import <nixpkgs> {
   inherit system;
-  overlays = [
+  overlays = if (nixosVersion == "nixpkgs-unstable") then [
     (self: super: rec {
       python3 = super.python3.override {
         packageOverrides = pself: psuper: rec {
@@ -14,10 +15,9 @@
       };
       python3Packages = python3.pkgs;
     })
-  ];
+  ] else [];
 }
 , localUsage ? false
-, nixosVersion ? "master"
 }:
 let
   lib = pkgs.lib;
