@@ -13,7 +13,7 @@ frame() {
 
 	# Scale input video to size
 	ffmpeg -y -i "$1" \
-		-vf scale=-2:2706 \
+		-vf scale=1354:2706 \
 		-vcodec libx264  \
 		-r 15 \
 		-preset ultrafast \
