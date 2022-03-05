@@ -71,6 +71,7 @@ pkgs.lib.traceValFn (x:
   fake-mic-wav-player = pkgs.libsForQt5.callPackage ./pkgs/FakeMicWavPlayer {
     inherit (self) libfake argparse;
   };
+  # fetchGradle = pkgs.callPackage ./pkgs/fetch-gradle { };
   graph-cli = pkgs.callPackage ./pkgs/graph-cli { };
   haste-client = pkgs.callPackage ./pkgs/haste-client { };
   instanttee = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/InstantTee {
@@ -253,7 +254,7 @@ pkgs.lib.traceValFn (x:
       wayland
       libxkbcommon
       zeromq;
-    inherit (xlibs)
+    inherit (xorg)
       libX11
       libXcursor
       libXi
@@ -268,10 +269,15 @@ pkgs.lib.traceValFn (x:
 # Derivations not supported on NUR
 pkgs.lib.optionalAttrs (localUsage) (rec {
   mvn2nix = pkgs.callPackage ./pkgs/mvn2nix { };
+  # android-nixpkgs = pkgs.callPackage ./pkgs/android-nixpkgs { };
   nixgl = pkgs.callPackage ./pkgs/nixgl { };
   xtreme-download-manager = pkgs.callPackage ./pkgs/xtreme-download-manager {
     inherit mvn2nix localUsage;
   };
+  # trollslate = pkgs.callPackage ./pkgs/Trollslate  {
+  #   inherit android-nixpkgs;
+  #   inherit (self) fetchGradle;
+  # };
 })
 )).extend (self: super: rec {
   modules = import ./modules { selfnur = self; };
