@@ -11,7 +11,7 @@
 , hostapd
 , iproute
 , iw
-, procps-ng
+, procps
 , utillinux
 , wirelesstools
 }:
@@ -48,7 +48,7 @@ stdenv.mkDerivation rec {
     hostapd
     iproute
     iw
-    procps-ng
+    procps
     utillinux
     wirelesstools
   ];
