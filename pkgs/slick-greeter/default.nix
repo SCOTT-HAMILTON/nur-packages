@@ -6,7 +6,7 @@
 , gnome-common
 , gtk3
 , intltool
-, libcanberra_gtk3
+, libcanberra-gtk3
 , lightdm
 , linkFarm
 , pkg-config
@@ -43,7 +43,7 @@ stdenv.mkDerivation rec {
   buildInputs = [
     gtk3
     (lib.getDev lightdm)
-    libcanberra_gtk3
+    libcanberra-gtk3
   ];
 
   propagatedBuildInputs = [
