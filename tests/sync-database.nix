@@ -12,8 +12,6 @@ let
     '';
 in
 import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
-    system = "x86_64-linux";
-
     nodes = let
       usersConfig = { ... }: {
         users.users.bob =

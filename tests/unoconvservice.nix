@@ -5,8 +5,6 @@
 }:
 
 import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
-    system = "x86_64-linux";
-
     nodes = let
     in {
       client = { ... }: {};

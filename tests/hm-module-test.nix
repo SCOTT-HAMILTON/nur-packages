@@ -5,7 +5,6 @@
 , nixpkgs
 }:
 import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
-    system = "x86_64-linux";
     nodes.machine = { ... }: {
       imports = [ "${home-manager}/nixos" ];
       users.users.bob = {
