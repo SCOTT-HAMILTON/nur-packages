@@ -10,7 +10,6 @@
 , avahi
 , cppzmq
 , zeromq
-, clang_10
 }:
 
 mkDerivation {
@@ -25,9 +24,8 @@ mkDerivation {
     fetchSubmodules = true;
   };
 
-  nativeBuildInputs = [ clang_10 qmake qtbase pkg-config qttools ];
+  nativeBuildInputs = [ qmake qtbase pkg-config qttools ];
   buildInputs = [ qtquickcontrols2 qtbase avahi cppzmq zeromq ];
-  qmakeFlags = [ "QMAKE_CXX=clang++" ];
   installFlags = [ "INSTALL_ROOT=$(out)" ];
 
   preFixup = ''
