@@ -132,6 +132,7 @@ pkgs.lib.traceValFn (x:
   pyrect = pkgs.callPackage ./pkgs/pyrect { };
   pyscreeze = pkgs.callPackage ./pkgs/pyscreeze { };
   pytweening = pkgs.callPackage ./pkgs/pytweening { };
+  qrup = pkgs.callPackage ./pkgs/qrup { };
   rpi-fan = pkgs.callPackage ./pkgs/rpi-fan { };
   rpi-fan-serve = let
     patchedDrogon = with drogonNixPkgs; drogon.overrideAttrs (old: {
