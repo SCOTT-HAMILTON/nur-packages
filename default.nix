@@ -236,10 +236,13 @@ pkgs.lib.traceValFn (x:
 # Override derivations (patches),
 # I put them here so that they get evaluated
 # by the CI, it's also convenient to be able
-# to access them directly from the root repo
-{
+# to access them directly from the root attribute
+rec {
   patched-rofi = with pkgs; import ./pkgs/patched-rofi {
     inherit rofi-unwrapped nixosVersion;
+  };
+  patched-tabbed = with pkgs; import ./pkgs/patched-tabbed {
+    inherit tabbed fetchFromGitHub libbsd zeromq nix-gitignore;
   };
   patched-alacritty = with pkgs; import ./pkgs/patched-alacritty {
     inherit
@@ -255,6 +258,7 @@ pkgs.lib.traceValFn (x:
       libGL
       wayland
       libxkbcommon
+      patched-tabbed
       zeromq;
     inherit (xorg)
       libX11
@@ -263,9 +267,6 @@ pkgs.lib.traceValFn (x:
       libXrandr
       libXxf86vm
       libxcb;
-  };
-  patched-tabbed = with pkgs; import ./pkgs/patched-tabbed {
-    inherit tabbed fetchFromGitHub libbsd zeromq;
   };
 } //
 # Derivations not supported on NUR
