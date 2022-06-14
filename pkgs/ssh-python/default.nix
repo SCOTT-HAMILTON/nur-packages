@@ -1,28 +1,45 @@
 { lib
 , python3Packages
-, cmake
+, fetchFromGitHub
 , zlib
 , openssl
+, libssh
+, openssh
+, git
+, octoprint
 }:
 
 python3Packages.buildPythonPackage rec {
   pname = "ssh-python";
-  version = "0.9.0";
+  version = "0.10.0";
 
-  src = python3Packages.fetchPypi {
-    inherit pname version;
-    sha256 = "0sm9hqcc2ndbnq7kak1v1949pzym5fsvzfhfp3knil1013a7i1zk";
+  src = fetchFromGitHub {
+    owner = "ParallelSSH";
+    repo = "ssh-python";
+    rev = version;
+    sha256 = "0a4z2j2jmwkk2qrd8dkmw9hz7k0m7qw91wq3s185r0iw6jarg438";
+    leaveDotGit = true;
+    deepClone = true;
   };
-  
-  nativeBuildInputs = [ cmake ];
-  buildInputs = [ zlib openssl ];
-  cmakeDir = "../libssh";
 
-  preBuild = ''
-    cd ..
+  postPatch = ''
+    substituteInPlace tests/embedded_server/openssh.py \
+      --replace '/usr/sbin/sshd' '${openssh}/bin/sshd'
   '';
 
-  doCheck = true;
+  SYSTEM_LIBSSH = 1;
+
+  nativeBuildInputs = [ git ];
+  buildInputs = [ zlib openssl libssh ];
+  checkInputs = [ octoprint python3Packages.pytest ];
+
+  patches = [ ./fix-fix_version-script.patch ];
+
+  preConfigure = ''
+    python ci/appveyor/fix_version.py . ${version}
+  '';
+
+  doCheck = false;
 
   meta = with lib; {
     description = "Bindings for libssh C library";
