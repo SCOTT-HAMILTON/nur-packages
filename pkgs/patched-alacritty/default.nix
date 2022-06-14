@@ -17,12 +17,13 @@
 , libXrandr
 , libXxf86vm
 , libxcb
+, patched-tabbed
 }:
 let
   tabbed-alacritty = writeScriptBin "tabbed-alacritty"
   ''
     #!${stdenvNoCC.shell}
-    tabbed -cr 2 -w "--working-directory" -x "--xembed-tcp-port" alacritty --embed ""
+    ${patched-tabbed}/bin/tabbed -cr 2 -w "--working-directory" -x "--xembed-tcp-port" alacritty --embed ""
   '';
   rpathLibs = [
     expat
@@ -45,8 +46,8 @@ alacritty.overrideAttrs (old: rec {
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "alacritty";
-    rev = "c0b1a42784c6092edbcd72ceae01b3154b53823e";
-    sha256 = "1s5skr3vnjs5njypmpdfj6gq97wcbcqsi0yc8bgqpx6did4ya4gg";
+    rev = "cc5b2c0d861eb7a860d6ba3b1b5130ab1411463d";
+    sha256 = "0pm3m20hck4zdvaadms8kr3fcnrwnsq06i9x21lw8zq55yic1vq5";
   };
   postPatch = ''
     sed -Ei 's|^Exec=alacritty|Exec=${tabbed-alacritty}/bin/tabbed-alacritty|g' "extra/linux/Alacritty.desktop"
@@ -65,8 +66,9 @@ alacritty.overrideAttrs (old: rec {
   cargoDeps = old.cargoDeps.overrideAttrs (lib.const {
     inherit src;
     outputHash = if nixosVersion == "master"
-      then "sha256-DojSnIec0neou1ibx98DLuRHjOBbahyiB1V9SHqOXeo="
-      else "sha256-3IPfFUvmkBowyFvzo2368z4vZBnh6DFOnp/DZfiGqwI=";
+      then "sha256-NLu33oala10xay8n0VLkkm3BoTv6zaAFtTfRI309qxs="
+      else "sha256-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=";
     doCheck = false;
   });
+  patches = [];
 })
