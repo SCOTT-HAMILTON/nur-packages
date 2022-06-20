@@ -22,6 +22,12 @@ rec {
   unoconvservice = import ./unoconvservice.nix {
     inherit tfk-api-unoconv unoconv simplehaproxy;
   };
+  smtprelay = import ./smtprelay.nix {
+    inherit (selfnur) smtprelay;
+  };
+  syspass = import ./syspass.nix {
+    inherit (selfnur) syspass;
+  };
   protifygotify = import ./protifygotify.nix {
     inherit simplehaproxy;
   };
