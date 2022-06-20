@@ -160,6 +160,7 @@ pkgs.lib.traceValFn (x:
     meson = patchedMeson;
   };
   # qradiopredict = pkgs.libsForQt5.callPackage ./pkgs/qradiopredict { };
+  scim = with pkgs; callPackage ./pkgs/scim { };
   scripts = with pkgs; callPackage ./pkgs/Scripts {
     eom = mate.eom;
     inherit (self) sync-database parallel-ssh merge-keepass;
@@ -167,6 +168,7 @@ pkgs.lib.traceValFn (x:
   slick-greeter = with pkgs; pkgs.callPackage ./pkgs/slick-greeter {
     inherit (gnome3) gnome-common slick-greeter;
   };
+  smtprelay = pkgs.callPackage ./pkgs/smtprelay { };
   spectacle-clipboard = pkgs.libsForQt5.callPackage ./pkgs/spectacle-clipboard { };
   splat = pkgs.callPackage ./pkgs/splat { };
   ssh-python = pkgs.callPackage ./pkgs/ssh-python { };
@@ -174,6 +176,9 @@ pkgs.lib.traceValFn (x:
   sync-database = pkgs.callPackage ./pkgs/sync-database {
     inherit (self) parallel-ssh merge-keepass;
     inherit nixosVersion;
+  };
+  syspass = pkgs.callPackage ./pkgs/syspass {
+    php = pkgs.php74;
   };
   tabula-py = pkgs.callPackage ./pkgs/tabula-py {
     inherit (python_with_openpyxl305.pkgs) buildPythonPackage fetchPypi distro numpy pandas setuptools_scm setuptools;

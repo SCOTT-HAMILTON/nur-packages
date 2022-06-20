@@ -1,0 +1,32 @@
+diff --git a/lib/Base.php b/lib/Base.php
+index 9c46f16b..87c2d0ef 100644
+--- a/lib/Base.php
++++ b/lib/Base.php
+@@ -34,7 +34,8 @@ define('BASE_PATH', __DIR__);
+ define('APP_PATH', APP_ROOT . DIRECTORY_SEPARATOR . 'app');
+ 
+ // Please, notice that this file should be outside the webserver root. You can move it and then update this path
+-define('CONFIG_PATH', APP_PATH . DIRECTORY_SEPARATOR . 'config');
++define('DATA_PATH', '/var/lib/syspass');
++define('CONFIG_PATH', DATA_PATH . DIRECTORY_SEPARATOR . 'config');
+ define('RESOURCES_PATH', APP_PATH . DIRECTORY_SEPARATOR . 'resources');
+ 
+ // Setup config files
+@@ -49,8 +50,8 @@ define('LOCK_FILE', CONFIG_PATH . DIRECTORY_SEPARATOR . '.lock');
+ define('MODULES_PATH', APP_PATH . DIRECTORY_SEPARATOR . 'modules');
+ define('LOCALES_PATH', APP_PATH . DIRECTORY_SEPARATOR . 'locales');
+ define('BACKUP_PATH', APP_PATH . DIRECTORY_SEPARATOR . 'backup');
+-define('CACHE_PATH', APP_PATH . DIRECTORY_SEPARATOR . 'cache');
+-define('TMP_PATH', APP_PATH . DIRECTORY_SEPARATOR . 'temp');
++define('CACHE_PATH', DATA_PATH . DIRECTORY_SEPARATOR . 'cache');
++define('TMP_PATH', DATA_PATH . DIRECTORY_SEPARATOR . 'temp');
+ 
+ // Setup other paths
+ define('VENDOR_PATH', APP_ROOT . DIRECTORY_SEPARATOR . 'vendor');
+@@ -77,4 +78,4 @@ try {
+     processException($e);
+ 
+     die($e->getMessage());
+-}
+\ No newline at end of file
++}

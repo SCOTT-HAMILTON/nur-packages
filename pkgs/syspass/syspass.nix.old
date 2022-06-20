@@ -1,0 +1,249 @@
+{ simplehaproxy, smtprelay }:
+{ config, lib, pkgs, specialArgs, options, modulesPath }:
+let
+  cfg = config.services.syspass;
+  hostAddress = "192.168.100.34";
+  containerAddress = "192.168.100.35";
+  smtpRelayPort = 59704;
+
+  myphp = pkgs.php74;
+
+  syspass = import ./sysPass {
+    inherit pkgs;
+    php = myphp;
+    phpPackages = myphp.packages;
+  };
+  app = "syspass";
+  domain = "${app}.me";
+  keyName = builtins.replaceStrings ["*"] ["_"] domain;
+  webrootDir = "${syspass}";
+  dataDir = "/var/lib/${app}";
+  certsDir = "${dataDir}/certs";
+
+  show_syspass_root = pkgs.writeScriptBin "show-syspass-root" ''
+    #!${pkgs.bash}/bin/sh
+    echo ${syspass}
+  '';
+  make_php_data_folders = pkgs.writeScriptBin "make-php-data-folders" ''
+    #!${pkgs.bash}/bin/sh
+    make_dir(){
+      mkdir -p $1
+      chown -R ${app}:${app}  $1
+      chmod -R 750  $1
+    }
+    make_dir ${dataDir}/config
+    make_dir ${dataDir}/cache
+    make_dir ${dataDir}/temp
+  '';
+
+  make_selfsigned_certs = let
+    # user = if config.security.acme.useRoot then "root" else "acme";
+    user = config.services.nginx.user;
+    group = config.services.nginx.group;
+  in pkgs.writeScriptBin "make-selfsigned-certs" ''
+    #!${pkgs.bash}/bin/sh
+    make_dir(){
+      mkdir -p $1
+      chown -R ${user}:${group}  $1
+      chmod -R 770  $1
+    }
+    make_dir ${certsDir}
+    cd ${certsDir}
+    mkdir ca
+    ${pkgs.minica}/bin/minica \
+      --ca-key ca/key.pem \
+      --ca-cert ca/cert.pem \
+      --domains ${domain}
+    cd '${keyName}'
+    cp ../ca/cert.pem chain.pem
+    cat cert.pem chain.pem > fullchain.pem
+    cat key.pem fullchain.pem > full.pem
+    chown '${user}:${group}' *
+    chmod 640 *
+  '';
+in
+with lib; {
+  imports = [ simplehaproxy smtprelay ];
+  options.services.syspass = {
+    enable = mkEnableOption "";
+    smtpRemote = mkOption {
+      type = types.str;
+      example = "starttls://user:pass@smtp.gmail.com:587";
+      description = ''
+        SMTP server to relay the mails to.
+      '';
+    };
+    # port = mkOption {
+    #   type = types.port;
+    #   default = 61694;
+    #   description = "Port for gotify to listen";
+    # };
+  };
+  config = mkIf cfg.enable {
+    services.mysql = {
+      enable = true;
+      package = pkgs.mariadb;
+      # initialScript = pkgs.writeTextFile {
+      #   name = "init.sql";
+      #   text = "CREATE DATABASE ${app} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;";
+      # };
+    };
+    services.phpfpm = {
+      phpPackage = myphp;
+      pools.${app} = {
+        user = app;
+        settings = {
+          "listen.owner" = config.services.nginx.user;
+          "pm" = "dynamic";
+          "pm.max_children" = 32;
+          "pm.max_requests" = 500;
+          "pm.start_servers" = 2;
+          "pm.min_spare_servers" = 2;
+          "pm.max_spare_servers" = 5;
+          "php_admin_value[error_log]" = "stderr";
+          "php_admin_flag[log_errors]" = true;
+          "catch_workers_output" = true;
+        };
+        phpOptions = ''
+          extension=${myphp.extensions.gnupg}/lib/php/extensions/gnupg.so
+          extension=${myphp.extensions.curl}/lib/php/extensions/curl.so
+          extension=${myphp.extensions.gd}/lib/php/extensions/gd.so
+          extension=${myphp.extensions.xml}/lib/php/extensions/xml.so
+          extension=${myphp.extensions.mbstring}/lib/php/extensions/mbstring.so
+          extension=${myphp.extensions.intl}/lib/php/extensions/intl.so
+          extension=${myphp.extensions.readline}/lib/php/extensions/readline.so
+          extension=${myphp.extensions.ldap}/lib/php/extensions/ldap.so
+        '';
+        phpEnv = {
+          "PATH" = lib.makeBinPath [ myphp ];
+          "GNUPGHOME" = "/var/lib/syspass/.gnupg";
+        };
+      };
+    };
+    # systemd.services."acme-${domain}.service".preStart = ''
+    #   ${make_certs_data_folders}/bin/make-selfsigned-certs
+    # '';
+    systemd.services."phpfpm-${app}".preStart = ''
+      ${make_php_data_folders}/bin/make-php-data-folders
+    '';
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = "sgn.hamilton+acme@protonmail.com";
+      defaults.server = "https://127.0.0.1";
+      # defaults.renewInterval = "minutely";
+      # certs = {
+      #   "${domain}" = {
+      #     webroot = "/var/lib/acme/syspass/certs";
+      #     group = config.services.nginx.group;
+      #   };
+      # };
+      # preliminarySelfsigned = true;
+    };
+
+    systemd.services.nginx.wants = [ "nginx-${app}-prep-certs.service" ];
+    systemd.services."nginx-${app}-prep-certs" = {
+      description = "Prepare certs folders for nginx ${app}.";
+      wantedBy = [ "nginx.service" ];
+      unitConfig = {
+        ConditionPathExists = "!${certsDir}/${keyName}/key.pem";
+        StartLimitIntervalSec = 0;
+      };
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = [ "${make_selfsigned_certs}/bin/make-selfsigned-certs" ];
+      };
+    };
+    services.nginx = let
+      acmeLocationRaw = ''
+        location /.well-known/acme-challenge {
+          root /var/lib/acme/acme-challenge;
+          auth_basic off;
+        }
+      '';
+    in {
+      enable = true;
+      appendHttpConfig = ''
+        server {
+          listen 0.0.0.0:80 ;
+          listen [::0]:80 ;
+          server_name ${domain} ;
+          location /.well-known/acme-challenge {
+            root /var/lib/acme/acme-challenge;
+            auth_basic off;
+          }
+          location / {
+            return 301 https://$host$request_uri;
+          }
+        }
+      '';
+      virtualHosts."${domain}" = {
+        serverName = "${domain}";
+        # onlySSL = true;
+        listen = [
+          { addr = "0.0.0.0"; port = 443; ssl = true; }
+          { addr = "[::0]"; port = 443; ssl = true; }
+        ];
+        # forceSSL = true;
+        # enableACME = true;
+        # useACMEHost = "${domain}";
+        # sslCertificate = "${certsDir}/${keyName}/fullchain.pem";
+        # sslCertificateKey = "${certsDir}/${keyName}/key.pem";
+        # sslTrustedCertificate = "${certsDir}/${keyName}/chain.pem";
+
+        extraConfig = ''
+          ${acmeLocationRaw}
+          error_page 500 502 503 504 /50x.html;
+          ssl_certificate ${certsDir}/${keyName}/fullchain.pem;
+          ssl_certificate_key ${certsDir}/${keyName}/key.pem;
+          ssl_trusted_certificate ${certsDir}/${keyName}/chain.pem;
+        '';
+        locations."\\.htaccess" = {
+          extraConfig = ''
+            deny all;
+          '';
+        };
+        locations."/" = {
+          root = "${webrootDir}";
+          tryFiles = "$uri $uri/ =404";
+          index = "index.php";
+        };
+        locations."/50x.html" = {
+          extraConfig = ''
+            root html;
+          '';
+        };
+        locations."~ \\.php$" = {
+          tryFiles = "$uri =404";
+          root = "${webrootDir}";
+          fastcgiParams = {
+            SCRIPT_NAME = "$fastcgi_script_name";
+            SCRIPT_FILENAME = "$document_root$fastcgi_script_name";
+          };
+          extraConfig = ''
+            fastcgi_pass             unix:${config.services.phpfpm.pools.${app}.socket};
+            fastcgi_index            index.php;
+            include                  ${pkgs.nginx}/conf/fastcgi_params;
+            include                  ${pkgs.nginx}/conf/fastcgi.conf;
+            fastcgi_intercept_errors on;
+            fastcgi_split_path_info  ^(.+\.php)(.+)$;
+          '';
+        };
+      };
+    };
+    users.users.${app} = {
+      isSystemUser = true;
+      group  = app;
+    };
+    users.groups.${app} = { };
+
+    # users.users.nginx.extraGroups = [ "acme" ];
+    networking.firewall.allowedTCPPorts = [ 443 80 smtpRelayPort ];
+    environment.systemPackages = [ myphp show_syspass_root ];
+    environment.shellInit = ''
+      go_to_syspass_root(){
+        cd ${syspass}
+      }
+      export GNUPGHOME=/var/lib/syspass/.gnupg
+    '';
+  };
+}
