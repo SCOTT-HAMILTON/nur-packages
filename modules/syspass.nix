@@ -56,10 +56,21 @@ with lib; {
         };
       };
     };
+    systemd.services."phpfpm-${app}" = {
+      serviceConfig = {
+        User = "phpfpm-${app}";
+        NoNewPrivileges = true;
+        RestrictNamespaces = true;
+        CapabilityBoundingSet = [ "" ];
+        # Since we only use unix sockets, we can this restriction
+        RestrictAddressFamilies = lib.mkForce [ "AF_UNIX" ];
+        PrivateNetwork = true;
+      };
+      preStart = ''
+        ${make_php_data_folders}/bin/make-php-data-folders
+      '';
+    };
 
-    systemd.services."phpfpm-${app}".preStart = ''
-      ${make_php_data_folders}/bin/make-php-data-folders
-    '';
     security.acme = {
       acceptTerms = true;
       defaults.email = "fake.address@example.com";
@@ -124,6 +135,10 @@ with lib; {
       };
     };
     users.users.${app} = {
+      isSystemUser = true;
+      group  = app;
+    };
+    users.users."phpfpm-${app}" = {
       isSystemUser = true;
       group  = app;
     };
