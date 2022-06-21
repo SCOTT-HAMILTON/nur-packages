@@ -30,9 +30,9 @@ check_overlay() {
 		fi
 	fi
 	if [ ! -f /sys/class/thermal/cooling_device0/cur_state ]; then
-		echo "Trying to load rpi-poe overlay..." >> $LOG_FILE
+		echo "Trying to load rpi-poe-plus overlay..." >> $LOG_FILE
 		echo "Overlays path: $OVERLAYS_DIR" >> $LOG_FILE
-		dtoverlay -l | grep rpi-poe || dtoverlay -d "$OVERLAYS_DIR" rpi-poe
+		dtoverlay -l | grep rpi-poe-plus || dtoverlay -d "$OVERLAYS_DIR" rpi-poe-plus
 	fi
 }
 check_overlay

@@ -12,13 +12,19 @@
 , fan_max ? 255
 }:
 let
-  rpi-poe-overlay-source = ./rpi-poe.dts;
+  rpi-poe-dts = ./rpi-poe.dts;
+  rpi-poe-plus-dts = ./rpi-poe.dts;
   overlays_dir = callPackage({ dtc }: stdenvNoCC.mkDerivation {
-    name = "overlays-with-rpi-poe-dtbo";
+    name = "overlays-with-rpi-poe-plus-dtbo";
     nativeBuildInputs = [ dtc ];
     buildCommand = ''
       mkdir -p "$out"
-      dtc -I dts ${rpi-poe-overlay-source} -O dtb -@ -o "$out/rpi-poe.dtbo"
+      mkdir temp
+      pushd temp
+      cp ${rpi-poe-dts} ./rpi-poe.dts
+      cp ${rpi-poe-plus-dts} ./rpi-poe-plus.dts
+      dtc -I dts ./rpi-poe-plus.dts -O dtb -@ -o "$out/rpi-poe-plus.dtbo"
+      popd
     '';
   }) {};
 in

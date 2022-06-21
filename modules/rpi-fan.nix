@@ -13,7 +13,7 @@ in
       type = types.nullOr types.path;
       default = null;
       description = ''
-        The directory where is located the `rpi-poe.dtbo` overlay file.
+        The directory where is located the `rpi-poe-plus.dtbo` overlay file.
         If null, the builtin directory will be used.
       '';
       example = "/home/user/custom_overlays";
@@ -63,8 +63,8 @@ in
     services.logrotate = {
       enable = true;
       extraConfig = ''
-        "${logFile}" {
-          su ${logUser} ${logGroup}
+        "${cfg.logFile}" {
+          su ${cfg.logUser} ${cfg.logGroup}
           daily
           rotate 7
           missingok
