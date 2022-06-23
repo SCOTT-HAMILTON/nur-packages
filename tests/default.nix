@@ -37,5 +37,8 @@ in rec {
   pronotebot = handleHmTest ./pronotebot.nix hm-module-test;
   pronote-timetable-fetch =
     handleHmTest ./pronote-timetable-fetch.nix hm-module-test;
+  syspass = handleTest ./syspass.nix {
+    inherit modules home-manager pkgs;
+  };
 }
 
