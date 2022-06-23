@@ -6,7 +6,6 @@ let
   myphp = pkgs.php74;
 
   app = "syspass";
-  domain = "${app}.me";
   webrootDir = "${syspass}";
   dataDir = "/var/lib/${app}";
 
@@ -32,6 +31,14 @@ in
 with lib; {
   options.services.syspass = {
     enable = mkEnableOption "Intuitive, secure and multiuser password manager.";
+    domain = mkOption {
+      type = types.str;
+      example = "example.mypass.com";
+      default = "${app}.me";
+      description = ''
+        The domain from where users should access syspass.
+      '';
+    };
   };
   config = mkIf cfg.enable {
     services.mysql = {
@@ -65,7 +72,7 @@ with lib; {
         NoNewPrivileges = true;
         RestrictNamespaces = true;
         CapabilityBoundingSet = [ "" ];
-        # Since we only use unix sockets, we can this restriction
+        # Since we only use unix sockets, we can force this restriction
         RestrictAddressFamilies = lib.mkForce [ "AF_UNIX" ];
         PrivateNetwork = true;
 
@@ -103,22 +110,22 @@ with lib; {
       # their servers with invalid requests.
       defaults.server = "https://127.0.0.1";
       certs = {
-        "${domain}" = {
+        "${cfg.domain}" = {
           webroot = "/var/lib/acme/${app}/certs";
           group = config.services.nginx.group;
         };
       };
       preliminarySelfsigned = true;
     };
-    systemd.services."acme-${domain}".enable = false;
-    systemd.timers."acme-${domain}".enable = false;
-    systemd.targets."acme-finished-${domain}".enable = false;
+    systemd.services."acme-${cfg.domain}".enable = false;
+    systemd.timers."acme-${cfg.domain}".enable = false;
+    systemd.targets."acme-finished-${cfg.domain}".enable = false;
     services.nginx = {
       enable = true;
-      virtualHosts."${domain}" = {
+      virtualHosts."${cfg.domain}" = {
         serverName = app;
         forceSSL = true;
-        useACMEHost = "${domain}";
+        useACMEHost = "${cfg.domain}";
 
         extraConfig = ''
           error_page 500 502 503 504 /50x.html;
@@ -156,15 +163,10 @@ with lib; {
         };
       };
     };
-    users.users.${app} = {
-      isSystemUser = true;
-      group  = app;
+    systemd.services.nginx = {
+      after = [ "acme-selfsigned-${cfg.domain}.service" ];
+      wants = [ "acme-selfsigned-${cfg.domain}.service" ];
     };
-    users.users."phpfpm-${app}" = {
-      isSystemUser = true;
-      group  = app;
-    };
-    users.groups.${app} = { };
     users.users.nginx.extraGroups = [ "acme" ];
     networking.firewall.allowedTCPPorts = [ 443 80 ];
     environment.systemPackages = [ myphp show_syspass_root ];
