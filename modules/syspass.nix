@@ -14,11 +14,14 @@ let
     #!${pkgs.bash}/bin/sh
     echo ${syspass}
   '';
-  make_php_data_folders = pkgs.writeScriptBin "make-php-data-folders" ''
+  make_php_data_folders = let
+    user = config.services.nginx.user;
+    group = config.services.nginx.group;
+  in pkgs.writeScriptBin "make-php-data-folders" ''
     #!${pkgs.bash}/bin/sh
     make_dir(){
       mkdir -p $1
-      chown -R ${app}:${app}  $1
+      chown -R ${user}:${group}  $1
       chmod -R 750  $1
     }
     make_dir ${dataDir}/config
@@ -38,7 +41,7 @@ with lib; {
     services.phpfpm = {
       phpPackage = myphp;
       pools.${app} = {
-        user = app;
+        user = config.services.nginx.user;
         settings = {
           "listen.owner" = config.services.nginx.user;
           "pm" = "dynamic";
@@ -101,7 +104,7 @@ with lib; {
       defaults.server = "https://127.0.0.1";
       certs = {
         "${domain}" = {
-          webroot = "/var/lib/acme/syspass/certs";
+          webroot = "/var/lib/acme/${app}/certs";
           group = config.services.nginx.group;
         };
       };
@@ -113,7 +116,7 @@ with lib; {
     services.nginx = {
       enable = true;
       virtualHosts."${domain}" = {
-        serverName = "syspass";
+        serverName = app;
         forceSSL = true;
         useACMEHost = "${domain}";
 
