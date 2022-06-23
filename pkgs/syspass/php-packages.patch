@@ -1,0 +1,19 @@
+--- php-packages.nix.old	2022-06-20 17:34:37.375620036 +0200
++++ php-packages.nix	2022-06-20 17:35:17.279684085 +0200
+@@ -1,4 +1,4 @@
+-{composerEnv, fetchurl, fetchgit ? null, fetchhg ? null, fetchsvn ? null, noDev ? false}:
++{src, composerEnv, fetchurl, fetchgit ? null, fetchhg ? null, fetchsvn ? null, noDev ? false}:
+ 
+ let
+   packages = {
+@@ -447,9 +447,8 @@
+   };
+ in
+ composerEnv.buildPackage {
+-  inherit packages devPackages noDev;
++  inherit src packages devPackages noDev;
+   name = "syspass-syspass";
+-  src = composerEnv.filterSrc ./.;
+   executable = false;
+   symlinkDependencies = false;
+   meta = {
