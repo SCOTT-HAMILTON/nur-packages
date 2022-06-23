@@ -58,17 +58,36 @@ with lib; {
     };
     systemd.services."phpfpm-${app}" = {
       serviceConfig = {
-        User = "phpfpm-${app}";
+        User = config.services.nginx.user;
         NoNewPrivileges = true;
         RestrictNamespaces = true;
         CapabilityBoundingSet = [ "" ];
         # Since we only use unix sockets, we can this restriction
         RestrictAddressFamilies = lib.mkForce [ "AF_UNIX" ];
         PrivateNetwork = true;
+
+        ProtectClock = true;
+        ProtectKernelLogs = true;
+        ProtectControlGroups = true;
+        ProtectKernelModules = true;
+        SystemCallArchitectures = "native";
+        RestrictSUIDSGID = true;
+        ProtectKernelTunables = true;
+        ProtectProc = "invisible";
+        PrivateUsers = true;
+        SystemCallFilter = [ "@system-service" ];
+        IPAddressDeny = "any";
       };
-      preStart = ''
-        ${make_php_data_folders}/bin/make-php-data-folders
-      '';
+      after = [ "phpfpm-${app}-prep-folders.service" ];
+      wants = [ "phpfpm-${app}-prep-folders.service" ];
+    };
+    systemd.services."phpfpm-${app}-prep-folders" = {
+      description = "Prepares the folder for phpfpm-${app}.service";
+      wantedBy = [ "phpfpm-${app}.service" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = [ "${make_php_data_folders}/bin/make-php-data-folders" ];
+      };
     };
 
     security.acme = {
