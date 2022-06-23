@@ -115,10 +115,10 @@ let
     "guzzlehttp/guzzle" = {
       targetDir = "";
       src = composerEnv.buildZipPackage {
-        name = "guzzlehttp-guzzle-724562fa861e21a4071c652c8a159934e4f05592";
+        name = "guzzlehttp-guzzle-a52f0440530b54fa079ce76e8c5d196a42cad981";
         src = fetchurl {
-          url = "https://api.github.com/repos/guzzle/guzzle/zipball/724562fa861e21a4071c652c8a159934e4f05592";
-          sha256 = "1jmwz5zc0xrwlwfz8p313k8wmcwgjk6xz8ngcnv7k6hbrc77lvnv";
+          url = "https://api.github.com/repos/guzzle/guzzle/zipball/a52f0440530b54fa079ce76e8c5d196a42cad981";
+          sha256 = "19y2c0kz5yanagrhxa464r6jq4lc53lypbmznvid0q1vmfgf0wz0";
         };
       };
     };
@@ -135,10 +135,10 @@ let
     "guzzlehttp/psr7" = {
       targetDir = "";
       src = composerEnv.buildZipPackage {
-        name = "guzzlehttp-psr7-337e3ad8e5716c15f9657bd214d16cc5e69df268";
+        name = "guzzlehttp-psr7-e98e3e6d4f86621a9b75f623996e6bbdeb4b9318";
         src = fetchurl {
-          url = "https://api.github.com/repos/guzzle/psr7/zipball/337e3ad8e5716c15f9657bd214d16cc5e69df268";
-          sha256 = "0qpldw2aw55dm275hgavw9h53l5697ahiz7cn2d0fz97l8j7fg9p";
+          url = "https://api.github.com/repos/guzzle/psr7/zipball/e98e3e6d4f86621a9b75f623996e6bbdeb4b9318";
+          sha256 = "1bbp66lwjbj2pg51jix96ddpfabc40samh63815wb913q6vv9m8s";
         };
       };
     };
@@ -215,10 +215,10 @@ let
     "phpmailer/phpmailer" = {
       targetDir = "";
       src = composerEnv.buildZipPackage {
-        name = "phpmailer-phpmailer-b52ed06864fdda81b82ec8bf564cf15d45ed4f95";
+        name = "phpmailer-phpmailer-9400f305a898f194caff5521f64e5dfa926626f3";
         src = fetchurl {
-          url = "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/b52ed06864fdda81b82ec8bf564cf15d45ed4f95";
-          sha256 = "0m5nzx58j635zx6y4c0rcil75y2dx09kxfg1sgfwnxv9p8inry3a";
+          url = "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/9400f305a898f194caff5521f64e5dfa926626f3";
+          sha256 = "1snnhwp46ly3ncyaz5yz1wijwjjvj16zxlrq6mzpndl1i181a0gy";
         };
       };
     };
@@ -357,10 +357,10 @@ let
     "roave/security-advisories" = {
       targetDir = "";
       src = composerEnv.buildZipPackage {
-        name = "roave-security-advisories-0a2664d739af6996ce1a24a35cb59ed2bbd27f4b";
+        name = "roave-security-advisories-a66635bf19583447f296db28180762367690ac5a";
         src = fetchurl {
-          url = "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/0a2664d739af6996ce1a24a35cb59ed2bbd27f4b";
-          sha256 = "08njg3nhw60azj6mb95k5b4d8d43va8x02ncx428s8rm0czm06i4";
+          url = "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/a66635bf19583447f296db28180762367690ac5a";
+          sha256 = "1gn785qk8ll1ls6fazqcww8gb024m4qq3dgjqbqrxlz6b1aq5wkv";
         };
       };
     };
@@ -448,7 +448,7 @@ let
 in
 composerEnv.buildPackage {
   inherit src packages devPackages noDev;
-  name = "syspass-syspass";
+  name = "syspass-3.2.7";
   executable = false;
   symlinkDependencies = false;
   meta = {

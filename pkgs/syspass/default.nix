@@ -24,7 +24,7 @@ import ./php-packages.nix {
   src = fetchFromGitHub {
     owner = "nuxsmin";
     repo = "sysPass";
-    rev = "3.2.8";
+    rev = "3.2.7";
     sha256 = "sha256-uHMxwGidzDGT5TngvYx1AtZJijTxhl95FbDay45n3y4=";
     postFetch = ''
       pushd "$out"
