@@ -235,6 +235,8 @@ in
         coc = {
           enable = true;
           settings = {
+            powershell.powerShellExePath = "${pkgs.powershell}/bin/pwsh";
+            powershell.integratedConsole.showOnStartup = false;
             languageserver = {
               rust = {
                 command = "rust-analyzer";
@@ -254,6 +256,7 @@ in
           pkgs.vimPlugins.vim-colorschemes
           pkgs.vimPlugins.commentary
           pkgs.vimPlugins.neovim-fuzzy
+          pkgs.vimPlugins.polyglot
         ];
         viAlias = true;
       };
