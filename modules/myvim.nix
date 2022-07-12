@@ -10,15 +10,15 @@
 { config, lib, pkgs, options, ... }:
 with lib;
 let
-  cfg = config.myvim;
+  cfg = config.programs.myvim;
 in 
 {
-  options.myvim = {
+  options.programs.myvim = {
     enable = mkEnableOption "My vim config from https://github.com/SCOTT-HAMILTON/vimconfig";
     enableNvimCoc = mkEnableOption "Install neovim's coc.vim plugin";
   };
   config = mkIf cfg.enable (mkMerge ([
-    {
+    ({
       programs.vim = {
         enable = true;
         extraConfig = builtins.readFile "${MyVimConfig}/vimrc";
@@ -233,7 +233,17 @@ in
           ${default-config}
           ${lib.optionalString cfg.enableNvimCoc coc-config}
         '';
-        coc = mkIf cfg.enableNvimCoc ({
+        plugins = (optional cfg.enableNvimCoc pkgs.vimPlugins.coc-rust-analyzer)
+        ++ [
+          pkgs.vimPlugins.vim-nix
+          pkgs.vimPlugins.vim-colorschemes
+          pkgs.vimPlugins.commentary
+          pkgs.vimPlugins.neovim-fuzzy
+          pkgs.vimPlugins.polyglot
+        ];
+        viAlias = true;
+      } // (lib.optionalAttrs cfg.enableNvimCoc {
+        coc = {
           enable = true;
           settings = {
             powershell.powerShellExePath = "${pkgs.powershell}/bin/pwsh";
@@ -250,22 +260,35 @@ in
               };
             };
           };
-        });
-        plugins = (optional cfg.enableNvimCoc pkgs.vimPlugins.coc-rust-analyzer)
-        ++ [
-          pkgs.vimPlugins.vim-nix
-          pkgs.vimPlugins.vim-colorschemes
-          pkgs.vimPlugins.commentary
-          pkgs.vimPlugins.neovim-fuzzy
-          pkgs.vimPlugins.polyglot
-        ];
-        viAlias = true;
-      };
+        };
+      });
       home.packages = with pkgs; lib.optionals (cfg.enableNvimCoc) [
         nodejs
         rust-analyzer
         rnix-lsp
       ];
     }
+    # (lib.optionalAttrs cfg.enableNvimCoc {
+    #   programs.neovim
+    #   coc = {
+    #     enable = true;
+    #     settings = {
+    #       powershell.powerShellExePath = "${pkgs.powershell}/bin/pwsh";
+    #       powershell.integratedConsole.showOnStartup = false;
+    #       languageserver = {
+    #         rust = {
+    #           command = "rust-analyzer";
+    #           filetypes = [ "rust" ];
+    #           rootPatterns = [ "Cargo.toml" ];
+    #         };
+    #         nix = {
+    #           command = "rnix-lsp";
+    #           filetypes = [ "nix" ];
+    #         };
+    #       };
+    #     };
+    #   };
+    # })
+    )
   ]));
 }
