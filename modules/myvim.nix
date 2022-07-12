@@ -15,6 +15,7 @@ in
 {
   options.myvim = {
     enable = mkEnableOption "My vim config from https://github.com/SCOTT-HAMILTON/vimconfig";
+    enableNvimCoc = mkEnableOption "Install neovim's coc.vim plugin";
   };
   config = mkIf cfg.enable (mkMerge ([
     {
@@ -229,10 +230,10 @@ in
             set shiftwidth=2
           '';
         in ''
-          ${coc-config}
           ${default-config}
+          ${lib.optionalString cfg.enableNvimCoc coc-config}
         '';
-        coc = {
+        coc = mkIf cfg.enableNvimCoc ({
           enable = true;
           settings = {
             powershell.powerShellExePath = "${pkgs.powershell}/bin/pwsh";
@@ -249,9 +250,9 @@ in
               };
             };
           };
-        };
-        plugins = [
-          pkgs.vimPlugins.coc-rust-analyzer
+        });
+        plugins = (optional cfg.enableNvimCoc pkgs.vimPlugins.coc-rust-analyzer)
+        ++ [
           pkgs.vimPlugins.vim-nix
           pkgs.vimPlugins.vim-colorschemes
           pkgs.vimPlugins.commentary
@@ -260,7 +261,7 @@ in
         ];
         viAlias = true;
       };
-      home.packages = with pkgs; [
+      home.packages = with pkgs; lib.optionals (cfg.enableNvimCoc) [
         nodejs
         rust-analyzer
         rnix-lsp
