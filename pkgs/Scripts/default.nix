@@ -5,6 +5,9 @@
 
 , python38
 
+## lsp
+, lesspass-cli
+
 ## Open documentation deps
 , eom, surf, zathura, coreutils, findutils, gawk
 
@@ -15,7 +18,6 @@ let
   perlEnv = perl.withPackages(pp: with pp; [ PDFAPI2 ]);
 in
 stdenv.mkDerivation rec {
-
   pname = "Scripts";
   version = "unstable";
 
@@ -54,6 +56,10 @@ stdenv.mkDerivation rec {
     echo "#! ${perlEnv}/bin/perl" > pdf-inverter/invert.perl
     echo "" >> pdf-inverter/invert.perl
     cat pdf-inverter/src >> pdf-inverter/invert.perl
+
+    cat ${./lsp.sh} > lsp.sh
+    substituteInPlace lsp.sh \
+      --subst-var-by lesspass ${lesspass-cli}
   '';
 
   installPhase = ''
@@ -61,6 +67,7 @@ stdenv.mkDerivation rec {
     install -Dm 555 scripts/CleanMusics.sh $out/bin/CleanMusics.sh
 
     # Install Open Documentation script
+    install -Dm 555 lsp.sh $out/bin/lsp
     install -Dm 555 scripts/open-documentation.py $out/bin/open-documentation.py
     install -Dm 555 pdf-inverter/invert.perl $out/bin/pdf-invert.pl
     install -Dm 555 scripts/scripts.desktop $out/share/applications/scripts.desktop
