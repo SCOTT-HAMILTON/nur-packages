@@ -77,10 +77,6 @@ pkgs.lib.traceValFn (x:
   instanttee = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/InstantTee {
     inherit buildRustPackage;
   };
-  iptux = with pkgs; callPackage ./pkgs/iptux {
-    inherit (gst_all_1) gstreamer;
-    inherit (gnome2) gtk;
-  };
   juk = kdeApplications.callPackage ./pkgs/Juk { };
   keysmith = kdeApplications.callPackage ./pkgs/keysmith { };
   killbots = kdeApplications.callPackage ./pkgs/Killbots { };
