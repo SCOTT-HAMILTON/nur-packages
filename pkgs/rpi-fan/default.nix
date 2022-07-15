@@ -6,30 +6,25 @@
 , dtc
 , coreutils
 , libraspberrypi
-, temp_min ? 40
-, temp_max ? 60
-, fan_min ? 0
-, fan_max ? 255
+, temp_max ? 70
 }:
 let
   rpi-poe-dts = ./rpi-poe.dts;
-  rpi-poe-plus-dts = ./rpi-poe.dts;
   overlays_dir = callPackage({ dtc }: stdenvNoCC.mkDerivation {
-    name = "overlays-with-rpi-poe-plus-dtbo";
+    name = "overlays-with-rpi-poe-dtbo";
     nativeBuildInputs = [ dtc ];
     buildCommand = ''
       mkdir -p "$out"
       mkdir temp
       pushd temp
       cp ${rpi-poe-dts} ./rpi-poe.dts
-      cp ${rpi-poe-plus-dts} ./rpi-poe-plus.dts
-      dtc -I dts ./rpi-poe-plus.dts -O dtb -@ -o "$out/rpi-poe-plus.dtbo"
+      dtc -I dts ./rpi-poe.dts -O dtb -@ -o "$out/rpi-poe.dtbo"
       popd
     '';
   }) {};
 in
 stdenvNoCC.mkDerivation rec {
-  inherit temp_min temp_max fan_min fan_max overlays_dir;
+  inherit temp_max overlays_dir;
   pname = "rpi-fan";
   version = "unstable";
   

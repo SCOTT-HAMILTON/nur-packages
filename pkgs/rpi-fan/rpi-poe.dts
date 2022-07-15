@@ -1,6 +1,3 @@
-/*
- * Overlay for the Raspberry Pi POE HAT.
- */
 /dts-v1/;
 /plugin/;
 
