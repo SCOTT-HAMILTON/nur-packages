@@ -7,13 +7,13 @@
 
 python3Packages.buildPythonPackage rec {
   pname = "PyScreeze";
-  version = "unstable";
+  version = "2022-03-16";
 
   src = fetchFromGitHub {
     owner = "asweigart";
     repo = "pyscreeze";
-    rev = "28ab707dceecbdd135a9491c3f8effd3a69680af";
-    sha256 = "16v16r1yw14zmy1nga5lbk448f7s99c1mq0r49hwg6pz6xvg4zc2";
+    rev = "b693ca9b2c964988a7e924a52f73e15db38511a8";
+    sha256 = "sha256-vGQsg15tKE1OHtIywuluX0rpx4s3UhwfmacbCdK79JE=";
   };
 
   nativeBuildInputs = [ xvfb-run ];
