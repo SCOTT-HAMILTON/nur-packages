@@ -5,7 +5,7 @@
 
 python3Packages.buildPythonPackage rec {
   pname = "day-night-plasma-wallpapers";
-  version = "2020-05-30";
+  version = "2022-02-11";
 
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
