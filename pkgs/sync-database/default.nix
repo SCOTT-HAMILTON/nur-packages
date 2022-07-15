@@ -5,17 +5,18 @@
 , libssh2
 , merge-keepass
 , nixosVersion
+, nix-gitignore
 }:
 
 python3Packages.buildPythonPackage rec {
   pname = "sync-database";
-  version = "2022-02-07";
+  version = "2022-07-15";
 
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "sync-database";
-    rev = "efa00a780d74038965a5a84f7cffa47b07391030";
-    sha256 = "0268hgdxkhjnlrn4iplqb81mn1rv8qmvf402niazcb2cr04bln13";
+    rev = "e6b91d4dc79e3f329bee1506a6d35afde3ff3e93";
+    sha256 = "sha256-dUS9ccy7g+0BqnkKKQC1G1kJfIyh6jOlzrtaxdXN0vI=";
   };
 
   propagatedBuildInputs = with python3Packages; [
