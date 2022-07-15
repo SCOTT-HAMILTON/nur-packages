@@ -3,16 +3,16 @@
 , fetchFromGitHub
 , cmake
 }:
-stdenv.mkDerivation rec {
 
+stdenv.mkDerivation rec {
   pname = "argparse";
-  version = "2.2";
+  version = "2.6";
 
   src = fetchFromGitHub {
     owner = "p-ranav";
     repo = "argparse";
     rev = "v${version}";
-    sha256 = "1vmn71c2frbhybli8k06kcmb5qdzgqf5gzz90aqf818s6xpv5j0n";
+    sha256 = "sha256-imLDuVbzkiE5hcQVarZGeNzNZE0/8LHMQqAiUYzPVks=";
   };
 
   postPatch = ''
