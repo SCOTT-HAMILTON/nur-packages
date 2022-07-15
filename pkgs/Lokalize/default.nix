@@ -15,13 +15,13 @@
 
 mkDerivation rec {
   pname = "Lokalize";
-  version = "21.04.0";
+  version = "22.04.3";
 
   src = fetchFromGitHub {
     owner = "KDE";
     repo = "lokalize";
     rev = "v${version}";
-    sha256 = "0kj2k40c4hzfvm7acxlwh7w5kq58mps9qcmz2829cp79waihxi17";
+    sha256 = "sha256-Hke/CtSI4Zagd3u5AkZR0K7hB+miZa0FnouDTuI+P8s=";
   };
 
   nativeBuildInputs = [ breakpointHook pkg-config extra-cmake-modules cmake  ];
