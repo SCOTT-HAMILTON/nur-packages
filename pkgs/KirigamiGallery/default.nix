@@ -7,21 +7,22 @@
 , qtquickcontrols2
 , kitemmodels
 , kactivities
+, kirigami2
 }:
 
 mkDerivation rec {
   pname = "KirigamiGallery";
-  version = "21.04.0";
+  version = "22.04.3";
 
   src = fetchFromGitHub {
     owner = "KDE";
     repo = "kirigami-gallery";
     rev = "v${version}";
-    sha256 = "084af9xbz86h0cdk6q2aywx99xc85pz6f8zmn3sw065050syr3iy";
+    sha256 = "sha256-oKymD8DJ0OE8FK0Szugi8oocglXixtbE3ueAiZ5+v4g=";
   };
 
   nativeBuildInputs = [ extra-cmake-modules cmake  ];
-  buildInputs = [ qtquickcontrols2 kactivities qtbase ];
+  buildInputs = [ qtquickcontrols2 kactivities qtbase kirigami2 ];
   propagatedBuildInputs = [ kitemmodels ];
 
   meta = with lib; {
