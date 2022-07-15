@@ -64,9 +64,6 @@ pkgs.lib.traceValFn (x:
     FakeMicWavPlayer = self.fake-mic-wav-player;
   };
   create_ap = pkgs.callPackage ./pkgs/create_ap { };
-  csview = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/csview {
-    inherit buildRustPackage;
-  };
   day-night-plasma-wallpapers = pkgs.callPackage ./pkgs/day-night-plasma-wallpapers { };
   fake-mic-wav-player = pkgs.libsForQt5.callPackage ./pkgs/FakeMicWavPlayer {
     inherit (self) libfake argparse;
