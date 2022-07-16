@@ -14,7 +14,7 @@ python3Packages.buildPythonApplication rec {
     sha256 = "sha256-3UCHTgIW7ArXQD0Kj5XwE1I5VszsueXDJ68QWdQrAho=";
   };
 
-  propagatedBuildInputs = with python3Packages; [ tornado_4 python-daemon ];
+  propagatedBuildInputs = with python3Packages; [ tornado python-daemon ];
 
   doCheck = true;
 
