@@ -4,5 +4,5 @@
 
 hm-module-test {
   hmModule = modules.hmModules.myvim;
-  hmModuleConfig = { myvim.enable = true; };
+  hmModuleConfig = { programs.myvim.enable = true; };
 }
