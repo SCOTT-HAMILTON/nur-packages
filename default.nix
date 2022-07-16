@@ -161,7 +161,7 @@ pkgs.lib.traceValFn (x:
   slick-greeter = with pkgs; pkgs.callPackage ./pkgs/slick-greeter {
     inherit (gnome3) gnome-common slick-greeter;
   };
-  smtprelay = pkgs.callPackage ./pkgs/smtprelay { };
+  smtprelay = pkgs.callPackage ./pkgs/smtprelay { inherit (pkgs) buildGo118Module; };
   spectacle-clipboard = pkgs.libsForQt5.callPackage ./pkgs/spectacle-clipboard { };
   splat = pkgs.callPackage ./pkgs/splat { };
   ssh-python = pkgs.callPackage ./pkgs/ssh-python { };
