@@ -23,9 +23,9 @@ stdenv.mkDerivation rec {
   cmakeFlags = ["-DUSE_BIDI=1"];
 
   meta = with lib; {
-    description = "Argument Parser for Modern C++";
-    license = licenses.mit;
-    homepage = "https://github.com/p-ranav/argparse";
+    description = "cli for extracting text from PDF files";
+    license = licenses.asl20;
+    homepage = "https://github.com/galkahana/pdf-text-extraction";
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
   };
