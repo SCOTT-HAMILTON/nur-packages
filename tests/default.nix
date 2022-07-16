@@ -26,9 +26,9 @@ in rec {
     inherit modules home-manager nixpkgs pkgs;
     inherit (selfnur) sync-database android-platform-tools;
   };
-  unoconvservice = handleTest ./unoconvservice.nix {
-    inherit modules home-manager nixpkgs pkgs;
-  };
+  # unoconvservice = handleTest ./unoconvservice.nix {
+  #   inherit modules home-manager nixpkgs pkgs;
+  # };
   hm-module-test = import ./hm-module-test.nix;
   myvim = handleHmTest ./myvim.nix hm-module-test;
   day-night-plasma-wallpapers =
