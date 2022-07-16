@@ -60,17 +60,6 @@ jobs:
           if [ "${{ matrix.channel-branch }}" = "nixpkgs-unstable" ]; then
             nix-build --argstr nixosVersion "${{ matrix.channel-branch }}" all-tests.nix --show-trace
           fi
-      - name: Save Build
-        if: always()
-        run: |
-          if [ "${{ matrix.channel-branch }}" = "master" ]; then
-            export NIX_PATH=nixpkgs=channel:${{ env.DEFAULT_NIX_CHANNEL }}
-          else
-            export NIX_PATH=nixpkgs=channel:${{ matrix.channel-branch }}
-          fi
-          # saving successful builds to the cache
-          nix-build --keep-going --argstr nixosVersion "${{ matrix.channel-branch }}" \
-                    all-unbroken.nix --show-trace | cachix push "${CACHIX_CACHE}"
       - name: Evaluations
         run: |
           if [ "${{ matrix.channel-branch }}" = "master" ]; then
