@@ -38,5 +38,6 @@ mkDerivation {
     homepage = "https://github.com/SCOTT-HAMILTON/Protify";
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
+    broken = true;
   };
 }
