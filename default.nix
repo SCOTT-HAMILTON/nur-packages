@@ -170,9 +170,6 @@ pkgs.lib.traceValFn (x:
     inherit (self) parallel-ssh merge-keepass;
     inherit nixosVersion;
   };
-  syspass = pkgs.callPackage ./pkgs/syspass {
-    php = pkgs.php74;
-  };
   tabula-py = pkgs.callPackage ./pkgs/tabula-py {
     inherit (python_with_openpyxl305.pkgs) buildPythonPackage fetchPypi distro numpy pandas setuptools_scm setuptools;
   };

@@ -25,9 +25,6 @@ rec {
   smtprelay = import ./smtprelay.nix {
     inherit (selfnur) smtprelay;
   };
-  syspass = import ./syspass.nix {
-    inherit (selfnur) syspass;
-  };
   protifygotify = import ./protifygotify.nix {
     inherit simplehaproxy;
   };

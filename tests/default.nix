@@ -7,8 +7,8 @@ let
   home-manager = pkgs.fetchFromGitHub {
     owner = "nix-community";
     repo = "home-manager";
-    rev = "63dccc4e60422c1db2c3929b2fd1541f36b7e664";
-    sha256 = "0caa4746rg0ip2fkhwi1jklavk4lfgx1qvillrya6r3c2hbyx4rm";
+    rev = "4a3d01fb53f52ac83194081272795aa4612c2381";
+    sha256 = "sha256-Nlnm4jeQWEGjYrE6hxi/7HYHjBSZ/E0RtjCYifnNsWk=";
   };
   callTest = t: t.test;
   hmTest = p: hm-module-test: 
@@ -37,8 +37,5 @@ in rec {
   pronotebot = handleHmTest ./pronotebot.nix hm-module-test;
   pronote-timetable-fetch =
     handleHmTest ./pronote-timetable-fetch.nix hm-module-test;
-  syspass = handleTest ./syspass.nix {
-    inherit modules home-manager pkgs;
-  };
 }
 
