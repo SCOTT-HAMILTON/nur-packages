@@ -37,9 +37,8 @@ stdenvNoCC.mkDerivation rec {
   propagatedBuildInputs = [ ffmpeg gifsicle ];
 
   meta = with lib; {
-    description = "Argument Parser for Modern C++";
+    description = "Scripts to make mobile apps demo gifs";
     license = licenses.mit;
-    homepage = "https://github.com/p-ranav/argparse";
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
   };
