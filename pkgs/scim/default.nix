@@ -26,9 +26,9 @@ stdenv.mkDerivation rec {
   makeFlags = [ "prefix=${placeholder "out"}"];
 
   meta = with lib; {
-    description = "Argument Parser for Modern C++";
-    license = licenses.mit;
-    homepage = "https://github.com/p-ranav/argparse";
+    description = "Ncurses spreadsheet program for the terminal";
+    license = licenses.lgpl3Plus;
+    homepage = "https://github.com/andmarti1424/sc-im";
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
   };
