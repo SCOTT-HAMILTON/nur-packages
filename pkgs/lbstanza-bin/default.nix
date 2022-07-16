@@ -27,9 +27,9 @@ stdenv.mkDerivation rec {
   '';
 
   meta = with lib; {
-    description = "Argument Parser for Modern C++";
+    description = "L.B. Stanza Programming Language";
     license = licenses.mit;
-    homepage = "https://github.com/p-ranav/argparse";
+    homepage = "http://lbstanza.org/";
     maintainers = [ "Scott Hamilton <sgn.hamilton+nixpkgs@protonmail.com>" ];
     platforms = platforms.linux;
   };
