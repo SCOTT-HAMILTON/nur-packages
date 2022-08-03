@@ -35,6 +35,7 @@ let
   domain = "${app}.me";
   webroot = "${dolibarr}/htdocs";
   passwordPlaceholder = "__PLACEHOLDER_PASSWORD__";
+  uniqueIdPlaceholder = "__PLACEHOLDER_UNIQUE_ID__";
 in
 with lib; {
   options.services.dolibarr = {
@@ -185,7 +186,7 @@ with lib; {
         $dolibarr_main_force_https='0';
         $dolibarr_main_restrict_os_commands='mysqldump, mysql, pg_dump, pgrestore';
         $dolibarr_nocsrfcheck='0';
-        $dolibarr_main_instance_unique_id="";
+        $dolibarr_main_instance_unique_id='${uniqueIdPlaceholder}';
         $dolibarr_mailing_limit_sendbyweb='0';
         $dolibarr_main_distrib='standard';
       '';
@@ -196,11 +197,15 @@ with lib; {
       chmod -R 0700 /var/lib/dolibarr
 
       # Setup config file
+      tmp_hash=$(mktemp)
+      head -n 100 /dev/random| md5sum | cut -d' ' -f1 > $tmp_hash
       [ ! -f /etc/dolibarr/conf.php ] && \
         echo ${escapeShellArg initConfig}  > /etc/dolibarr/conf.php && \
         ${pkgs.replace-secret}/bin/replace-secret '${passwordPlaceholder}' '${cfg.initialDbPasswordFile}' /etc/dolibarr/conf.php && \
+        ${pkgs.replace-secret}/bin/replace-secret '${uniqueIdPlaceholder}' $tmp_hash /etc/dolibarr/conf.php && \
         chown ${app}:${app} /etc/dolibarr/conf.php && \
         chmod 0600 /etc/dolibarr/conf.php
+      rm -f $tmp_hash
     '';
 
     users.users.${app} = {
