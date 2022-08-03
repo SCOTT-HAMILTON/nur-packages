@@ -34,28 +34,31 @@ let
   app = "dolibarr";
   domain = "${app}.me";
   webroot = "${dolibarr}/htdocs";
-
+  passwordPlaceholder = "__PLACEHOLDER_PASSWORD__";
 in
 with lib; {
   options.services.dolibarr = {
     enable = mkEnableOption "Dolibarr ERP CRM";
-    # port = mkOption {
-    #   type = types.port;
-    #   default = 61694;
-    #   description = "Port for gotify to listen";
-    # };
+    initialDbPasswordFile = mkOption {
+      type = with types; nullOr str;
+      default = null;
+      example = "/run/secrets/dolibarr-db-user-password";
+      description = ''
+        If not null, the plain-text password contained in this file will be used to
+        set the password for the ${app} mysql user. Please make sure the ${config.services.nginx.user}
+        user has access to it.
+      '';
+    };
+    rootUrl = mkOption {
+      type = types.str;
+      example = "http://dolibarr.mycompany.com";
+      description = "Root url where user should be able to access dolibarr";
+    };
   };
   config = mkIf cfg.enable {
     services.mysql = {
       enable = true;
       package = pkgs.mariadb;
-      initialDatabases = [ { name = app; } ];
-      ensureUsers = [{
-        name = app;
-        ensurePermissions = {
-          "${app}.*" = "ALL PRIVILEGES";
-        };
-      }];
     };
     services.phpfpm.pools.${app} = {
       user = app;
@@ -112,6 +115,46 @@ with lib; {
         };
       };
     };
+
+    systemd.services.dolibarr-mysql-db-init = {
+      description = "Initialize mysql db for dolibarr";
+      wants = [ "mysql.service" ];
+      after = [ "mysql.service" ];
+      serviceConfig = let
+        script =  let
+          mysqlPasswordActivation = let
+              initialScript = ''
+                CREATE USER IF NOT EXISTS '${app}'@'localhost' IDENTIFIED WITH mysql_native_password;
+                GRANT ALL PRIVILEGES ON ${app}.* TO '${app}'@'localhost';
+                SET PASSWORD FOR '${app}'@'localhost' = PASSWORD('${passwordPlaceholder}');
+              '';
+            in (if (cfg.initialDbPasswordFile != null) then ''
+              tmp_script_file=$(mktemp)
+              echo ${escapeShellArg initialScript} > $tmp_script_file
+              ${pkgs.replace-secret}/bin/replace-secret '${passwordPlaceholder}' '${cfg.initialDbPasswordFile}' $tmp_script_file
+              echo "Creating initial database: ${app}"
+              ( echo 'create database `${app}`;') | ${config.services.mysql.package}/bin/mysql -u root -N
+              cat $tmp_script_file | ${config.services.mysql.package}/bin/mysql -u root -N
+              rm -f $tmp_script_file
+            '' else "");
+        in ''
+          #!${pkgs.runtimeShell}
+          # Setup database password
+          if ! test -e "${config.services.mysql.dataDir}/${app}"; then
+            ${mysqlPasswordActivation}
+          fi
+        '';
+        startScript = pkgs.writeScriptBin "dolibarr-mysql-db-init-start" script;
+      in {
+        Type = "oneshot";
+        ExecStart = "${startScript}/bin/dolibarr-mysql-db-init-start";
+      };
+    };
+
+    systemd.services.nginx = {
+      wants = [ "dolibarr-mysql-db-init.service" ];
+      after = [ "dolibarr-mysql-db-init.service" ];
+    };
     systemd.services.phpfpm-dolibarr = {
       serviceConfig.ReadWriteDirectories = [
         "/etc/dolibarr"
@@ -119,20 +162,47 @@ with lib; {
       ];
     };
     
-    system.activationScripts.dolibarr-make-documents-folder = ''
+    system.activationScripts.dolibarr-init-script = let
+      initConfig = ''
+        <?php
+
+        $dolibarr_main_url_root='${cfg.rootUrl}';
+        $dolibarr_main_document_root='${webroot}';
+        $dolibarr_main_url_root_alt='/custom';
+        $dolibarr_main_document_root_alt='${webroot}/custom';
+        $dolibarr_main_data_root='/var/lib/dolibarr/documents';
+        $dolibarr_main_db_host='localhost';
+        $dolibarr_main_db_port='3306';
+        $dolibarr_main_db_name='dolibarr';
+        $dolibarr_main_db_prefix='llx_';
+        $dolibarr_main_db_user='dolibarr';
+        $dolibarr_main_db_pass='${passwordPlaceholder}';
+        $dolibarr_main_db_type='mysqli';
+        $dolibarr_main_db_character_set='utf8';
+        $dolibarr_main_db_collation='utf8_unicode_ci';
+        $dolibarr_main_authentication='dolibarr';
+        $dolibarr_main_prod='0';
+        $dolibarr_main_force_https='0';
+        $dolibarr_main_restrict_os_commands='mysqldump, mysql, pg_dump, pgrestore';
+        $dolibarr_nocsrfcheck='0';
+        $dolibarr_main_instance_unique_id="";
+        $dolibarr_mailing_limit_sendbyweb='0';
+        $dolibarr_main_distrib='standard';
+      '';
+    in stringAfter [ "etc" "groups" "users" ] ''
+      # Setup folders in /var/lib/dolibarr/documents
       mkdir -p /var/lib/dolibarr/documents/{mycompany,medias,users,facture,propale,ficheinter,produit,doctemplates}
       chown -R ${app}:${app} /var/lib/dolibarr
       chmod -R 0700 /var/lib/dolibarr
+
+      # Setup config file
+      [ ! -f /etc/dolibarr/conf.php ] && \
+        echo ${escapeShellArg initConfig}  > /etc/dolibarr/conf.php && \
+        ${pkgs.replace-secret}/bin/replace-secret '${passwordPlaceholder}' '${cfg.initialDbPasswordFile}' /etc/dolibarr/conf.php && \
+        chown ${app}:${app} /etc/dolibarr/conf.php && \
+        chmod 0600 /etc/dolibarr/conf.php
     '';
 
-    environment.etc = {
-      "dolibarr/conf.php" = {
-        user = app;
-        group = app;
-        mode = "0600";
-        source = "${dolibarr}/htdocs/conf/conf.php.example";
-      };
-    };
     users.users.${app} = {
       isSystemUser = true;
       createHome = true;
