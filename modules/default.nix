@@ -16,6 +16,7 @@ rec {
     inherit (selfnur) tfk-api-unoconv;
   };
   unoconv = ./unoconv.nix;
+  dolibarr = ./dolibarr.nix;
   simplehaproxy = ./simplehaproxy.nix;
   rpi-fan-serve = import ./rpi-fan-serve.nix {
     inherit simplehaproxy;
