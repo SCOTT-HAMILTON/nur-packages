@@ -1,7 +1,9 @@
 { selfnur }:
 rec {
   # create-ap = ./create-ap.nix;
-  day-night-plasma-wallpapers = ./day-night-plasma-wallpapers-nixos.nix;
+  day-night-plasma-wallpapers = import ./day-night-plasma-wallpapers-nixos.nix {
+    inherit (selfnur) day-night-plasma-wallpapers;
+  };
   numworks = ./numworks.nix;
   slick-greeter = ./slick-greeter.nix;
   autognirehtet = import ./autognirehtet.nix {
