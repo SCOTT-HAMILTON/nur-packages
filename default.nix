@@ -67,7 +67,6 @@ pkgs.lib.traceValFn (x:
   fake-mic-wav-player = pkgs.libsForQt5.callPackage ./pkgs/FakeMicWavPlayer {
     inherit (self) libfake argparse;
   };
-  # fetchGradle = pkgs.callPackage ./pkgs/fetch-gradle { };
   graph-cli = pkgs.callPackage ./pkgs/graph-cli { };
   haste-client = pkgs.callPackage ./pkgs/haste-client { };
   instanttee = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/InstantTee {
@@ -125,6 +124,7 @@ pkgs.lib.traceValFn (x:
   pyrect = pkgs.callPackage ./pkgs/pyrect { };
   pyscreeze = pkgs.callPackage ./pkgs/pyscreeze { };
   pytweening = pkgs.callPackage ./pkgs/pytweening { };
+  qcoro = pkgs.libsForQt5.callPackage ./pkgs/qcoro { };
   qrup = pkgs.callPackage ./pkgs/qrup { };
   rpi-fan = pkgs.callPackage ./pkgs/rpi-fan { };
   rpi-fan-serve = let
@@ -266,15 +266,10 @@ rec {
 # Derivations not supported on NUR
 pkgs.lib.optionalAttrs (localUsage) (rec {
   mvn2nix = pkgs.callPackage ./pkgs/mvn2nix { };
-  # android-nixpkgs = pkgs.callPackage ./pkgs/android-nixpkgs { };
   nixgl = pkgs.callPackage ./pkgs/nixgl { };
   xtreme-download-manager = pkgs.callPackage ./pkgs/xtreme-download-manager {
     inherit mvn2nix localUsage;
   };
-  # trollslate = pkgs.callPackage ./pkgs/Trollslate  {
-  #   inherit android-nixpkgs;
-  #   inherit (self) fetchGradle;
-  # };
 })
 )).extend (self: super: rec {
   modules = import ./modules { selfnur = self; };
