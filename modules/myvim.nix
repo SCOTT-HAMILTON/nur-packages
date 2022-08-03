@@ -205,6 +205,7 @@ in
             nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
           '';
           default-config = ''
+            set laststatus=0
             let mapleader = ","
 
             vn < <gv
@@ -248,6 +249,7 @@ in
           settings = {
             powershell.powerShellExePath = "${pkgs.powershell}/bin/pwsh";
             powershell.integratedConsole.showOnStartup = false;
+            clangd.path = "${pkgs.clang-tools}/bin/clangd";
             languageserver = {
               rust = {
                 command = "rust-analyzer";
