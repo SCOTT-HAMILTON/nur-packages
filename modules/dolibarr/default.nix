@@ -3,8 +3,7 @@ let
   cfg = config.services.dolibarr;
   app = "dolibarr";
 
-  myphp = pkgs.php.withExtensions ({ enabled, all }:
-    enabled ++ [ all.gnupg ]);
+  myphp = pkgs.php;
   version = "15.0.3";
   configFile = "/etc/${app}/conf.php";
   dolibarr = with pkgs; stdenvNoCC.mkDerivation {
@@ -38,7 +37,7 @@ let
 in
 with lib; {
   options.services.dolibarr = {
-    enable = mkEnableOption "Dolibarr ERP CRM";
+    enable = mkEnableOption "Dolibarr ERP & CRM";
     preInstalled = mkEnableOption "Preinstall dolibarr"// {
       description = ''
         Whether to preinstall dolibarr or not.
@@ -59,9 +58,9 @@ with lib; {
       default = null;
       example = "/run/secrets/dolibarr-db-user-password";
       description = ''
-        If not null, the plain-text password contained in this file will be used to
-        set the password for the ${app} mysql user. Please make sure the ${config.services.nginx.user}
-        user has access to it.
+        If not null, the ${app} user will be created in mysql and the plain-text password
+        contained in this file will be used to set the password for this user
+        Please make sure the root user has access to this file.
       '';
     };
     domain = mkOption {
@@ -228,7 +227,7 @@ with lib; {
       group = app;
     };
     users.groups.${app} = { };
-    networking.firewall.allowedTCPPorts = [ 443 80 ];
+    networking.firewall.allowedTCPPorts = [ 80 ];
     environment.systemPackages = [ myphp ];
   };
 }
