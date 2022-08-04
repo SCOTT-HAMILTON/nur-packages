@@ -1,11 +1,12 @@
 { config, lib, pkgs, specialArgs, options, modulesPath }:
 let
   cfg = config.services.dolibarr;
+  app = "dolibarr";
 
   myphp = pkgs.php.withExtensions ({ enabled, all }:
     enabled ++ [ all.gnupg ]);
   version = "15.0.3";
-  configFile = "/etc/dolibarr/conf.php";
+  configFile = "/etc/${app}/conf.php";
   dolibarr = with pkgs; stdenvNoCC.mkDerivation {
     pname = "dolibarr-src";
     inherit version;
@@ -31,8 +32,6 @@ let
       cp -r * $out
     '';
   };
-  app = "dolibarr";
-  domain = "${app}.me";
   webroot = "${dolibarr}/htdocs";
   passwordPlaceholder = "__PLACEHOLDER_PASSWORD__";
   uniqueIdPlaceholder = "__PLACEHOLDER_UNIQUE_ID__";
@@ -40,6 +39,21 @@ in
 with lib; {
   options.services.dolibarr = {
     enable = mkEnableOption "Dolibarr ERP CRM";
+    preInstalled = mkEnableOption "Preinstall dolibarr"// {
+      description = ''
+        Whether to preinstall dolibarr or not.
+
+        <note><para>
+          The database is automatically configured with the following credentials:
+          
+
+          <itemizedlist>
+            <listitem><para>login is <literal>dolibarrlogin</literal></para></listitem>
+            <listitem><para>password is <literal>123dolibarrlogin_pass</literal></para></listitem>
+          </itemizedlist>
+        </para></note>
+      '';
+    };
     initialDbPasswordFile = mkOption {
       type = with types; nullOr str;
       default = null;
@@ -50,16 +64,23 @@ with lib; {
         user has access to it.
       '';
     };
-    rootUrl = mkOption {
+    domain = mkOption {
       type = types.str;
-      example = "http://dolibarr.mycompany.com";
-      description = "Root url where user should be able to access dolibarr";
+      example = "${app}.mycompany.com";
+      description = "Domain to serve on";
     };
   };
   config = mkIf cfg.enable {
     services.mysql = {
       enable = true;
       package = pkgs.mariadb;
+      initialDatabases = [
+        ({
+          name = app;
+        } // lib.optionalAttrs cfg.preInstalled {
+          schema = ./preinstalled-db.sql;
+        })
+      ];
     };
     services.phpfpm.pools.${app} = {
       user = app;
@@ -75,26 +96,19 @@ with lib; {
         "php_admin_flag[log_errors]" = true;
         "catch_workers_output" = true;
       };
-      # phpOptions = ''
-      #   extension=${myphp.extensions.gnupg}/lib/php/extensions/gnupg.so
-      # '';
       phpEnv = {
         "PATH" = lib.makeBinPath [ myphp ];
-        # "GNUPGHOME" = "/var/lib/passbolt/.gnupg";
       };
     };
     services.nginx = {
       enable = true;
-      virtualHosts."${domain}" = {
+      virtualHosts."${app}.com" = {
         listen = [{
           addr = "0.0.0.0";
           port = 80;
         }];
-        # addSSL = true;
-        # enableACME = true;
         root = "${webroot}";
         locations."/" = {
-          # tryFiles = "$uri /index.html index.php?$args";
           tryFiles = "$uri $uri/ $uri.php";
           index = "index.php";
         };
@@ -118,7 +132,7 @@ with lib; {
     };
 
     systemd.services.dolibarr-mysql-db-init = {
-      description = "Initialize mysql db for dolibarr";
+      description = "Initialize mysql db for ${app}";
       wants = [ "mysql.service" ];
       after = [ "mysql.service" ];
       serviceConfig = let
@@ -133,33 +147,32 @@ with lib; {
               tmp_script_file=$(mktemp)
               echo ${escapeShellArg initialScript} > $tmp_script_file
               ${pkgs.replace-secret}/bin/replace-secret '${passwordPlaceholder}' '${cfg.initialDbPasswordFile}' $tmp_script_file
-              echo "Creating initial database: ${app}"
-              ( echo 'create database `${app}`;') | ${config.services.mysql.package}/bin/mysql -u root -N
               cat $tmp_script_file | ${config.services.mysql.package}/bin/mysql -u root -N
               rm -f $tmp_script_file
             '' else "");
         in ''
           #!${pkgs.runtimeShell}
           # Setup database password
-          if ! test -e "${config.services.mysql.dataDir}/${app}"; then
+          echo 'SELECT User FROM mysql.user WHERE User = "${app}";' | ${config.services.mysql.package}/bin/mysql -u root -N | grep '${app}'
+          if [ ! $? = 0 ]; then
             ${mysqlPasswordActivation}
           fi
         '';
-        startScript = pkgs.writeScriptBin "dolibarr-mysql-db-init-start" script;
+        startScript = pkgs.writeScriptBin "${app}-mysql-db-init-start" script;
       in {
         Type = "oneshot";
-        ExecStart = "${startScript}/bin/dolibarr-mysql-db-init-start";
+        ExecStart = "${startScript}/bin/${app}-mysql-db-init-start";
       };
     };
 
     systemd.services.nginx = {
-      wants = [ "dolibarr-mysql-db-init.service" ];
-      after = [ "dolibarr-mysql-db-init.service" ];
+      wants = [ "${app}-mysql-db-init.service" ];
+      after = [ "${app}-mysql-db-init.service" ];
     };
     systemd.services.phpfpm-dolibarr = {
       serviceConfig.ReadWriteDirectories = [
-        "/etc/dolibarr"
-        "/var/lib/dolibarr/documents"
+        "/etc/${app}"
+        "/var/lib/${app}/documents"
       ];
     };
     
@@ -167,21 +180,21 @@ with lib; {
       initConfig = ''
         <?php
 
-        $dolibarr_main_url_root='${cfg.rootUrl}';
+        $dolibarr_main_url_root='http://${cfg.domain}';
         $dolibarr_main_document_root='${webroot}';
         $dolibarr_main_url_root_alt='/custom';
         $dolibarr_main_document_root_alt='${webroot}/custom';
-        $dolibarr_main_data_root='/var/lib/dolibarr/documents';
+        $dolibarr_main_data_root='/var/lib/${app}/documents';
         $dolibarr_main_db_host='localhost';
         $dolibarr_main_db_port='3306';
-        $dolibarr_main_db_name='dolibarr';
+        $dolibarr_main_db_name='${app}';
         $dolibarr_main_db_prefix='llx_';
-        $dolibarr_main_db_user='dolibarr';
+        $dolibarr_main_db_user='${app}';
         $dolibarr_main_db_pass='${passwordPlaceholder}';
         $dolibarr_main_db_type='mysqli';
         $dolibarr_main_db_character_set='utf8';
         $dolibarr_main_db_collation='utf8_unicode_ci';
-        $dolibarr_main_authentication='dolibarr';
+        $dolibarr_main_authentication='${app}';
         $dolibarr_main_prod='0';
         $dolibarr_main_force_https='0';
         $dolibarr_main_restrict_os_commands='mysqldump, mysql, pg_dump, pgrestore';
@@ -191,27 +204,27 @@ with lib; {
         $dolibarr_main_distrib='standard';
       '';
     in stringAfter [ "etc" "groups" "users" ] ''
-      # Setup folders in /var/lib/dolibarr/documents
-      mkdir -p /var/lib/dolibarr/documents/{mycompany,medias,users,facture,propale,ficheinter,produit,doctemplates}
-      chown -R ${app}:${app} /var/lib/dolibarr
-      chmod -R 0700 /var/lib/dolibarr
+      # Setup folders in /var/lib/${app}/documents
+      mkdir -p /var/lib/${app}/documents/{mycompany,medias,users,facture,propale,ficheinter,produit,doctemplates}
+      chown -R ${app}:${app} /var/lib/${app}
+      chmod -R 0700 /var/lib/${app}
 
       # Setup config file
       tmp_hash=$(mktemp)
       head -n 100 /dev/random| md5sum | cut -d' ' -f1 > $tmp_hash
-      [ ! -f /etc/dolibarr/conf.php ] && \
-        echo ${escapeShellArg initConfig}  > /etc/dolibarr/conf.php && \
-        ${pkgs.replace-secret}/bin/replace-secret '${passwordPlaceholder}' '${cfg.initialDbPasswordFile}' /etc/dolibarr/conf.php && \
-        ${pkgs.replace-secret}/bin/replace-secret '${uniqueIdPlaceholder}' $tmp_hash /etc/dolibarr/conf.php && \
-        chown ${app}:${app} /etc/dolibarr/conf.php && \
-        chmod 0600 /etc/dolibarr/conf.php
+      [ ! -f /etc/${app}/conf.php ] && \
+        echo ${escapeShellArg initConfig}  > /etc/${app}/conf.php && \
+        ${pkgs.replace-secret}/bin/replace-secret '${passwordPlaceholder}' '${cfg.initialDbPasswordFile}' /etc/${app}/conf.php && \
+        ${pkgs.replace-secret}/bin/replace-secret '${uniqueIdPlaceholder}' $tmp_hash /etc/${app}/conf.php && \
+        chown ${app}:${app} /etc/${app}/conf.php && \
+        chmod 0600 /etc/${app}/conf.php
       rm -f $tmp_hash
     '';
 
     users.users.${app} = {
       isSystemUser = true;
       createHome = true;
-      home = "/etc/dolibarr";
+      home = "/etc/${app}";
       group = app;
     };
     users.groups.${app} = { };
