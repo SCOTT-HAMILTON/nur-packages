@@ -24,15 +24,21 @@ in {
     deployment = {
       targetEnv = "none";
       targetPort = 22;
-      targetHost = "146.190.26.126";
+      targetHost = "146.190.238.159";
+      keys.dolibarr-db-ini-password = {
+        text = "123dolibarr_pass";
+        user = "root";
+        group = "root";
+        permissions = "0440";
+      };
     };
     services.openssh.enable = true;
 
     services.dolibarr = {
       enable = true;
+      domain = "146.190.238.159";
+      preInstalled = true;
+      initialDbPasswordFile = "/run/keys/dolibarr-db-ini-password";
     };
-    # services.kairos = {
-    #   enable = true;
-    # };
   };
 }
