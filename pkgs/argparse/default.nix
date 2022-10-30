@@ -19,6 +19,9 @@ stdenv.mkDerivation rec {
     sed -i '/string(REPLACE/d' CMakeLists.txt
     substituteInPlace 'CMakeLists.txt' \
       --replace 'CMAKE_INSTALL_LIBDIR_ARCHIND' 'CMAKE_INSTALL_LIBDIR'
+    substituteInPlace 'packaging/pkgconfig.pc.in' \
+      --replace '@CMAKE_INSTALL_INCLUDEDIR@' \
+                'include'
   '';
 
   nativeBuildInputs = [ cmake ];
