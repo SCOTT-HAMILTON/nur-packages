@@ -124,6 +124,7 @@ pkgs.lib.traceValFn (x:
   pyrect = pkgs.callPackage ./pkgs/pyrect { };
   pyscreeze = pkgs.callPackage ./pkgs/pyscreeze { };
   pytweening = pkgs.callPackage ./pkgs/pytweening { };
+  pyzo = pkgs.callPackage ./pkgs/pyzo { };
   qcoro = pkgs.libsForQt5.callPackage ./pkgs/qcoro { };
   qrup = pkgs.callPackage ./pkgs/qrup { };
   rpi-fan = pkgs.callPackage ./pkgs/rpi-fan { };
