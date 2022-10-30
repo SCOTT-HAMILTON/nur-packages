@@ -1,7 +1,7 @@
-diff --color -ur a/source/dialogs/drun.c b/source/dialogs/drun.c
---- a/source/dialogs/drun.c	2022-02-11 17:25:57.860069676 +0100
-+++ b/source/dialogs/drun.c	2022-02-11 17:31:16.677888022 +0100
-@@ -1018,6 +1018,19 @@
+diff --color -ur a/source/modes/drun.c b/source/modes/drun.c
+--- a/source/modes/drun.c	2022-10-30 15:41:07.970678984 +0100
++++ b/source/modes/drun.c	2022-10-30 15:47:02.861931289 +0100
+@@ -1016,6 +1016,19 @@
        TICK_N("Get Desktop apps (user dir)");
      }
  
