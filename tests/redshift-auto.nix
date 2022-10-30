@@ -3,6 +3,7 @@
 }:
 
 hm-module-test {
+  name = "redshift-auto";
   hmModule = modules.hmModules.redshift-auto;
   hmModuleConfig = {
     services.redshift-auto = {

@@ -3,6 +3,7 @@
 }:
 
 hm-module-test {
+  name = "pronotebot";
   hmModule = modules.hmModules.pronotebot;
   hmModuleConfig = {
     pronotebot = {
