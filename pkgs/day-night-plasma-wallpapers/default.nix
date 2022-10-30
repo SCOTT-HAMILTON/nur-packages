@@ -1,8 +1,14 @@
 { lib
+, python3
+, dbus
 , python3Packages
 , fetchFromGitHub 
 }:
-
+let
+  fixedDbusNext = python3Packages.dbus-next.overridePythonAttrs (old: {
+    checkPhase = builtins.replaceStrings ["not test_peer_interface"] ["not test_peer_interface and not test_tcp_connection_with_forwarding"] old.checkPhase;
+  });
+in
 python3Packages.buildPythonPackage rec {
   pname = "day-night-plasma-wallpapers";
   version = "2022-02-11";
@@ -14,7 +20,7 @@ python3Packages.buildPythonPackage rec {
     sha256 = "1w1m0jrfdzvmrbvn0c1adysqcnl6qbcahkfbxp9gv85cvy42hqdl";
   };
 
-  propagatedBuildInputs = with python3Packages; [ dbus-next ];
+  propagatedBuildInputs = [ fixedDbusNext ];
 
   postInstall = ''
     mkdir -p "$out/.config/autostart-scripts"
