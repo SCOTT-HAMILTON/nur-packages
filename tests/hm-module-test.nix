@@ -15,6 +15,7 @@ import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
     };
     home-manager.users.bob = { pkgs, ... }: {
       imports = [ hmModule hmModuleConfig ];
+      manual.manpages.enable = false;
     };
   };
   testScript = ''
