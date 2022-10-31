@@ -4,12 +4,12 @@
 
 python3Packages.buildPythonPackage rec {
   pname = "graph-cli";
-  version = "0.1.18";
+  version = "0.1.19";
 
   src = python3Packages.fetchPypi {
     inherit version;
     pname = "graph_cli";
-    sha256 = "08552hjb6rsvlqyrxh5kzrhryajn90ljysds95h67p29qirlwv6j";
+    sha256 = "sha256-AOfUgeVgcTtuf5IuLYy1zFTBCjWZxu0OiZzUVXDIaSc=";
   };
   
   propagatedBuildInputs = with python3Packages; [ matplotlib pandas ];
