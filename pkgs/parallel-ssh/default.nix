@@ -7,11 +7,11 @@
 
 python3Packages.buildPythonPackage rec {
   pname = "parallel-ssh";
-  version = "2.10.0";
+  version = "2.12.0";
 
   src = python3Packages.fetchPypi {
     inherit pname version;
-    sha256 = "sha256-i5JfQ5cqVJrgkKVfVXvrU6GWhWZtvrFmswQ9YfXrLbk=";
+    sha256 = "sha256-viwG7odlJz0gTgD4Kvri2s5e6678U0PR38ZFE2QhYeA=";
   };
   
   propagatedBuildInputs = with python3Packages; [
