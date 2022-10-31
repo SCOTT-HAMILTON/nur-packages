@@ -57,6 +57,7 @@ jobs:
             export NIX_PATH=nixpkgs=channel:${{ matrix.channel-branch }}
           fi
           nix-build --argstr nixosVersion "${{ matrix.channel-branch }}" all-unbroken.nix --show-trace
+          cat $(nix-instantiate --argstr nixosVersion "${{ matrix.channel-branch }}" -A tests.day-night-plasma-wallpapers)
           if [ "${{ matrix.channel-branch }}" = "nixpkgs-unstable" ]; then
             nix-build --argstr nixosVersion "${{ matrix.channel-branch }}" all-tests.nix --show-trace
           fi
