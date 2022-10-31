@@ -6,17 +6,17 @@
 }:
 python3Packages.buildPythonPackage rec {
   pname = "ssh2-python";
-  version = "0.27.0";
+  version = "1.0.0";
 
   src = python3Packages.fetchPypi {
     inherit pname version;
-    sha256 = "0fv216a2nz8divgm1b3dww3is36k8kk0vbvh1klmr85p8kzi8nx6";
+    sha256 = "sha256-r4noDDID54KbJO6miOr1xeJ5BxrtGIIji09E7CFE58U=";
   };
   
   nativeBuildInputs = with python3Packages; [ cmake setuptools ];
   buildInputs = [ openssl zlib ];
   propagatedBuildInputs = with python3Packages; [ cython ];
-  cmakeDir = "../libssh2";
+  cmakeDir = "../libssh2/libssh2";
 
   checkInputs = with python3Packages; [ pytest ];
 
