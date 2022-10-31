@@ -2,19 +2,24 @@
 , stdenv
 , fetchzip
 , autoPatchelfHook
+, gcc-unwrapped
 }:
 
 stdenv.mkDerivation rec {
   pname = "lbstanza-bin";
-  version = "0.15.11";
+  version = "0.17.34";
 
   src = fetchzip {
     url = "http://lbstanza.org/resources/stanza/lstanza_${lib.replaceStrings ["."] ["_"] version}.zip";
-    sha256 = "1gnbwk0wnbys873c7mxzf1i82v9fnb1iycxawaijicy7yl7c3ff2";
-    stripRoot=false;
+    sha256 = "sha256-LRm0peh+XSjPh4zWSBDm/nM5wJfIWhkrMaX/EYJkPdU=";
+    stripRoot = false;
   };
 
   nativeBuildInputs = [ autoPatchelfHook ];
+
+  preBuild = ''
+    addAutoPatchelfSearchPath ${gcc-unwrapped.lib}/lib
+  '';
 
   installPhase = ''
     runHook preInstall
