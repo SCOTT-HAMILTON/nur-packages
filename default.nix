@@ -127,6 +127,7 @@ pkgs.lib.traceValFn (x:
   pyzo = pkgs.callPackage ./pkgs/pyzo { };
   qcoro = pkgs.libsForQt5.callPackage ./pkgs/qcoro { };
   qrup = pkgs.callPackage ./pkgs/qrup { };
+  renrot = pkgs.callPackage ./pkgs/renrot { };
   rpi-fan = pkgs.callPackage ./pkgs/rpi-fan { };
   rpi-fan-serve = let
     patchedDrogon = with drogonNixPkgs; drogon.overrideAttrs (old: {
