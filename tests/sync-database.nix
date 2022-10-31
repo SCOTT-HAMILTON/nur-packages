@@ -30,6 +30,7 @@ import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
         ];
         home-manager.users.bob = { pkgs, ... }: {
           imports = [ modules.hmModules.sync-database ];
+          manual.manpages.enable = false;
           sync-database = {
             enable = true;
             passwords_directory = "~/passwords";
