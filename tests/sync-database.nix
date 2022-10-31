@@ -10,6 +10,25 @@ let
       UserKnownHostsFile=/dev/null
       StrictHostKeyChecking=no
     '';
+  verify-dbs = pkgs.writeScriptBin "verify-dbs" ''
+    #! ${pkgs.runtimeShell}
+    machine=$1
+    tmpout=$(mktemp)
+    echo test | ${pkgs.keepassxc}/bin/keepassxc-cli ls /home/bob/passwords/db1.kdbx > $tmpout
+    echo "Verifying... $machine"
+    cat $tmpout
+    echo
+    testMissing(){
+      if ! grep "$1" $tmpout; then
+        echo "Missing $1 for $machine"
+        exit 1
+      fi
+    }
+    testMissing "MyPassAccount" && \
+      testMissing "Sample Entry New Name" && \
+      testMissing "Sample Entry #2" && \
+      rm $tmpout
+  '';
 in
 import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
   name = "sync-database";
@@ -27,6 +46,7 @@ import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
         imports = [ "${home-manager}/nixos" usersConfig ];
         environment.systemPackages = with pkgs; [
           android-platform-tools
+          verify-dbs
         ];
         home-manager.users.bob = { pkgs, ... }: {
           imports = [ modules.hmModules.sync-database ];
@@ -50,6 +70,7 @@ import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
 
       {
         imports = [ usersConfig ]; 
+        environment.systemPackages = with pkgs; [ verify-dbs ];
         services.openssh.enable = true;
         security.pam.services.sshd.limits =
           [ { domain = "*"; item = "memlock"; type = "-"; value = 1024; } ];
@@ -114,5 +135,9 @@ import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
     client.succeed(
       "${runAsBob "HOME=/home/bob ${sync-database}/bin/sync_database -m test -t 200 1>&2"}"
     )
+    client.succeed("verify-dbs client 1>&2")
+    server1.succeed("verify-dbs server1 1>&2")
+    client.copy_from_vm("/home/bob/passwords/db1.kdbx", "db1-client.kdbx")
+    server1.copy_from_vm("/home/bob/passwords/db1.kdbx", "db1-server1.kdbx")
   '';
 })
