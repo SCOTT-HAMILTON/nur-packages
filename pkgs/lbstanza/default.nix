@@ -2,17 +2,18 @@
 , stdenv
 , fetchFromGitHub
 , lbstanza-bin
+, cmake
 }:
 
 stdenv.mkDerivation rec {
   pname = "lbstanza";
-  version = "2022-01-20";
+  version = "2022-10-31";
 
   src = fetchFromGitHub {
     owner = "StanzaOrg";
     repo = "lbstanza";
-    rev = "5de4ed1b015bff146079d66bf0a7eeb7325b89df";
-    sha256 = "17hwyi5hpppdjarbaqcvc9kjgrd7rx4512fpzmk48649cp84cy5i";
+    rev = "6d7b418c140bb041b1f65d8a4186d20bcf9bf98d";
+    sha256 = "sha256-87O+v2eiKtIu5lB47dz22iFef1grM7gyBNTkAUkAndE=";
   };
 
   postPatch = ''
@@ -45,7 +46,8 @@ stdenv.mkDerivation rec {
     runHook postInstall
   '';
 
-  nativeBuildInputs = [ lbstanza-bin ];
+  nativeBuildInputs = [ lbstanza-bin cmake ];
+  dontUseCmakeConfigure = true;
 
   meta = with lib; {
     description = "L.B. Stanza Programming Language";
