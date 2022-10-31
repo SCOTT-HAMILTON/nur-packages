@@ -17,8 +17,8 @@ let
   src = pkgs.fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "tfk-api-unoconv";
-    rev = "a2f29e71d12fa9fb3ddbf1b67ab0293bdcf3e64c";
-    sha256 = "1vdf34ckghhjnih54krsq6r9vj8lavxs48lbb5s5pvzcgylxfqmk";
+    rev = "17bcb8b48198ac78e3ae9ce6ef4692c227c72f90";
+    sha256 = "sha256-19SVYSmb36OSjt4mvNXFploQDdcKZ4e/tyQECagj/AE=";
   };
 in
 (import ./node-packages.nix {
