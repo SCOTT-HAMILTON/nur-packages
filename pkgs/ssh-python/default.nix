@@ -1,5 +1,5 @@
 { lib
-, python38Packages
+, python3Packages
 , fetchFromGitHub
 , zlib
 , openssl
@@ -9,17 +9,15 @@
 , octoprint
 }:
 
-python38Packages.buildPythonPackage rec {
+python3Packages.buildPythonPackage rec {
   pname = "ssh-python";
-  version = "03.0";
-
-  disabled = python38Packages.pythonOlder "3.8";
+  version = "0.10.0";
 
   src = fetchFromGitHub {
     owner = "ParallelSSH";
     repo = "ssh-python";
     rev = version;
-    sha256 = "sha256-Nlp/bv9VtIUbp8r6RkVpOgRAJvCPLyJjmRIpR8vw2WQ=";
+    sha256 = "sha256-aJCXlTQ8glxQ0APzkDg+FczzYeJ1NtQyFnPyKoUUnyg=";
     leaveDotGit = true;
     deepClone = true;
   };
@@ -33,7 +31,7 @@ python38Packages.buildPythonPackage rec {
 
   nativeBuildInputs = [ git ];
   buildInputs = [ zlib openssl libssh ];
-  checkInputs = [ octoprint python38Packages.pytest ];
+  checkInputs = [ octoprint python3Packages.pytest ];
 
   patches = [ ./fix-fix_version-script.patch ];
 
