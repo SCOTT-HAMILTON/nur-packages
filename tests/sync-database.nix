@@ -10,24 +10,42 @@ let
       UserKnownHostsFile=/dev/null
       StrictHostKeyChecking=no
     '';
-  verify-dbs = pkgs.writeScriptBin "verify-dbs" ''
+  verify-all = pkgs.writeScriptBin "verify-all" ''
     #! ${pkgs.runtimeShell}
     machine=$1
     tmpout=$(mktemp)
     echo test | ${pkgs.keepassxc}/bin/keepassxc-cli ls /home/bob/passwords/db1.kdbx > $tmpout
-    echo "Verifying... $machine"
+    echo "Verifying databases for $machine..."
     cat $tmpout
     echo
-    testMissing(){
+    testMergedForMissing(){
       if ! grep "$1" $tmpout; then
         echo "Missing $1 for $machine"
         exit 1
       fi
     }
-    testMissing "MyPassAccount" && \
-      testMissing "Sample Entry New Name" && \
-      testMissing "Sample Entry #2" && \
+    testMergedForMissing "MyPassAccount" && \
+      testMergedForMissing "Sample Entry New Name" && \
+      testMergedForMissing "Sample Entry #2" && \
       rm $tmpout
+
+    echo "Verifying archives for $machine..."
+    if ! (find /home/bob/passwords/history_backup -maxdepth 1 -name '*.tar.xz' -print -quit | grep backup); then
+      echo "Missing backup tar for $machine";
+      exit 1
+    fi
+    backup=$(find /home/bob/passwords/history_backup -maxdepth 1 -name '*.tar.xz' -print -quit | grep backup)
+    echo "Content of $backup for $machine: "
+    tar -tvf $backup
+    testBackupForMissing(){
+      if ! (tar -tvf $backup | grep $1); then
+        echo "Missing backup $1 file in $machine";
+        exit 1
+      fi
+    }
+    testBackupForMissing "/db1.kdbx" && \
+      testBackupForMissing "/db_0" && \
+      testBackupForMissing "/db_1"
   '';
 in
 import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
@@ -46,7 +64,7 @@ import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
         imports = [ "${home-manager}/nixos" usersConfig ];
         environment.systemPackages = with pkgs; [
           android-platform-tools
-          verify-dbs
+          verify-all
         ];
         home-manager.users.bob = { pkgs, ... }: {
           imports = [ modules.hmModules.sync-database ];
@@ -70,7 +88,7 @@ import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
 
       {
         imports = [ usersConfig ]; 
-        environment.systemPackages = with pkgs; [ verify-dbs ];
+        environment.systemPackages = with pkgs; [ verify-all ];
         services.openssh.enable = true;
         security.pam.services.sshd.limits =
           [ { domain = "*"; item = "memlock"; type = "-"; value = 1024; } ];
@@ -132,12 +150,15 @@ import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
     client.succeed("systemctl restart home-manager-bob.service -l 1>&2")
     client.succeed("${runAsBob "systemctl status home-manager-bob.service -l"} 1>&2")
     client.succeed("${runAsBob "cat /home/bob/.config/sync-database.conf"} 1>&2")
+  
     client.succeed(
-      "${runAsBob "HOME=/home/bob ${sync-database}/bin/sync_database -m test -t 200 1>&2"}"
+      "${runAsBob "HOME=/home/bob ${sync-database}/bin/sync_database -k /tmp/sync-database-tmp.d -m test -t 200 -d 1>&2"}"
     )
-    client.succeed("verify-dbs client 1>&2")
-    server1.succeed("verify-dbs server1 1>&2")
-    client.copy_from_vm("/home/bob/passwords/db1.kdbx", "db1-client.kdbx")
-    server1.copy_from_vm("/home/bob/passwords/db1.kdbx", "db1-server1.kdbx")
+    client.copy_from_vm("/tmp/sync-database-tmp.d", "tempdir")
+
+    client.succeed("verify-all client 1>&2")
+    server1.succeed("verify-all server1 1>&2")
+    client.copy_from_vm("/home/bob/passwords", "passwords-client")
+    server1.copy_from_vm("/home/bob/passwords", "passwords-server")
   '';
 })
