@@ -10,13 +10,13 @@
 
 python3Packages.buildPythonPackage rec {
   pname = "sync-database";
-  version = "2022-07-15";
+  version = "2022-11-01";
 
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "sync-database";
-    rev = "e6b91d4dc79e3f329bee1506a6d35afde3ff3e93";
-    sha256 = "sha256-dUS9ccy7g+0BqnkKKQC1G1kJfIyh6jOlzrtaxdXN0vI=";
+    rev = "9f4c9cf5c558be8169d3169a72d82378ef777a4b";
+    sha256 = "sha256-H1mDEVgHXch7rzKZusrLAIQZt+6ojri/gvjfklepFnA=";
   };
 
   propagatedBuildInputs = with python3Packages; [
