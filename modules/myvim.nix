@@ -241,6 +241,7 @@ in
           pkgs.vimPlugins.commentary
           pkgs.vimPlugins.neovim-fuzzy
           pkgs.vimPlugins.polyglot
+          vim-myftplugins
         ];
         viAlias = true;
       } // (lib.optionalAttrs cfg.enableNvimCoc {
@@ -270,27 +271,6 @@ in
         rnix-lsp
       ];
     }
-    # (lib.optionalAttrs cfg.enableNvimCoc {
-    #   programs.neovim
-    #   coc = {
-    #     enable = true;
-    #     settings = {
-    #       powershell.powerShellExePath = "${pkgs.powershell}/bin/pwsh";
-    #       powershell.integratedConsole.showOnStartup = false;
-    #       languageserver = {
-    #         rust = {
-    #           command = "rust-analyzer";
-    #           filetypes = [ "rust" ];
-    #           rootPatterns = [ "Cargo.toml" ];
-    #         };
-    #         nix = {
-    #           command = "rnix-lsp";
-    #           filetypes = [ "nix" ];
-    #         };
-    #       };
-    #     };
-    #   };
-    # })
     )
   ]));
 }
