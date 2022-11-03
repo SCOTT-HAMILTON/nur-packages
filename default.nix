@@ -124,7 +124,7 @@ pkgs.lib.traceValFn (x:
   pyrect = pkgs.callPackage ./pkgs/pyrect { };
   pyscreeze = pkgs.callPackage ./pkgs/pyscreeze { };
   pytweening = pkgs.callPackage ./pkgs/pytweening { };
-  pyzo = pkgs.callPackage ./pkgs/pyzo { };
+  pyzo = pkgs.callPackage ./pkgs/pyzo { shellPython = pkgs.python310; };
   qcoro = pkgs.libsForQt5.callPackage ./pkgs/qcoro { };
   qrup = pkgs.callPackage ./pkgs/qrup { };
   renrot = pkgs.callPackage ./pkgs/renrot { };
