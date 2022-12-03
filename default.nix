@@ -107,7 +107,6 @@ pkgs.lib.traceValFn (x:
     inherit (self) pyautogui;
   };
   pronote-timetable-fetch = pkgs.callPackage ./pkgs/pronote-timetable-fetch { };
-  protify = pkgs.libsForQt512.callPackage ./pkgs/Protify { };
   pyautogui = pkgs.callPackage ./pkgs/pyautogui {
     inherit (self)
       mouseinfo
