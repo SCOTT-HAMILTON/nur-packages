@@ -6,16 +6,6 @@
 , python3Packages ? python3.pkgs
 , util-linux
 }:
-let
-  customPython = (shellPython.buildEnv.override {
-    extraLibs = with shellPython.pkgs; [
-      pandas
-      numpy
-    ];
-  }).overrideAttrs (old: {
-    name = "${shellPython.name}-for-pyzo-shell";
-  });
-in
 python3Packages.buildPythonPackage rec {
   pname = "pyzo";
   version = "4.12.3";
@@ -51,7 +41,7 @@ python3Packages.buildPythonPackage rec {
   '';
 
   makeWrapperArgs = [
-    "--set" "PYZO_DEFAULT_SHELL_PYTHON_EXE" "${customPython}/bin/python"
+    "--set" "PYZO_DEFAULT_SHELL_PYTHON_EXE" "${shellPython}/bin/python"
   ];
 
   doCheck = false;
