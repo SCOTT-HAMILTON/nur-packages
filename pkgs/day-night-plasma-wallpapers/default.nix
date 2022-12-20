@@ -17,7 +17,7 @@ python3Packages.buildPythonPackage rec {
     owner = "SCOTT-HAMILTON";
     repo = "Day-night-plasma-wallpapers";
     rev = "aae28f1267c5f6820719e87932b670233ed3bbfa";
-    sha256 = "1w1m0jrfdzvmrbvn0c1adysqcnl6qbcahkfbxp9gv85cvy42hqdl";
+    sha256 = "sha256-tGEoiN+soP3S7ctNqNjChlqGtW8qMGD3ynX/5rIENfA=";
   };
 
   propagatedBuildInputs = [ fixedDbusNext ];
