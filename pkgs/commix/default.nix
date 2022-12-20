@@ -5,13 +5,13 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "commix";
-  version = "3.5";
+  version = "3.6";
 
   src = fetchFromGitHub {
     owner = "commixproject";
     repo = "commix";
     rev = "v${version}";
-    sha256 = "sha256-3UCHTgIW7ArXQD0Kj5XwE1I5VszsueXDJ68QWdQrAho=";
+    sha256 = "sha256-QdhJp7oUqOY8Z36haIrHgP4hVGaFXlOxNVg1ams7uhg=";
   };
 
   propagatedBuildInputs = with python3Packages; [ tornado python-daemon ];
