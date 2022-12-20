@@ -8,19 +8,14 @@
 }:
 python3Packages.buildPythonPackage rec {
   pname = "pyzo";
-  version = "4.12.3";
+  version = "4.12.4";
 
   src = fetchFromGitHub {
     owner = "pyzo";
     repo = "pyzo";
     rev = "v${version}";
-    sha256 = "sha256-wr7r70b+eHnjAzwGJDXdU1dumA8s9X61UD+5Jcp92Ww=";
+    sha256 = "sha256-1lRSz5pVCgCJ2UtU1kPA/cS3KX0pL2yKEZ/YAxeNGIM=";
   };
-
-  patches = [ (fetchpatch {
-    url = "https://github.com/pyzo/pyzo/pull/819/commits/75e81f350b8df3ce3f9de190060a00b045c9b7f0.patch";
-    sha256 = "sha256-+cwSLtr48wxs+TiHyvYNrcvOQkmOXhM0Hz3yeOaa794=";
-  }) ];
 
   nativeBuildInputs = [ util-linux ];
 
