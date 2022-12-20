@@ -10,11 +10,11 @@
 
 buildPythonPackage rec {
   pname = "tabula-py";
-  version = "2.5.1";
+  version = "2.6.0";
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "sha256-1tw/bh1CDfmNKVLpBwnG//ZesoQY56F9fl30t92G0Zc=";
+    sha256 = "sha256-sQuD0V5yCfz2XGTe4GS9stULBqfk4o/Jl0uSye8Uxcw=";
   };
   
   propagatedBuildInputs = [
