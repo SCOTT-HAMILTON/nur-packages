@@ -8,13 +8,13 @@
 
 stdenv.mkDerivation rec {
   pname = "pdf-text-extraction";
-  version = "unstable";
+  version = "2022-12-11";
 
   src = fetchFromGitHub {
     owner = "galkahana";
     repo = "pdf-text-extraction";
-    rev = "f6b78cffeab0529a5b0c9b517be589a88e14e651";
-    sha256 = "03091abh8irass08233j2ybgv5rcq5rj2smzs5pp4ql3fbkd3i5w";
+    rev = "46758f25065606c93637ac330a3830a8090d9eb6";
+    sha256 = "sha256-aTbTeH77CUPFvS7gtfU4jHEvx7AKqpL8p878ET37kOI=";
   };
 
   nativeBuildInputs = [ cmake pkg-config ];
