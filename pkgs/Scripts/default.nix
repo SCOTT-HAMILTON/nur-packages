@@ -52,6 +52,8 @@ stdenv.mkDerivation rec {
   ];
 
   postPatch = ''
+    substituteInPlace scripts/autotype.sh \
+      --replace wmctrl ${wmctrl}/bin/wmctrl
     substituteInPlace scripts/scripts.desktop \
       --replace @Scripts@ $out \
       --replace "Exec=surf" "Exec=${surf}/bin/surf"
