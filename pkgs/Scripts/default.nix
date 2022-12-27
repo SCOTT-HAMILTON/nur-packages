@@ -11,6 +11,9 @@
 ## Open documentation deps
 , eom, surf, zathura, coreutils, findutils, gawk
 
+## Autotype
+, wmctrl
+
 ## Sync databases deps
 , sync-database, parallel-ssh, merge-keepass
 }:
@@ -25,8 +28,8 @@ stdenv.mkDerivation rec {
     (fetchFromGitHub {
       owner = "SCOTT-HAMILTON";
       repo = "Scripts";
-      rev = "c32e16e5df1f23f9765cd9a516a5a1f835d9387c";
-      sha256 = "1qc95hkn7rli09g0icnv9j7f1rpcwi1j8pb0w5sx2bx79yvshp76";
+      rev = "334ba0752f18ea5ff40b746aa5a19691e13f7831";
+      sha256 = "sha256-D5Rh/hX0smj0fkE7EKtjgoR4tD5qDat3LyWB0goi8Wc=";
       name = "scripts";
     })
     (fetchFromGitHub {
@@ -43,6 +46,7 @@ stdenv.mkDerivation rec {
   propagatedBuildInputs = [
     python38
     coreutils findutils gawk eom surf zathura 
+    wmctrl
     sync-database merge-keepass parallel-ssh
     perlEnv
   ];
@@ -68,6 +72,7 @@ stdenv.mkDerivation rec {
 
     # Install Open Documentation script
     install -Dm 555 lsp.sh $out/bin/lsp
+    install -Dm 555 scripts/autotype.sh $out/bin/autotype
     install -Dm 555 scripts/open-documentation.py $out/bin/open-documentation.py
     install -Dm 555 pdf-inverter/invert.perl $out/bin/pdf-invert.pl
     install -Dm 555 scripts/scripts.desktop $out/share/applications/scripts.desktop
