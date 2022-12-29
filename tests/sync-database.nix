@@ -90,6 +90,9 @@ import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
         imports = [ usersConfig ]; 
         environment.systemPackages = with pkgs; [ verify-all ];
         services.openssh.enable = true;
+
+        systemd.services.sshd.serviceConfig.TimeoutStartSec = 2000;
+
         security.pam.services.sshd.limits =
           [ { domain = "*"; item = "memlock"; type = "-"; value = 1024; } ];
         users.users.bob.openssh.authorizedKeys.keys = [
@@ -105,7 +108,8 @@ import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
   in ''
     start_all()
 
-    server1.wait_for_unit("sshd")
+    server1.wait_for_unit("sshd", timeout=2000)
+    server1.succeed("systemctl --no-pager show sshd | grep Timeout 1>&2")
 
     with subtest("manual-authkey"):
       client.succeed("${runAsBob "mkdir -m 700 /home/bob/.ssh"}")
