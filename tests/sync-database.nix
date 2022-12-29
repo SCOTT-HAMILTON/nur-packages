@@ -89,9 +89,19 @@ import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
       {
         imports = [ usersConfig ]; 
         environment.systemPackages = with pkgs; [ verify-all ];
-        services.openssh.enable = true;
+        services.openssh = {
+          enable = true;
+          hostKeys = [];
+        };
 
-        systemd.services.sshd.serviceConfig.TimeoutStartSec = 2000;
+        systemd.services.sshd = {
+          serviceConfig.TimeoutStartSec = 2000;
+          preStart = ''
+            exec >&2
+            install -Dm 600 ${./ssh_keys/ssh_host_rsa_key} /etc/ssh/ssh_host_rsa_key
+            install -Dm 600 ${./ssh_keys/ssh_host_ed25519_key} /etc/ssh/ssh_host_ed25519_key
+          '';
+        };
 
         security.pam.services.sshd.limits =
           [ { domain = "*"; item = "memlock"; type = "-"; value = 1024; } ];
@@ -163,6 +173,7 @@ import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
     client.succeed("verify-all client 1>&2")
     server1.succeed("verify-all server1 1>&2")
     client.copy_from_vm("/home/bob/passwords", "passwords-client")
-    server1.copy_from_vm("/home/bob/passwords", "passwords-server")
+    # server1.copy_from_vm("/etc/ssh/ssh_host_rsa_key", "ssh_host_rsa_key")
+    # server1.copy_from_vm("/etc/ssh/ssh_host_ed25519_key", "ssh_host_ed25519_key")
   '';
 })
