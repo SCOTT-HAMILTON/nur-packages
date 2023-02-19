@@ -16,7 +16,7 @@ python3Packages.buildPythonPackage rec {
     sha256 = "sha256-vGQsg15tKE1OHtIywuluX0rpx4s3UhwfmacbCdK79JE=";
   };
 
-  nativeBuildInputs = [ xvfb-run ];
+  nativeBuildInputs = [ xvfb-run python3Packages.pytest scrot ];
   propagatedBuildInputs = with python3Packages; [
     pillow
   ];
