@@ -15,6 +15,7 @@ python3Packages.buildPythonPackage rec {
     sha256 = "0hwzdgq7mrldr1y40fpfyvka9m6a8g6xhiv0di106lq06l4zcrch";
   };
 
+  nativeBuildInputs = with python3Packages; [ pytest ];
   propagatedBuildInputs = with python3Packages; [ pykeepass click ];
   checkInputs = with python3Packages; [ pytest ];
 
