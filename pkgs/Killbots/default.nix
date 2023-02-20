@@ -10,14 +10,14 @@
 
 mkDerivation rec {
   pname = "Killbots";
-  version = "22.12.0";
+  version = "22.12.2";
 
   src = fetchFromGitLab {
     domain = "invent.kde.org";
     owner = "games";
     repo = "killbots";
     rev = "v${version}";
-    sha256 = "sha256-0a9/WaRNVkuCuXU9A/y9fG1G4qpo3helT9PfPDZznMM=";
+    sha256 = "sha256-MCldClqzxMqwHi7IJeG4waiA6CyApcFoL73eVcsa5tA=";
   };
 
   nativeBuildInputs = [ extra-cmake-modules cmake  ];
