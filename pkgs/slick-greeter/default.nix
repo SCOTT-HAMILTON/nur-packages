@@ -7,6 +7,7 @@
 , gtk3
 , intltool
 , libcanberra-gtk3
+, xapps
 , lightdm
 , linkFarm
 , pkg-config
@@ -20,13 +21,13 @@ in
 stdenv.mkDerivation rec {
 
   pname = "slick-greeter";
-  version = "master.mint20";
+  version = "master.mint21";
 
   src = fetchFromGitHub {
     owner = "linuxmint";
     repo = "slick-greeter";
     rev = version;
-    sha256 = "128rdnvqwhivxpkc28zjs66hrrj17zlmxb32ni6qqandv89w3dj9";
+    sha256 = "sha256-GCBIbGIn3x2Oj7eecgwTq99g1cOyJc3FKhIOaVMgPyE=";
   };
 
   patches = [ ./install-to-sbin-and-to-bin.patch ];
@@ -44,6 +45,7 @@ stdenv.mkDerivation rec {
     gtk3
     (lib.getDev lightdm)
     libcanberra-gtk3
+    xapps
   ];
 
   propagatedBuildInputs = [
