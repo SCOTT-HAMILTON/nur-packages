@@ -10,13 +10,13 @@
 
 stdenv.mkDerivation rec {
   pname = "scim";
-  version = "0.8.2";
+  version = "0.8.3";
 
   src = fetchFromGitHub {
     owner = "andmarti1424";
     repo = "sc-im";
     rev = "v${version}";
-    sha256 = "sha256-H+GQUpouiXc/w6GWdkSVvTXZ/Dtb7sUmBLGcpxG3Mts=";
+    sha256 = "sha256-QlnxMe0WsRX9J2xzpf2Udcf9+N3MvQWqmYl2YKsGpYM=";
   };
 
   sourceRoot = "source/src";
