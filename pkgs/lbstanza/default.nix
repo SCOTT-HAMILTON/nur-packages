@@ -7,13 +7,13 @@
 
 stdenv.mkDerivation rec {
   pname = "lbstanza";
-  version = "2022-10-31";
+  version = "2023-01-28";
 
   src = fetchFromGitHub {
     owner = "StanzaOrg";
     repo = "lbstanza";
-    rev = "6d7b418c140bb041b1f65d8a4186d20bcf9bf98d";
-    sha256 = "sha256-87O+v2eiKtIu5lB47dz22iFef1grM7gyBNTkAUkAndE=";
+    rev = "cea8b5bbf4bd33b43a54e897d56e6c2f28cc68aa";
+    sha256 = "sha256-NmJBAvRWAXdu4Ax2QfPG3W4MbplHOmr6klir0Dz7EJ8=";
   };
 
   postPatch = ''

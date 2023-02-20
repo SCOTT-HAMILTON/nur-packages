@@ -7,11 +7,11 @@
 
 stdenv.mkDerivation rec {
   pname = "lbstanza-bin";
-  version = "0.17.34";
+  version = "0.17.55";
 
   src = fetchzip {
     url = "http://lbstanza.org/resources/stanza/lstanza_${lib.replaceStrings ["."] ["_"] version}.zip";
-    sha256 = "sha256-LRm0peh+XSjPh4zWSBDm/nM5wJfIWhkrMaX/EYJkPdU=";
+    sha256 = "sha256-WbLXkHMTP0zvtNtExdlclj6dnr8pkwCSaqiASllj7dg=";
     stripRoot = false;
   };
 
