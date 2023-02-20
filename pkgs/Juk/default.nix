@@ -11,14 +11,14 @@
 
 mkDerivation rec {
   pname = "juk";
-  version = "22.12.0";
+  version = "22.12.2";
 
   src = fetchFromGitLab {
     domain = "invent.kde.org";
     owner = "multimedia";
     repo = "juk";
     rev = "v${version}";
-    sha256 = "sha256-J1b+pbIrY7aZoAPeArHAuo57IGHOm/3ASzPP78XbaI8=";
+    sha256 = "sha256-Jj5SflHOtDRCZlwX4uo6mLyhvI1/Bp9o8Rfhaq7eOGY=";
   };
 
   nativeBuildInputs = [ extra-cmake-modules cmake  ];
