@@ -9,13 +9,13 @@
 }:
 mkDerivation rec {
   pname = "qcoro";
-  version = "0.7.0";
+  version = "0.8.0";
 
   src = fetchFromGitHub {
     owner = "danvratil";
     repo = "qcoro";
     rev = "v${version}";
-    sha256 = "sha256-cHd2CwzP4oD/gy9qsDWIMgvlfBQq1p9C4G7JNAs4XW4=";
+    sha256 = "sha256-PDYPwZUhejP8CK4Vrk37zc/5t5TGBLHZZyiykBH/cBA=";
   };
 
   nativeBuildInputs = [ cmake qtbase pkg-config ];
