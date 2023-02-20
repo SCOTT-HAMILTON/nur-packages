@@ -18,13 +18,13 @@
 
 mkDerivation rec {
   pname = "keysmith";
-  version = "22.11";
+  version = "23.01.0";
 
   src = fetchFromGitHub {
     owner = "KDE";
     repo = "keysmith";
     rev = "v${version}";
-    sha256 = "sha256-bIPOC/pOWdOgNN2JOitGItxUHjbi9+lHZ+6RSOKMDrs=";
+    sha256 = "sha256-yVb2XLI9jJwQgAHPMVFlZzpJeCdxmYv4X9Tmjrqh1UE=";
   };
 
   nativeBuildInputs = [ cmake extra-cmake-modules makeWrapper ];
