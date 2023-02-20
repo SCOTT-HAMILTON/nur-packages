@@ -8,13 +8,13 @@
 }:
 python3Packages.buildPythonPackage rec {
   pname = "pyzo";
-  version = "4.12.4";
+  version = "4.12.7";
 
   src = fetchFromGitHub {
     owner = "pyzo";
     repo = "pyzo";
     rev = "v${version}";
-    sha256 = "sha256-1lRSz5pVCgCJ2UtU1kPA/cS3KX0pL2yKEZ/YAxeNGIM=";
+    sha256 = "sha256-Ma7p7xLdjAzOWNILJDj6DJy/Tskry8qM9fG78QAViZU=";
   };
 
   nativeBuildInputs = [ util-linux ];
