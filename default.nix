@@ -242,6 +242,7 @@ pkgs.lib.traceValFn (x:
   };
   xmltoman = pkgs.callPackage ./pkgs/xmltoman { };
   yaml2probatree = pkgs.callPackage ./pkgs/Yaml2ProbaTree { };
+  youtube-dl = pkgs.callPackage ./pkgs/youtube-dl { };
 } // 
 # Override derivations (patches),
 # I put them here so that they get evaluated
