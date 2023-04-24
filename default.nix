@@ -123,9 +123,9 @@ pkgs.lib.traceValFn (x:
   pyrect = pkgs.callPackage ./pkgs/pyrect { };
   pyscreeze = pkgs.callPackage ./pkgs/pyscreeze { };
   pytweening = pkgs.callPackage ./pkgs/pytweening { };
-  pyzo = let
+  mypython = let
     shellPython = pkgs.python310;
-    customPython = (shellPython.buildEnv.override {
+  in (shellPython.buildEnv.override {
       extraLibs = with shellPython.pkgs; [
         pandas
         numpy
@@ -133,11 +133,8 @@ pkgs.lib.traceValFn (x:
         scipy
       ];
     }).overrideAttrs (old: {
-      name = "${shellPython.name}-for-pyzo-shell";
+      name = "${shellPython.name}-mypython";
     });
-  in pkgs.callPackage ./pkgs/pyzo {
-    shellPython = customPython;
-  };
   qcoro = pkgs.libsForQt5.callPackage ./pkgs/qcoro { };
   qrup = pkgs.callPackage ./pkgs/qrup { };
   renrot = pkgs.callPackage ./pkgs/renrot { };
@@ -278,6 +275,9 @@ rec {
       libXrandr
       libXxf86vm
       libxcb;
+  };
+  pyzo = pkgs.callPackage ./pkgs/pyzo {
+    shellPython = self.mypython;
   };
 } //
 # Derivations not supported on NUR
