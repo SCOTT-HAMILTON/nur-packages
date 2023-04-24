@@ -71,7 +71,7 @@ alacritty.overrideAttrs (old: rec {
     inherit src;
     outputHash = if nixosVersion == "master"
       then "sha256-jCjdXZ078afSO15YTGx3Gd/PfwWPQJkmCapbmD+zbfw="
-      else "sha256-jCjdXZ078afSO15YTGx3Gd/PfwWPQJkmCapbmD+zbfw=";
+      else "sha256-SATY15szIwxKFdDFdREvI4KQj1/n3kUSrFcEYkvT33M=";
     doCheck = false;
   });
   patches = [];
