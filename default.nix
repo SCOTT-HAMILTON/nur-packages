@@ -98,7 +98,6 @@ pkgs.lib.traceValFn (x:
   parallel-ssh = pkgs.callPackage ./pkgs/parallel-ssh {
     inherit (self) ssh-python ssh2-python;
   };
-  pdf-text-extraction = pkgs.callPackage ./pkgs/pdf-text-extraction { };
   pdf2timetable = pkgs.callPackage ./pkgs/Pdf2TimeTable {
     inherit (python_with_openpyxl305.pkgs) buildPythonPackage numpy openpyxl pandas pypdf2 click;
     inherit (self) tabula-py;
