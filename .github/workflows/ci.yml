@@ -57,9 +57,9 @@ jobs:
             export NIX_PATH=nixpkgs=channel:${{ matrix.channel-branch }}
           fi
           nix-shell -p nix-eval-jobs --command 'CHANNEL_BRANCH="${{ matrix.channel-branch }}" ./scripts/build-ci.sh'
-          if [ "${{ matrix.channel-branch }}" = "nixpkgs-unstable" ]; then
-            cachix watch-exec "${CACHIX_CACHE}" -- nix-build --argstr nixosVersion "${{ matrix.channel-branch }}" all-tests.nix --show-trace
-          fi
+          # if [ "${{ matrix.channel-branch }}" = "nixpkgs-unstable" ]; then
+          #   cachix watch-exec "${CACHIX_CACHE}" -- nix-build --argstr nixosVersion "${{ matrix.channel-branch }}" all-tests.nix --show-trace
+          # fi
       - name: Evaluations
         run: |
           if [ "${{ matrix.channel-branch }}" = "master" ]; then

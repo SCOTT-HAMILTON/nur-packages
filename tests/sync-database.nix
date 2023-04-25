@@ -49,7 +49,6 @@ let
   '';
 in
 import "${nixpkgs}/nixos/tests/make-test-python.nix" ({ pkgs, ...}: {
-  meta.broken = true;
   name = "sync-database";
   nodes = let
     usersConfig = { ... }: {
