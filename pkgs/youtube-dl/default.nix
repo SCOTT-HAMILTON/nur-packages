@@ -6,13 +6,13 @@
 }:
 python3Packages.buildPythonPackage rec {
   pname = "youtube-dl";
-  version = "2023-03-09";
+  version = "2023-04-21";
 
   src = fetchFromGitHub {
     owner = "ytdl-org";
     repo = "youtube-dl";
-    rev = "8c86fd33dca48ebb505ed04150d9e35993b9fe7e";
-    sha256 = "sha256-x8wEWH06vm1db5I8ovkcJPa3OVRssLcq1+p/k9eZzlw=";
+    rev = "211cbfd5d46025a8e4d8f9f3d424aaada4698974";
+    sha256 = "sha256-ktH1tzS9MZpo9uT9JdJs5gqNMHR7z5p0xRG9PkXr6ao=";
   };
 
   doCheck = false;
