@@ -17,7 +17,7 @@ python3Packages.buildPythonPackage rec {
     owner = "ParallelSSH";
     repo = "ssh-python";
     rev = version;
-    sha256 = "sha256-53o7Wx1kVIL4W8bG2r0I0GhCpHrQwrvyzQWyum4Tp6k=";
+    sha256 = "sha256-R24U42xS8eYs+DAftRGVccWzALrHj4fGtUys9nSrJu4=";
     leaveDotGit = true;
     deepClone = true;
   };
