@@ -3,7 +3,7 @@
 , fetchFromGitHub
 , perl
 
-, python38
+, python3
 
 ## lsp
 , lesspass-cli
@@ -15,7 +15,7 @@
 , wmctrl
 
 ## Sync databases deps
-, sync-database, parallel-ssh, merge-keepass
+, merge-keepass
 }:
 let
   perlEnv = perl.withPackages(pp: with pp; [ PDFAPI2 ]);
@@ -44,10 +44,10 @@ stdenv.mkDerivation rec {
   sourceRoot = ".";
 
   propagatedBuildInputs = [
-    python38
+    python3
     coreutils findutils gawk eom surf zathura 
     wmctrl
-    sync-database merge-keepass parallel-ssh
+     merge-keepass
     perlEnv
   ];
 
@@ -84,7 +84,7 @@ stdenv.mkDerivation rec {
     install -Dm 644 scripts/icons/app-icon.svgz $out/share/icons/hicolor/scalable/apps/scripts.svgz
 
     # Install Synchronize Databases script
-    ln -s ${sync-database}/bin/sync_database $out/bin/sync_database
+    #ln -s {sync-database}/bin/sync_database $out/bin/sync_database
   '';
 
   meta = with lib; {

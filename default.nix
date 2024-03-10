@@ -55,6 +55,9 @@ pkgs.lib.traceValFn (x:
   cargo-sort-ck = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/cargo-sort-ck {
     inherit buildRustPackage;
   };
+  chunkdrive = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/chunkdrive {
+    inherit buildRustPackage;
+  };
   cdc-cognitoform-result-generator = pkgs.callPackage ./pkgs/CdC-cognitoform-result-generator { };
   # chart-cli = pkgs.haskellPackages.callPackage ./pkgs/chart-cli { };
   commix = pkgs.callPackage ./pkgs/commix { };
@@ -95,13 +98,15 @@ pkgs.lib.traceValFn (x:
   MyVimConfig = pkgs.callPackage ./pkgs/MyVimConfig { };
   nix-bisect = pkgs.callPackage ./pkgs/nix-bisect { };
   numworks-udev-rules = pkgs.callPackage ./pkgs/numworks-udev-rules { };
+  phidget-udev-rules = pkgs.callPackage ./pkgs/phidget-udev-rules { };
   parallel-ssh = pkgs.callPackage ./pkgs/parallel-ssh {
-    inherit (self) ssh-python ssh2-python;
+    inherit (self)ssh2-python;
   };
   pdf2timetable = pkgs.callPackage ./pkgs/Pdf2TimeTable {
     inherit (python_with_openpyxl305.pkgs) buildPythonPackage numpy openpyxl pandas pypdf2 click;
     inherit (self) tabula-py;
   };
+  phidget22 = pkgs.callPackage ./pkgs/phidget22 { };
   pronotebot = pkgs.callPackage ./pkgs/PronoteBot {
     inherit (self) pyautogui;
   };
@@ -122,6 +127,10 @@ pkgs.lib.traceValFn (x:
   pyrect = pkgs.callPackage ./pkgs/pyrect { };
   pyscreeze = pkgs.callPackage ./pkgs/pyscreeze { };
   pytweening = pkgs.callPackage ./pkgs/pytweening { };
+  pymecavideo = pkgs.callPackage ./pkgs/pymecavideo {
+    inherit (pkgs.qt6) qttools wrapQtAppsHook;
+    inherit (pkgs.libsForQt5) qtbase;
+  };
   mypython = let
     shellPython = pkgs.python310;
   in (shellPython.buildEnv.override {
@@ -164,9 +173,10 @@ pkgs.lib.traceValFn (x:
   };
   # qradiopredict = pkgs.libsForQt5.callPackage ./pkgs/qradiopredict { };
   scim = with pkgs; callPackage ./pkgs/scim { };
+  libphidget = with pkgs; callPackage ./pkgs/libphidget { };
   scripts = with pkgs; callPackage ./pkgs/Scripts {
     eom = mate.eom;
-    inherit (self) sync-database parallel-ssh merge-keepass;
+    inherit (self) merge-keepass;
   };
   slick-greeter = with pkgs; pkgs.callPackage ./pkgs/slick-greeter {
     inherit (gnome3) gnome-common slick-greeter;

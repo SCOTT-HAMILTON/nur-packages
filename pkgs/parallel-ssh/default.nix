@@ -1,6 +1,5 @@
 { lib
 , python3Packages
-, ssh-python
 , ssh2-python
 , libssh2
 }:
@@ -17,7 +16,6 @@ python3Packages.buildPythonPackage rec {
   propagatedBuildInputs = with python3Packages; [
     gevent
     paramiko
-    ssh-python
     ssh2-python
     libssh2
   ];

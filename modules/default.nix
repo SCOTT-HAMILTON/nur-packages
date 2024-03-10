@@ -5,6 +5,7 @@ rec {
     inherit (selfnur) day-night-plasma-wallpapers;
   };
   numworks = ./numworks.nix;
+  phidget = ./phidget.nix;
   slick-greeter = ./slick-greeter.nix;
   autognirehtet = import ./autognirehtet.nix {
     inherit (selfnur) autognirehtet;
