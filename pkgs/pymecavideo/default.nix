@@ -6,6 +6,7 @@
 , wrapQtAppsHook
 , qtbase
 , opencv2
+, makeDesktopItem
 }:
 
 python3Packages.buildPythonApplication rec {
@@ -21,12 +22,21 @@ python3Packages.buildPythonApplication rec {
 
   nativeBuildInputs = [ inkscape qttools wrapQtAppsHook python3Packages.pyqt6 ];
 
-  patches = [ /tmp/tmp.diff ];
+  patches = [ ./setup-fix.patch ];
 
   preBuild = ''
     cd src
     make LRELEASE="lrelease" RCC="${qtbase.dev}/bin/rcc"
     cd ..
+  '';
+
+  postInstall = ''
+    install -Dm644 "${desktopItem}/share/applications/"* \
+      -t $out/share/applications/
+    install -Dm 644 data/icones/pymecavideo-16.png $out/share/icons/hicolor/16x16/apps/pymecavideo.png
+    install -Dm 644 data/icones/pymecavideo-32.png $out/share/icons/hicolor/32x32/apps/pymecavideo.png
+    install -Dm 644 data/icones/pymecavideo-48.png $out/share/icons/hicolor/48x48/apps/pymecavideo.png
+    install -Dm 644 data/icones/pymecavideo.svg $out/share/icons/hicolor/scalable/apps/pymecavideo.svg
   '';
 
   propagatedBuildInputs = with python3Packages; [
@@ -36,6 +46,17 @@ python3Packages.buildPythonApplication rec {
     opencv4
     pyqtgraph
   ];
+
+  desktopItem = makeDesktopItem {
+    name = "PyMecaVideo";
+    desktopName = "PyMecaVideo";
+    type = "Application";
+    exec = "pymecavideo";
+    terminal = false;
+    icon = "pymecavideo";
+    comment = "Interactive tool to track moving points in video framesets";
+    categories = [ "GNOME" "Application" "Video" "Education" "Science" ];
+  };
 
   doCheck = false;
 
