@@ -67,6 +67,9 @@ pkgs.lib.traceValFn (x:
     FakeMicWavPlayer = self.fake-mic-wav-player;
   };
   day-night-plasma-wallpapers = pkgs.callPackage ./pkgs/day-night-plasma-wallpapers { };
+  decisive-vim = with pkgs.vimUtils; pkgs.callPackage ./pkgs/decisive {
+    inherit buildVimPlugin;
+  };
   fake-mic-wav-player = pkgs.libsForQt5.callPackage ./pkgs/FakeMicWavPlayer {
     inherit (self) libfake argparse;
   };
@@ -80,7 +83,7 @@ pkgs.lib.traceValFn (x:
   killbots = kdeApplications.callPackage ./pkgs/Killbots { };
   kirigami-gallery = pkgs.libsForQt5.callPackage ./pkgs/KirigamiGallery { };
   kotlin-vim = with pkgs.vimUtils; pkgs.callPackage ./pkgs/kotlin-vim {
-    inherit buildVimPluginFrom2Nix;
+    inherit buildVimPlugin;
   };
   lbstanza = pkgs.callPackage ./pkgs/lbstanza {
     inherit (self) lbstanza-bin;
@@ -204,33 +207,33 @@ pkgs.lib.traceValFn (x:
     inherit qmake qtbase qttools qtquickcontrols2;
   };
   vim-async = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-async {
-    inherit buildVimPluginFrom2Nix;
+    inherit buildVimPlugin;
   };
   vim-asyncomplete = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-asyncomplete {
-    inherit buildVimPluginFrom2Nix;
+    inherit buildVimPlugin;
   };
   vim-asyncomplete-lsp = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-asyncomplete-lsp {
-    inherit buildVimPluginFrom2Nix;
+    inherit buildVimPlugin;
   };
   vim-lsp = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-lsp {
     inherit (self) vim-async;
-    inherit buildVimPluginFrom2Nix;
+    inherit buildVimPlugin;
   };
   vim-lsp-settings = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-lsp-settings {
     inherit (self) vim-async vim-lsp vim-asyncomplete vim-asyncomplete-lsp;
-    inherit buildVimPluginFrom2Nix;
+    inherit buildVimPlugin;
   };
   vim-myftplugins = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-myftplugins {
-    inherit buildVimPluginFrom2Nix;
+    inherit buildVimPlugin;
   };
   vim-stanza = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-stanza {
-    inherit buildVimPluginFrom2Nix;
+    inherit buildVimPlugin;
   };
   vim-super-retab = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-super-retab {
-    inherit buildVimPluginFrom2Nix;
+    inherit buildVimPlugin;
   };
   vim-vala = with pkgs.vimUtils; pkgs.callPackage ./pkgs/vim-vala {
-    inherit buildVimPluginFrom2Nix;
+    inherit buildVimPlugin;
   };
   voacap = pkgs.callPackage ./pkgs/voacap { };
   wavetrace = with pkgs; python3Packages.callPackage ./pkgs/Wavetrace {
@@ -267,6 +270,7 @@ rec {
       stdenvNoCC
       fetchFromGitHub
       alacritty
+      nix-gitignore
       writeScriptBin
       nixosVersion
       expat

@@ -30,6 +30,11 @@ python3Packages.buildPythonApplication rec {
     cd ..
   '';
 
+  postPatch = ''
+    substituteInPlace src/version.py \
+      --replace "~" "_"
+  '';
+
   postInstall = ''
     install -Dm644 "${desktopItem}/share/applications/"* \
       -t $out/share/applications/

@@ -47,7 +47,8 @@ rec {
           vim-myftplugins
           vim-stanza
           vim-super-retab
-          vim-vala;
+          vim-vala
+          decisive-vim;
     };
     redshift-auto = ./redshift-auto.nix;
     sync-database = ./sync-database.nix;

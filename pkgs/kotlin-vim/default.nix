@@ -1,9 +1,9 @@
 { lib
-, buildVimPluginFrom2Nix
+, buildVimPlugin
 , fetchFromGitHub
 }:
 
-buildVimPluginFrom2Nix {
+buildVimPlugin {
   pname = "kotlin-vim";
   version = "2022-12-30";
 

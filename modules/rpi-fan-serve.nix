@@ -63,7 +63,7 @@ with lib; {
       config =
         { config, pkgs, ... }:
         {
-          system.stateVersion = "23.11";
+          system.stateVersion = "24.05";
           services.journald.extraConfig = ''
             SystemMaxUse=20M
           '';

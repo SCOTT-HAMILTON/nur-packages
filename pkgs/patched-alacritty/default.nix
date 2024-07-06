@@ -4,6 +4,7 @@
 , alacritty
 , writeScriptBin
 , nixosVersion
+, nix-gitignore
 , expat
 , fontconfig
 , freetype
@@ -43,11 +44,12 @@ let
 in
 alacritty.overrideAttrs (old: rec {
   pname = "${old.pname}-patched";
+  # src = nix-gitignore.gitignoreSource [ ] ~/GIT/alacritty;
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "alacritty";
-    rev = "cc5b2c0d861eb7a860d6ba3b1b5130ab1411463d";
-    sha256 = "0pm3m20hck4zdvaadms8kr3fcnrwnsq06i9x21lw8zq55yic1vq5";
+    rev = "c138011150c2457b08ef9e7ccf87d6aa27f5d645";
+    sha256 = "sha256-DZu1YBcXEd0uQ3woZGx6IC/bqu1RWhf1OFXEXhmKfjs=";
   };
   postPatch = ''
     sed -Ei 's|^Exec=alacritty|Exec=${tabbed-alacritty}/bin/tabbed-alacritty|g' "extra/linux/Alacritty.desktop"
@@ -70,8 +72,8 @@ alacritty.overrideAttrs (old: rec {
   cargoDeps = old.cargoDeps.overrideAttrs (lib.const {
     inherit src;
     outputHash = if nixosVersion == "master"
-      then "sha256-dd8TE/b3u+Ox7tNGHCtybp2Rh6fXs+7dteYcPgKBhnw="
-      else "sha256-dd8TE/b3u+Ox7tNGHCtybp2Rh6fXs+7dteYcPgKBhnw=";
+      then "sha256-P4ZQSXNqREZhllAtalzxTrJRC6R06UHEQwsmi2ugH/s="
+      else "sha256-P4ZQSXNqREZhllAtalzxTrJRC6R06UHEQwsmi2ugH/s=";
     doCheck = false;
   });
   patches = [];

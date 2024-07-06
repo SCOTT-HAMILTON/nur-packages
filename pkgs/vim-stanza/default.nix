@@ -1,10 +1,10 @@
 { lib
-, buildVimPluginFrom2Nix
+, buildVimPlugin
 , fetchFromGitHub
 , coreutils
 }:
 
-buildVimPluginFrom2Nix {
+buildVimPlugin {
 
   pname = "stanza";
   version = "2019-08-09";

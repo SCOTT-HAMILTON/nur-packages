@@ -16,7 +16,7 @@ python3Packages.buildPythonPackage rec {
   };
 
   nativeBuildInputs = with python3Packages; [ pytest ];
-  propagatedBuildInputs = with python3Packages; [ pykeepass click ];
+  propagatedBuildInputs = with python3Packages; [ pykeepass click dateutils ];
   checkInputs = with python3Packages; [ pytest ];
 
   checkPhase = ''

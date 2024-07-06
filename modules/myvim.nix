@@ -6,11 +6,14 @@
 , vim-stanza
 , vim-super-retab
 , vim-vala
+, decisive-vim
 }:
 { config, lib, pkgs, options, ... }:
 with lib;
 let
   cfg = config.programs.myvim;
+  nixpkgs-unstable = import <nixpkgs-unstable> {};
+  neovim-0_10 = nixpkgs-unstable.neovim-unwrapped;
 in 
 {
   options.programs.myvim = {
@@ -39,6 +42,16 @@ in
 
       programs.neovim = {
         enable = true;
+        package = neovim-0_10;
+        extraLuaConfig = ''
+          vim.keymap.set('n', '<leader>cca', ":lua require('decisive').align_csv({})<cr>", {desc="align CSV", silent=true})
+          vim.keymap.set('n', '<leader>ccA', ":lua require('decisive').align_csv_clear({})<cr>", {desc="align CSV clear", silent=true})
+          vim.keymap.set('n', '[c', ":lua require('decisive').align_csv_prev_col()<cr>", {desc="align CSV prev col", silent=true})
+          vim.keymap.set('n', ']c', ":lua require('decisive').align_csv_next_col()<cr>", {desc="align CSV next col", silent=true})
+
+          -- setup text objects (optional)
+          require('decisive').setup{}
+        '';
         extraConfig = let
           coc-config = ''
             " TextEdit might fail if hidden is not set.
@@ -242,6 +255,7 @@ in
           pkgs.vimPlugins.neovim-fuzzy
           pkgs.vimPlugins.polyglot
           vim-myftplugins
+          decisive-vim
         ];
         viAlias = true;
       } // (lib.optionalAttrs cfg.enableNvimCoc {
@@ -258,8 +272,9 @@ in
                 rootPatterns = [ "Cargo.toml" ];
               };
               nix = {
-                command = "rnix-lsp";
+                command = "nil";
                 filetypes = [ "nix" ];
+                rootPatterns = [ "flake.nix" ];
               };
             };
           };
@@ -268,7 +283,7 @@ in
       home.packages = with pkgs; lib.optionals (cfg.enableNvimCoc) [
         nodejs
         rust-analyzer
-        rnix-lsp
+        nil
       ];
     }
     )

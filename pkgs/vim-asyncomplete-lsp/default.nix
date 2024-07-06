@@ -1,10 +1,10 @@
 { lib
-, buildVimPluginFrom2Nix
+, buildVimPlugin
 , fetchFromGitHub
 , coreutils
 }:
 
-buildVimPluginFrom2Nix {
+buildVimPlugin {
   pname = "vim-asyncomplete-lsp";
   version = "2022-11-21";
 
