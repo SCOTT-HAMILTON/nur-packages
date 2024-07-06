@@ -44,6 +44,7 @@ in
         enable = true;
         package = neovim-0_10;
         extraLuaConfig = ''
+
           vim.keymap.set('n', '<leader>cca', ":lua require('decisive').align_csv({})<cr>", {desc="align CSV", silent=true})
           vim.keymap.set('n', '<leader>ccA', ":lua require('decisive').align_csv_clear({})<cr>", {desc="align CSV clear", silent=true})
           vim.keymap.set('n', '[c', ":lua require('decisive').align_csv_prev_col()<cr>", {desc="align CSV prev col", silent=true})
@@ -218,6 +219,7 @@ in
             nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
           '';
           default-config = ''
+            set number
             set laststatus=0
             let mapleader = ","
 
@@ -226,8 +228,8 @@ in
             ino fd <Esc>
             vno fd <Esc>
 
-            set clipboard=unnamed
-            colorscheme 256-jungle
+            set clipboard=unnamedplus
+            colorscheme BlackSea
 
             " Let's save undo info!
             if !isdirectory($HOME."/.vim")
