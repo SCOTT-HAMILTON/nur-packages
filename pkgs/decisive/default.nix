@@ -5,7 +5,7 @@
 }:
 
 buildVimPlugin {
-  pname = "decisive-bim";
+  pname = "decisive-vim";
   version = "2024-06-15";
 
   src = fetchFromGitHub {
