@@ -1,7 +1,6 @@
 { lib
 , mkDerivation
 , fetchFromGitHub
-, fetchpatch
 , cmake
 , pkg-config
 , extra-cmake-modules
@@ -15,7 +14,7 @@
 
 mkDerivation rec {
   pname = "Lokalize";
-  version = "23.04.0";
+  version = "24.05.2";
 
   src = fetchFromGitHub {
     owner = "KDE";
