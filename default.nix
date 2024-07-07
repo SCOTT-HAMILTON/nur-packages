@@ -34,10 +34,10 @@ let
     };
   };
   kdeApplications = pkgs.libsForQt5.kdeApplications;
-  drogonNixPkgs = import (fetchTarball {
-    url = "https://github.com/NixOS/NixPkgs/archive/cd0fa6156f486c583988d334202946ffa4b9ebe8.tar.gz";
-    sha256 = "003vg8gz99spbmdvff06y36icn4by2yv4kb3s1m73q5z73bb2dy7";
-  }) {};
+  # drogonNixPkgs = import (fetchTarball {
+  #   url = "https://github.com/NixOS/NixPkgs/archive/cd0fa6156f486c583988d334202946ffa4b9ebe8.tar.gz";
+  #   sha256 = "003vg8gz99spbmdvff06y36icn4by2yv4kb3s1m73q5z73bb2dy7";
+  # }) {};
 in
 pkgs.lib.traceValFn (x:
  "Nixpkgs version : ${pkgs.lib.version},
@@ -150,30 +150,32 @@ pkgs.lib.traceValFn (x:
   qrup = pkgs.callPackage ./pkgs/qrup { };
   renrot = pkgs.callPackage ./pkgs/renrot { };
   rpi-fan = pkgs.callPackage ./pkgs/rpi-fan { };
-  rpi-fan-serve = let
-    patchedDrogon = with drogonNixPkgs; drogon.overrideAttrs (old: {
-      patches = (old.patches or []) ++ [
-        (fetchpatch {
-          url = "https://github.com/drogonframework/drogon/pull/1094/commits/52c4dcc1bda865a924a112249fd845ac5ea9c9a7.patch";
-          sha256 = "09rbh31lwmkv8pjysvd11vz9qnrmga7iw9jn3f9i39q0y1yvrfw6";
-        })
-      ];
-    });
-    patchedMeson = with drogonNixPkgs; meson.overrideAttrs (old: rec {
-      pname = "patched-meson";
-      version = "0.58.1";
-      name = "${pname}-${version}";
-      src = python3Packages.fetchPypi {
-        inherit (old) pname;
-        inherit version;
-        sha256 = "0padn0ykwz8azqiwkhi8p97bl742y8lsjbv0wpqpkkrgcvda6i1i";
-      };
-    });
-  in drogonNixPkgs.libsForQt5.callPackage ./pkgs/rpi-fan-serve {
-    inherit (self) argparse;
-    drogon = patchedDrogon;
-    meson = patchedMeson;
-  };
+    # rpi-fan-serve = let
+    # patchedDrogon = pkgs.drogon;
+    # patchedDrogon = with drogonNixPkgs; drogon.overrideAttrs (old: {
+    #   patches = (old.patches or []) ++ [
+    #     (fetchpatch {
+    #       url = "https://github.com/drogonframework/drogon/pull/1094/commits/52c4dcc1bda865a924a112249fd845ac5ea9c9a7.patch";
+    #       sha256 = "09rbh31lwmkv8pjysvd11vz9qnrmga7iw9jn3f9i39q0y1yvrfw6";
+    #     })
+    #   ];
+    # });
+    # patchedMeson = pkgs.meson;
+    # patchedMeson = with pkgs; meson.overrideAttrs (old: rec {
+    #   pname = "patched-meson";
+    #   version = "0.58.1";
+    #   name = "${pname}-${version}";
+    #   src = python3Packages.fetchPypi {
+    #     inherit (old) pname;
+    #     inherit version;
+    #     sha256 = "0padn0ykwz8azqiwkhi8p97bl742y8lsjbv0wpqpkkrgcvda6i1i";
+    #   };
+    # });
+  # in pkgs.libsForQt5.callPackage ./pkgs/rpi-fan-serve {
+  #   inherit (self) argparse;
+  #   drogon = patchedDrogon;
+  #   meson = patchedMeson;
+  # };
   # qradiopredict = pkgs.libsForQt5.callPackage ./pkgs/qradiopredict { };
   scim = with pkgs; callPackage ./pkgs/scim { };
   libphidget = with pkgs; callPackage ./pkgs/libphidget { };
