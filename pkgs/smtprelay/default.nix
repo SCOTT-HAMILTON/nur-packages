@@ -1,21 +1,21 @@
 { lib
 , stdenv
 , fetchFromGitHub
-, buildGo118Module
+, buildGoModule
 }:
 
-buildGo118Module rec {
+buildGoModule rec {
   pname = "smtprelay";
-  version = "1.9.0";
+  version = "1.11.1";
 
   src = fetchFromGitHub {
     owner = "decke";
     repo = "smtprelay";
     rev = "v${version}";
-    sha256 = "sha256-wC1PatVDToNf1GqyATTxCZr9fCKqe/9PPAIw6JocL78=";
+    sha256 = "sha256-2fZA2vYJ6c5oaNImvS0KKZo1+Eu7LFO6jCRnChReMcE=";
   };
 
-  vendorSha256 = "sha256-mit4wM4WQJiGaKzEW5ZSaZoe/bRMtq16f5JPk6mRq1k=";
+  vendorHash = "sha256-BX1Ll0EEo59p+Pe5oM6+6zT6fvnv1RsfX8YEh9RKkWU=";
 
   meta = with lib; {
     description = "Simple command-line snippet manager, written in Go";
