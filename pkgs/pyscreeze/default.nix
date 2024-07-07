@@ -3,28 +3,33 @@
 , fetchFromGitHub
 , xvfb-run
 , scrot
+, gnome-screenshot
+, which
+, nix-gitignore
 }:
 
 python3Packages.buildPythonPackage rec {
   pname = "PyScreeze";
-  version = "2022-03-16";
+  version = "2023-06-14";
 
   src = fetchFromGitHub {
     owner = "asweigart";
     repo = "pyscreeze";
-    rev = "b693ca9b2c964988a7e924a52f73e15db38511a8";
-    sha256 = "sha256-vGQsg15tKE1OHtIywuluX0rpx4s3UhwfmacbCdK79JE=";
+    rev = "eeca245a135cf171c163b3691300138518efa64e";
+    sha256 = "sha256-DH/ehS1LolOlyftX6icLru94ZZuCguMFE+KJ3snLjkg=";
   };
+  patches = [ ./find-gnome-screenshot.patch ];
+  # src = nix-gitignore.gitignoreSource [ ] /home/scott/GIT/pyscreeze;
 
-  nativeBuildInputs = [ xvfb-run python3Packages.pytest scrot ];
+  nativeBuildInputs = [ xvfb-run python3Packages.pytest scrot gnome-screenshot ];
   propagatedBuildInputs = with python3Packages; [
     pillow
   ];
-  checkInputs = with python3Packages; [ pytest xlib scrot ];
+  checkInputs = with python3Packages; [ pytest xlib scrot pillow gnome-screenshot which ];
 
   doCheck = true;
   checkPhase = ''
-    xvfb-run -s '-screen 0 800x600x24' \
+    XDG_SESSION_TYPE=x11 xvfb-run -s '-screen 0 800x600x24' \
       pytest
   '';
 
