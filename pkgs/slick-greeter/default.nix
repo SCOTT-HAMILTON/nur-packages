@@ -21,13 +21,13 @@ in
 stdenv.mkDerivation rec {
 
   pname = "slick-greeter";
-  version = "master.mint21";
+  version = "master.mint22";
 
   src = fetchFromGitHub {
     owner = "linuxmint";
     repo = "slick-greeter";
     rev = version;
-    sha256 = "sha256-GCBIbGIn3x2Oj7eecgwTq99g1cOyJc3FKhIOaVMgPyE=";
+    sha256 = "sha256-Q37CprukHvDRBcuPbfusKg2DY+JCwmjVX1+KnfSH2iw=";
   };
 
   patches = [ ./install-to-sbin-and-to-bin.patch ];
