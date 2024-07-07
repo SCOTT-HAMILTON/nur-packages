@@ -8,13 +8,13 @@
 }:
 python3Packages.buildPythonPackage rec {
   pname = "pyzo";
-  version = "4.12.8";
+  version = "4.16.0";
 
   src = fetchFromGitHub {
     owner = "pyzo";
     repo = "pyzo";
     rev = "v${version}";
-    sha256 = "sha256-g7FzoZoqTsCGypJuVIPU/A+y8AkDr5p+2msYafa12gw=";
+    sha256 = "sha256-pb9t0W9IOrgW2oqMDTWLoQdett4BZjgLKPT80mAr56A=";
   };
 
   nativeBuildInputs = [ util-linux ];
@@ -32,7 +32,7 @@ python3Packages.buildPythonPackage rec {
       s=$(echo $l | rev | cut -d'/' -f1 | rev | sed -E 's=pyzologo(.*)\..*=\1=g');
       install -Dm644 "$l" "$out/share/icons/hicolor/${sizeShell}/apps/pyzologo.png"
     done
-    install -Dm644 "$out/lib/${python3.libPrefix}/site-packages/pyzo/resources/pyzo.desktop" "$out/share/applications/pyzo.desktop"
+    install -Dm644 "$out/lib/${python3.libPrefix}/site-packages/pyzo/resources/org.pyzo.Pyzo.desktop" "$out/share/applications/org.pyzo.Pyzo.desktop"
   '';
 
   makeWrapperArgs = [
