@@ -6,13 +6,13 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "MouseInfo";
-  version = "unstable";
+  version = "2023-05-05";
 
   src = fetchFromGitHub {
     owner = "asweigart";
     repo = "mouseinfo";
-    rev = "27d4059a20180344bbfaed4b679f193d44c9f366";
-    sha256 = "1ylnsr5ffh7lb4yr5m79jcnfkdyz79yq06r21ccd1yqdnmaf7p4w";
+    rev = "23791fad3347efef405e1bbe65809a6394b1677d";
+    sha256 = "sha256-A1RN6aczG1c0jb1sMalGmJoZ/A4I1sHunlVcfym7o0c=";
   };
 
   propagatedBuildInputs = with python3Packages; [
