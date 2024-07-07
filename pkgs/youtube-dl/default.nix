@@ -6,7 +6,7 @@
 }:
 python3Packages.buildPythonPackage rec {
   pname = "youtube-dl";
-  version = "2023-04-21";
+  version = "2024-07-06";
 
   src = fetchFromGitHub {
     owner = "ytdl-org";
