@@ -5,13 +5,13 @@
 
 python3Packages.buildPythonPackage rec {
   pname = "pytweening";
-  version = "2023-04-24";
+  version = "2024-02-20";
 
   src = fetchFromGitHub {
     owner = "asweigart";
     repo = "pytweening";
-    rev = "800a5f619b7f99e8bb925b3009ae31ae3260f8e1";
-    sha256 = "sha256-fqXN92FfjkI5fOnsVpzStMul5RWmCCvHrB5S5Vamn/Q=";
+    rev = "c622929950db00a8364bc26b836e6606c4d62614";
+    sha256 = "sha256-d38NingNX+Dwc1GUAEgqEViQCyiRWEQGvy5d1T30D1k=";
   };
 
   doCheck = false;
