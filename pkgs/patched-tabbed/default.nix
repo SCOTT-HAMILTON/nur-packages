@@ -11,10 +11,10 @@
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "tabbed";
-    rev = "2dd66f0ab17e8fb97592179c3c65eac54d3f1f87";
-    sha256 = "0q7fk4sq3kx5k9nkamq086c5rc8h0vkb0p0gyig5m9dqfxbkp63x";
+    rev = "0946c7766fa8639ebe8d81751ad43604572ac495";
+    sha256 = "sha256-fZ8BCSWwraNAPlEwsu7srKzGdW2MYKxZfJkPm2Y/26o=";
   };
-  # src = nix-gitignore.gitignoreSource [ ] ~/GIT/tabbed;
+  # src = nix-gitignore.gitignoreSource [ ] /home/scott/GIT/tabbed;
   buildInputs = (old.buildInputs or []) ++ [ libbsd zeromq ];
   # dontStrip = true;
 })
