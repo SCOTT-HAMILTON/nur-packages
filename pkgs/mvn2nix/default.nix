@@ -5,7 +5,7 @@ import
   (fetchFromGitHub {
     owner = "fzakaria";
     repo = "mvn2nix";
-    rev = "ea21cfe97069feee55fa307ca9b125616c1fa84f";
-    sha256 = "0bs6j59i5c2lc7jnvifnvc5igp77cbhs78svkyia2gg4miifzwdz";
+    rev = "e27562cb6fc5b546eb8a3a6be79b7f1ac7676e4b";
+    sha256 = "sha256-5ZnRlGhWFD3U9AzCbZ7L8Yf2lTvO81dVv138nbqHEFI=";
   }) {}
 
