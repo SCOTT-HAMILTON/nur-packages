@@ -192,7 +192,6 @@ pkgs.lib.traceValFn (x:
   ssh2-python = pkgs.callPackage ./pkgs/ssh2-python { };
   sync-database = pkgs.callPackage ./pkgs/sync-database {
     inherit (self) parallel-ssh merge-keepass;
-    inherit nixosVersion;
   };
   tabula-py = pkgs.callPackage ./pkgs/tabula-py {
     inherit (python_with_openpyxl305.pkgs) buildPythonPackage fetchPypi distro numpy pandas setuptools_scm setuptools;
