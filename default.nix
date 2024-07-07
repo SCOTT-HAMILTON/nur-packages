@@ -79,7 +79,9 @@ pkgs.lib.traceValFn (x:
     inherit buildRustPackage;
   };
   juk = kdeApplications.callPackage ./pkgs/Juk { };
-  keysmith = kdeApplications.callPackage ./pkgs/keysmith { };
+  keysmith = kdeApplications.callPackage ./pkgs/keysmith {
+    inherit (pkgs.kdePackages) extra-cmake-modules;
+  };
   killbots = kdeApplications.callPackage ./pkgs/Killbots { };
   kirigami-gallery = pkgs.libsForQt5.callPackage ./pkgs/KirigamiGallery { };
   kotlin-vim = with pkgs.vimUtils; pkgs.callPackage ./pkgs/kotlin-vim {
@@ -91,9 +93,7 @@ pkgs.lib.traceValFn (x:
   lbstanza-bin = pkgs.callPackage ./pkgs/lbstanza-bin { };
   libfake = pkgs.callPackage ./pkgs/FakeLib { };
   lokalize = pkgs.libsForQt5.callPackage ./pkgs/Lokalize { };
-  merge-keepass = pkgs.callPackage ./pkgs/merge-keepass {
-    inherit nixosVersion;
-  };
+  merge-keepass = pkgs.callPackage ./pkgs/merge-keepass { };
   mouseinfo = pkgs.callPackage ./pkgs/mouseinfo {
     inherit (self) python3-xlib;
   };

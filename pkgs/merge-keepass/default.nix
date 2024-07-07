@@ -1,18 +1,17 @@
 { lib
 , python3Packages
 , fetchFromGitHub 
-, nixosVersion
 }:
 
 python3Packages.buildPythonPackage rec {
   pname = "merge-keepass";
-  version = "2021-12-27";
+  version = "2023-07-11";
 
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "merge-keepass";
-    rev = "4ab69e149be77250e512907ad68a533fb1814462";
-    sha256 = "0hwzdgq7mrldr1y40fpfyvka9m6a8g6xhiv0di106lq06l4zcrch";
+    rev = "a3681fc3ee9e4ec59bbbacd447672f9f9115103e";
+    sha256 = "sha256-YS1OXxigl+ijtw31MLAp0oKxTEC+7q+3NnKZlQDEvn8=";
   };
 
   nativeBuildInputs = with python3Packages; [ pytest ];
