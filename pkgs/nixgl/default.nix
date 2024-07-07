@@ -5,7 +5,7 @@ import
   (fetchFromGitHub {
     owner = "guibou";
     repo = "nixGL";
-    rev = "c917918ab9ebeee27b0dd657263d3f57ba6bb8ad";
-    sha256 = "sha256-KCkWZXCjH+C4Kn7fUGSrEl5btk+sERHhZueSsvVbPWc=";
+    rev = "310f8e49a149e4c9ea52f1adf70cdc768ec53f8a";
+    sha256 = "sha256-lnzZQYG0+EXl/6NkGpyIz+FEOc/DSEG57AP1VsdeNrM=";
   }) {}
 
