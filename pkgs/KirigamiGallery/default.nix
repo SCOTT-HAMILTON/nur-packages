@@ -12,13 +12,13 @@
 
 mkDerivation rec {
   pname = "KirigamiGallery";
-  version = "23.04.0";
+  version = "24.05.2";
 
   src = fetchFromGitHub {
     owner = "KDE";
     repo = "kirigami-gallery";
     rev = "v${version}";
-    sha256 = "sha256-yDWsUjxk+aRe96seS51stLrahx3ehAm1NJBc5glhD/Y=";
+    sha256 = "sha256-EHQuS1mpo4w3UJ1mTOILsLSe7u3de7Omx9jheVVRtVM=";
   };
 
   nativeBuildInputs = [ extra-cmake-modules cmake  ];
