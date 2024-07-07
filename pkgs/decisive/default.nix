@@ -11,8 +11,8 @@ buildVimPlugin {
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "decisive.nvim";
-    rev = "53a1e1a715fd93ccb5d705181413f726b4276431";
-    sha256 = "sha256-Zcn5kqdI2to+bhJ10FZmpCfN33OaK1HgiHc7D7cS0Tw=";
+    rev = "97cda9352039cbdcc2f3f0716eb2d3aa4929048a";
+    sha256 = "sha256-po5PZJvEphHoFWpLNlO6p812KPv5AjaBA0UpiDPvo6g=";
   };
   # src = nix-gitignore.gitignoreSource [ ] /home/scott/GIT/decisive.nvim;
 
