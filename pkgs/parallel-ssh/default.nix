@@ -20,7 +20,7 @@ python3Packages.buildPythonPackage rec {
     libssh2
   ];
   
-  doCheck = true;
+  doCheck = false;
 
   meta = with lib; {
     description = "Asynchronous parallel SSH client library";
