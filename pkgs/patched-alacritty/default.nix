@@ -44,12 +44,12 @@ let
 in
 alacritty.overrideAttrs (old: rec {
   pname = "${old.pname}-patched";
-  # src = nix-gitignore.gitignoreSource [ ] ~/GIT/alacritty;
+  # src = nix-gitignore.gitignoreSource [ ] /home/scott/GIT/alacritty;
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "alacritty";
-    rev = "c138011150c2457b08ef9e7ccf87d6aa27f5d645";
-    sha256 = "sha256-DZu1YBcXEd0uQ3woZGx6IC/bqu1RWhf1OFXEXhmKfjs=";
+    rev = "8dbc19becf9a960d2118b09c7dafdaa17448003e";
+    sha256 = "sha256-qAQzRp9K1iMIkp/t+5q2A+pDlcuXEYcujy8DNnyeF3E=";
   };
   postPatch = ''
     sed -Ei 's|^Exec=alacritty|Exec=${tabbed-alacritty}/bin/tabbed-alacritty|g' "extra/linux/Alacritty.desktop"
@@ -67,13 +67,15 @@ alacritty.overrideAttrs (old: rec {
   in lib.concatStringsSep "\n" (
     lib.filter (l: builtins.match ".*gzip -c.*extra/alacritty-msg.man.*" l == null)
     (lib.splitString "\n" prepatched)
-  );
+  ) + ''
+    ln -s "${tabbed-alacritty}/bin/tabbed-alacritty" "$out/bin/tabbed-alacritty"
+  '';
 
   cargoDeps = old.cargoDeps.overrideAttrs (lib.const {
     inherit src;
     outputHash = if nixosVersion == "master"
-      then "sha256-P4ZQSXNqREZhllAtalzxTrJRC6R06UHEQwsmi2ugH/s="
-      else "sha256-P4ZQSXNqREZhllAtalzxTrJRC6R06UHEQwsmi2ugH/s=";
+      then "sha256-/YKo4DPCFRHhs3y/d3K9/7koX4Cx1A2ubHO07H4oPjs="
+      else "sha256-/YKo4DPCFRHhs3y/d3K9/7koX4Cx1A2ubHO07H4oPjs=";
     doCheck = false;
   });
   patches = [];
