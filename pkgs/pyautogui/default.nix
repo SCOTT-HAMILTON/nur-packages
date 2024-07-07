@@ -10,11 +10,11 @@
 
 python3Packages.buildPythonPackage rec {
   pname = "PyAutoGUI";
-  version = "0.9.53";
+  version = "0.9.54";
 
   src = python3Packages.fetchPypi {
     inherit pname version;
-    sha256 = "0dbhr4pbnwzxkbmi9j70js8kwam1w7y93069gyz913912bvyh7fk";
+    sha256 = "sha256-3R0p6P0RiUHLGT9031flxv+OklO5nHsE85z8afOuBLI=";
   };
 
   propagatedBuildInputs = with python3Packages; [
