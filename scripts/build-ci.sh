@@ -18,7 +18,7 @@ fi
 rm -rf gcroot
 
 remaining=$(nix-build --dry-run --argstr nixosVersion all-unbroken.nix 2>&1 | awk '/^these.*derivations will be built/,/^these.*paths will be fetched/' | sed '1d;$d')
-count=$(printf $remaining | wc -l)
+count=$(printf "%s" "$remaining" | wc -l)
 if [ $count -gt 0 ]; then
     echo "There remains $count derivations to be built:"
     echo $remaining
