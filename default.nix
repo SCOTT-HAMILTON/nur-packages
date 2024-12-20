@@ -103,6 +103,7 @@ pkgs.lib.traceValFn (x:
     inherit (self) pyautogui;
   };
   pronote-timetable-fetch = pkgs.callPackage ./pkgs/pronote-timetable-fetch { };
+  pyfemm = pkgs.callPackage ./pkgs/pyfemm { };
   pyautogui = pkgs.callPackage ./pkgs/pyautogui {
     inherit (self)
       mouseinfo
