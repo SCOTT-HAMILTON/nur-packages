@@ -192,7 +192,6 @@ pkgs.lib.traceValFn (x:
   tabula-py = pkgs.callPackage ./pkgs/tabula-py {
     inherit (pkgs.python3Packages) buildPythonPackage fetchPypi distro numpy pandas setuptools_scm setuptools;
   };
-  # tdf = pkgs.callPackage ./pkgs/tdf { };
   tfk-api-unoconv = pkgs.callPackage ./pkgs/tfk-api-unoconv {
     inherit nixosVersion;
     nodejs = pkgs."nodejs-18_x";
