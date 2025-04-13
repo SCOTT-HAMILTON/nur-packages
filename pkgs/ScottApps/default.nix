@@ -7,8 +7,8 @@
 # , nix-gitignore
 }:
 
-stdenv.mkDerivation {
-  pname = "ScottAps";
+stdenv.mkDerivation rec {
+  pname = "ScottApps";
   version = "1.0";
 
   src = fetchFromGitHub {
@@ -28,11 +28,13 @@ stdenv.mkDerivation {
     "ASSETDIR=$(out)/share/assets"
   ];
 
-  postPatch = ''
+  postInstall = ''
     install -Dm 644 assets/balle.bmp "$out/share/assets/balle.bmp"
     install -Dm 644 assets/Racket.bmp "$out/share/assets/Racket.bmp"
     install -Dm 644 assets/Perdu.bmp "$out/share/assets/Perdu.bmp"
     install -Dm 644 assets/imgMenu.bmp "$out/share/assets/imgMenu.bmp"
+
+    ln -s "$out/bin/ScottsPong" "$out/bin/${pname}"
   '';
 
   ## FOR DEBUGGING
