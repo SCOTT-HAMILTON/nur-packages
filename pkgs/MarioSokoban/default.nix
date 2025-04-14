@@ -1,23 +1,23 @@
 { lib
 , stdenv
-# , fetchFromGitHub
+, fetchFromGitHub
 , SDL
 , SDL_image
 , pkg-config
-, nix-gitignore
+# , nix-gitignore
 }:
 
 stdenv.mkDerivation rec {
   pname = "MarioSokoban";
   version = "1.0";
 
-  # src = fetchFromGitHub {
-  #   owner = "SCOTT-HAMILTON";
-  #   repo = "Scott-Apps";
-  #   rev = "745db42791d39458de46711d230aa2c5d90cf8a8";
-  #   sha256 = "sha256-TsFhZeiXa8RZZhT9uiwY8H+YzLe1DPsYIkLm4XitBCw=";
-  # };
-  src = nix-gitignore.gitignoreSource [ ] ~/GIT/Mario-Sokoban-game;
+  src = fetchFromGitHub {
+    owner = "SCOTT-HAMILTON";
+    repo = "Mario-Sokoban-game";
+    rev = "29da4a82b0bd70f5469b47763a31a0b47281730d";
+    sha256 = "sha256-VaxXhSLsDCiWB8lMGsX7eJIx8Rhhl4kdyRQg4lxSITY=";
+  };
+  # src = nix-gitignore.gitignoreSource [ ] ~/GIT/Mario-Sokoban-game;
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ SDL SDL_image ];
@@ -49,9 +49,9 @@ stdenv.mkDerivation rec {
   '';
 
   ## FOR DEBUGGING
-  NIX_CFLAGS_COMPILE = "-g -O0";
-  hardeningDisable = [ "all" ]; 
-  dontStrip = true;
+  # NIX_CFLAGS_COMPILE = "-g -O0";
+  # hardeningDisable = [ "all" ]; 
+  # dontStrip = true;
 
   meta = with lib; {
     description = "Argument Parser for Modern C++";
