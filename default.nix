@@ -171,6 +171,7 @@ pkgs.lib.traceValFn (x:
   #   meson = patchedMeson;
   # };
   # qradiopredict = pkgs.libsForQt5.callPackage ./pkgs/qradiopredict { };
+  rush = pkgs.callPackage ./pkgs/Rush { };
   scim = with pkgs; callPackage ./pkgs/scim { };
   libphidget = with pkgs; callPackage ./pkgs/libphidget { };
   scottapps = with pkgs; callPackage ./pkgs/ScottApps { };
