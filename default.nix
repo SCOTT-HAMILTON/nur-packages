@@ -82,6 +82,7 @@ pkgs.lib.traceValFn (x:
   lbstanza-bin = pkgs.callPackage ./pkgs/lbstanza-bin { };
   libfake = pkgs.callPackage ./pkgs/FakeLib { };
   lokalize = pkgs.libsForQt5.callPackage ./pkgs/Lokalize { };
+  love3d = pkgs.callPackage ./pkgs/L-ove3D { };
   mario-sokoban = with pkgs; callPackage ./pkgs/MarioSokoban { };
   merge-keepass = pkgs.callPackage ./pkgs/merge-keepass { };
   mouseinfo = pkgs.callPackage ./pkgs/mouseinfo {
