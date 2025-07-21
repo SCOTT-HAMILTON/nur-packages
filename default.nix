@@ -33,9 +33,10 @@ pkgs.lib.traceValFn (x:
   Local Usage : ${if localUsage then "true" else "false"}"
 )
 (lib.makeExtensible (self:
-{
+let
+  mylib = import ./lib { inherit pkgs; }; # functions
+in {
   # The `lib`, `modules`, and `overlay` names are special
-  lib = import ./lib { inherit pkgs; }; # functions
 
   android-platform-tools = pkgs.callPackage ./pkgs/android-platform-tools { };
   argparse = pkgs.callPackage ./pkgs/argparse { };
@@ -61,6 +62,8 @@ pkgs.lib.traceValFn (x:
   fake-mic-wav-player = pkgs.libsForQt5.callPackage ./pkgs/FakeMicWavPlayer {
     inherit (self) libfake argparse;
   };
+  go-pathfinder = pkgs.callPackage ./pkgs/Go-pathfinder { inherit (mylib.gomod2nix) buildGoApplication; };
+  go-sdl2 = pkgs.callPackage ./pkgs/go-sdl2 { inherit (mylib.gomod2nix) buildGoApplication; };
   graph-cli = pkgs.callPackage ./pkgs/graph-cli { };
   haste-client = pkgs.callPackage ./pkgs/haste-client { };
   instanttee = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/InstantTee {
