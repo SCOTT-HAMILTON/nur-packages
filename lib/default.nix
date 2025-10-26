@@ -1,10 +1,9 @@
-{ pkgs }:
-
-with pkgs.lib; let
+{ pkgs, gomod2nix }:
+let
   builder0 = pkgs.callPackage ./gomod2nix-no-cyclic-deps/builder { };
   gomod2nix0 = pkgs.callPackage ./gomod2nix-no-cyclic-deps { inherit (builder0) buildGoApplication; };
-  builder1 = pkgs.callPackage ./gomod2nix/builder { gomod2nix = gomod2nix0; };
-  # gomod2nix = pkgs.callPackage ./gomod2nix { inherit buildGoApplication; };
+  gomod2nixbuilder = if gomod2nix != null then (gomod2nix + "/builder") else ./gomod2nix/builder;
+  builder1 = pkgs.callPackage gomod2nixbuilder { gomod2nix = gomod2nix0; };
 in {
   # Add your library functions here
   #

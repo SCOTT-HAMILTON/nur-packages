@@ -18,10 +18,11 @@
   ] else [];
 }
 , localUsage ? false
+, gomod2nix ? null
 }:
 let
   lib = pkgs.lib;
-  mylib = import ./lib { inherit pkgs; }; # functions
+  mylib = import ./lib { inherit pkgs gomod2nix; }; # functions
   kdeApplications = pkgs.libsForQt5.kdeApplications;
   # drogonNixPkgs = import (fetchTarball {
   #   url = "https://github.com/NixOS/NixPkgs/archive/cd0fa6156f486c583988d334202946ffa4b9ebe8.tar.gz";
