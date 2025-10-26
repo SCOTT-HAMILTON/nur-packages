@@ -1,25 +1,26 @@
 { lib
-# , fetchFromGitHub
+, fetchFromGitHub
 , buildGoApplication
-, nix-gitignore
+# , nix-gitignore
 , pkg-config
 , SDL2
 , SDL2_ttf
+, libX11
 }:
-buildGoApplication {
+buildGoApplication rec {
   pname = "Go-pathfinder";
   version = "1.0";
 
-  # src = fetchFromGitHub {
-  #   owner = "SCOTT-HAMILTON";
-  #   repo = pname;
-  #   rev = "d94328dae048346554396f34ea608ad68bacaf3b";
-  #   sha256 = "sha256-1aNIOvq7R66mJFX7XtYEVXV7GWITCmTm4aXVz/jlupU=";
-  # };
-  src = nix-gitignore.gitignoreSource [ ] ~/GIT/Go-pathfinder;
+  src = fetchFromGitHub {
+    owner = "SCOTT-HAMILTON";
+    repo = pname;
+    rev = "e913e2c42940833829279569d2c908d9c34b9c1c";
+    sha256 = "sha256-0uE2cpmnU5vxkMKeN0TCSe652eGNja4mkbIz6gm1ztk=";
+  };
+  # src = nix-gitignore.gitignoreSource [ ] ~/GIT/Go-pathfinder;
 
   nativeBuildInputs = [ pkg-config ];
-  buildInputs = [ SDL2 SDL2_ttf ];
+  buildInputs = [ SDL2 SDL2_ttf libX11 ];
   ldflags = [ "-X 'main.assetsDir=${placeholder "out"}/share/assets/'" ];
 
   postInstall = ''
