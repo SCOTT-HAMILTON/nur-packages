@@ -74,8 +74,9 @@ alacritty.overrideAttrs (old: rec {
   cargoDeps = old.cargoDeps.overrideAttrs (lib.const {
     inherit src;
     outputHash = if nixosVersion == "master"
-      then "sha256-2pClxjTQ0mn18kQyn1opiBRkGQCtSicF4gH4DVaQ2gk="
-      else "sha256-2pClxjTQ0mn18kQyn1opiBRkGQCtSicF4gH4DVaQ2gk=";
+      then ""
+      else "";
+    outputHashMode = "recursive";
     doCheck = false;
   });
   patches = [];
