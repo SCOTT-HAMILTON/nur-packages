@@ -21,6 +21,7 @@
 }:
 let
   lib = pkgs.lib;
+  mylib = import ./lib { inherit pkgs; }; # functions
   kdeApplications = pkgs.libsForQt5.kdeApplications;
   # drogonNixPkgs = import (fetchTarball {
   #   url = "https://github.com/NixOS/NixPkgs/archive/cd0fa6156f486c583988d334202946ffa4b9ebe8.tar.gz";
@@ -33,9 +34,7 @@ pkgs.lib.traceValFn (x:
   Local Usage : ${if localUsage then "true" else "false"}"
 )
 (lib.makeExtensible (self:
-let
-  mylib = import ./lib { inherit pkgs; }; # functions
-in {
+{
   # The `lib`, `modules`, and `overlay` names are special
 
   android-platform-tools = pkgs.callPackage ./pkgs/android-platform-tools { };
