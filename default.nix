@@ -92,6 +92,7 @@ pkgs.lib.traceValFn (x:
     inherit (self) python3-xlib;
   };
   mobiledemo = pkgs.callPackage ./pkgs/MobileDemo { };
+  myxournalpp = pkgs.callPackage ./pkgs/MobileDemo { };
   MyVimConfig = pkgs.callPackage ./pkgs/MyVimConfig { };
   nix-bisect = pkgs.callPackage ./pkgs/nix-bisect { };
   numworks-udev-rules = pkgs.callPackage ./pkgs/numworks-udev-rules { };
