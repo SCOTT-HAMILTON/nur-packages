@@ -132,6 +132,8 @@ pkgs.lib.traceValFn (x:
     inherit (pkgs.qt6) qttools wrapQtAppsHook;
     inherit (pkgs.libsForQt5) qtbase;
   };
+
+  pyvicp = pkgs.callPackage ./pkgs/pyvicp { };
   mypython = let
     shellPython = pkgs.python310;
   in (shellPython.buildEnv.override {
