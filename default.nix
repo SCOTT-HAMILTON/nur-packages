@@ -47,7 +47,7 @@ pkgs.lib.traceValFn (x:
   chunkdrive = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/chunkdrive {
     inherit buildRustPackage;
   };
-  cdc-cognitoform-result-generator = pkgs.callPackage ./pkgs/CdC-cognitoform-result-generator { };
+  # cdc-cognitoform-result-generator = pkgs.callPackage ./pkgs/CdC-cognitoform-result-generator { };
   # chart-cli = pkgs.haskellPackages.callPackage ./pkgs/chart-cli { };
   commix = pkgs.callPackage ./pkgs/commix { };
   compton = pkgs.callPackage ./pkgs/Compton { };
