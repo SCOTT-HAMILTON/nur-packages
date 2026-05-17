@@ -19,7 +19,7 @@ in
           scrollback_lines = 10000;
           enable_audio_bell = false;
           update_check_interval = 0;
-          watcher = "${kitty-ntfy-cmd}/share/KittyNtfyCmd/kitty_ntfy_cmd_watcher.py";
+          # watcher = "${kitty-ntfy-cmd}/share/KittyNtfyCmd/kitty_ntfy_cmd_watcher.py";
         };
         keybindings = {
           "alt+n" = "new_tab_with_cwd";
