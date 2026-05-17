@@ -23,7 +23,7 @@
 let
   lib = pkgs.lib;
   mylib = import ./lib { inherit pkgs gomod2nix; }; # functions
-  kdeApplications = pkgs.libsForQt5.kdeApplications;
+  # kdeApplications = pkgs.libsForQt5.kdeApplications;
   # drogonNixPkgs = import (fetchTarball {
   #   url = "https://github.com/NixOS/NixPkgs/archive/cd0fa6156f486c583988d334202946ffa4b9ebe8.tar.gz";
   #   sha256 = "003vg8gz99spbmdvff06y36icn4by2yv4kb3s1m73q5z73bb2dy7";
@@ -49,13 +49,13 @@ pkgs.lib.traceValFn (x:
   };
   # cdc-cognitoform-result-generator = pkgs.callPackage ./pkgs/CdC-cognitoform-result-generator { };
   # chart-cli = pkgs.haskellPackages.callPackage ./pkgs/chart-cli { };
-  commix = pkgs.callPackage ./pkgs/commix { };
+  # commix = pkgs.callPackage ./pkgs/commix { };
   compton = pkgs.callPackage ./pkgs/Compton { };
   controls-for-fake = pkgs.libsForQt5.callPackage ./pkgs/ControlsForFake  {
     inherit (self) libfake;
     FakeMicWavPlayer = self.fake-mic-wav-player;
   };
-  day-night-plasma-wallpapers = pkgs.callPackage ./pkgs/day-night-plasma-wallpapers { };
+  # day-night-plasma-wallpapers = pkgs.callPackage ./pkgs/day-night-plasma-wallpapers { };
   decisive-vim = with pkgs.vimUtils; pkgs.callPackage ./pkgs/decisive {
     inherit buildVimPlugin;
   };
@@ -64,18 +64,13 @@ pkgs.lib.traceValFn (x:
   };
   go-pathfinder = pkgs.callPackage ./pkgs/Go-pathfinder { inherit (mylib.gomod2nix) buildGoApplication; };
   go-sdl2 = pkgs.callPackage ./pkgs/go-sdl2 { inherit (mylib.gomod2nix) buildGoApplication; };
-  graph-cli = pkgs.callPackage ./pkgs/graph-cli { };
+  # graph-cli = pkgs.callPackage ./pkgs/graph-cli { };
   haste-client = pkgs.callPackage ./pkgs/haste-client { };
   instanttee = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/InstantTee {
     inherit buildRustPackage;
   };
-  juk = kdeApplications.callPackage ./pkgs/Juk { };
-  keysmith = kdeApplications.callPackage ./pkgs/keysmith {
-    inherit (pkgs.kdePackages) extra-cmake-modules;
-  };
-  killbots = kdeApplications.callPackage ./pkgs/Killbots { };
   kirigami-gallery = pkgs.libsForQt5.callPackage ./pkgs/KirigamiGallery { };
-  kitty-ntfy-cmd = pkgs.callPackage ./pkgs/kitty-ntfy-cmd { };
+  # kitty-ntfy-cmd = pkgs.callPackage ./pkgs/kitty-ntfy-cmd { };
   kotlin-vim = with pkgs.vimUtils; pkgs.callPackage ./pkgs/kotlin-vim {
     inherit buildVimPlugin;
   };
@@ -88,46 +83,14 @@ pkgs.lib.traceValFn (x:
   love3d = pkgs.callPackage ./pkgs/L-ove3D { };
   mario-sokoban = with pkgs; callPackage ./pkgs/MarioSokoban { };
   merge-keepass = pkgs.callPackage ./pkgs/merge-keepass { };
-  mouseinfo = pkgs.callPackage ./pkgs/mouseinfo {
-    inherit (self) python3-xlib;
-  };
   mobiledemo = pkgs.callPackage ./pkgs/MobileDemo { };
   myxournalpp = pkgs.callPackage ./pkgs/myxournalpp { };
   MyVimConfig = pkgs.callPackage ./pkgs/MyVimConfig { };
-  nix-bisect = pkgs.callPackage ./pkgs/nix-bisect { };
   numworks-udev-rules = pkgs.callPackage ./pkgs/numworks-udev-rules { };
   phidget-udev-rules = pkgs.callPackage ./pkgs/phidget-udev-rules { };
-  parallel-ssh = pkgs.callPackage ./pkgs/parallel-ssh {
-    inherit (self)ssh2-python;
-  };
-  pdf2timetable = pkgs.callPackage ./pkgs/Pdf2TimeTable {
-    inherit (pkgs.python3Packages) buildPythonPackage numpy openpyxl pandas pypdf2 click;
-    inherit (self) tabula-py;
-  };
   phidget22 = pkgs.callPackage ./pkgs/phidget22 { };
-  pronotebot = pkgs.callPackage ./pkgs/PronoteBot {
-    inherit (self) pyautogui;
-  };
   pronote-timetable-fetch = pkgs.callPackage ./pkgs/pronote-timetable-fetch { };
   pyfemm = pkgs.callPackage ./pkgs/pyfemm { };
-  pyautogui = pkgs.callPackage ./pkgs/pyautogui {
-    inherit (self)
-      mouseinfo
-      pygetwindow
-      pyrect
-      pyscreeze
-      python3-xlib
-      pytweening;
-  };
-  pygetwindow = pkgs.callPackage ./pkgs/pygetwindow {
-    inherit (self) pyrect;
-  };
-  python3-xlib = pkgs.callPackage ./pkgs/python3-xlib { };
-  pyrect = pkgs.callPackage ./pkgs/pyrect { };
-  pyscreeze = pkgs.callPackage ./pkgs/pyscreeze ((
-    if nixosVersion == "master" then  { inherit (pkgs.gnome) gnome-screenshot; } else {}
-  ) // { inherit nixosVersion; });
-  pytweening = pkgs.callPackage ./pkgs/pytweening { };
   pymecavideo = pkgs.callPackage ./pkgs/pymecavideo {
     inherit (pkgs.qt6) qttools wrapQtAppsHook;
     inherit (pkgs.libsForQt5) qtbase;
@@ -195,19 +158,13 @@ pkgs.lib.traceValFn (x:
   smtprelay = pkgs.callPackage ./pkgs/smtprelay { inherit (pkgs) buildGoModule; };
   spectacle-clipboard = pkgs.libsForQt5.callPackage ./pkgs/spectacle-clipboard { };
   splat = pkgs.callPackage ./pkgs/splat { };
-  ssh-python = with pkgs.python310Packages; pkgs.callPackage ./pkgs/ssh-python { python3Packages = pkgs.python310Packages; inherit pythonAtLeast; };
-  ssh2-python = pkgs.callPackage ./pkgs/ssh2-python { };
   sync-database = pkgs.callPackage ./pkgs/sync-database {
-    inherit (self) parallel-ssh merge-keepass;
-  };
-  tabula-py = pkgs.callPackage ./pkgs/tabula-py {
-    inherit (pkgs.python3Packages) buildPythonPackage fetchPypi distro numpy pandas setuptools_scm setuptools;
+    inherit (self) merge-keepass;
   };
   tfk-api-unoconv = pkgs.callPackage ./pkgs/tfk-api-unoconv {
     inherit nixosVersion;
     nodejs = pkgs."nodejs-18_x";
   };
-  timetable2header = pkgs.callPackage ./pkgs/TimeTable2Header { };
   tg = pkgs.callPackage ./pkgs/tg  { };
   unoconvui = with pkgs.libsForQt5; callPackage ./pkgs/UnoconvUI  {
     inherit qmake qtbase qttools qtquickcontrols2;
@@ -244,20 +201,8 @@ pkgs.lib.traceValFn (x:
   voacap = pkgs.callPackage ./pkgs/voacap { };
   wavetrace = with pkgs; python3Packages.callPackage ./pkgs/Wavetrace {
     inherit (self) splat;
-    inherit (python3Packages)
-      buildPythonPackage
-      certifi
-      chardet
-      click
-      gdal
-      idna
-      requests
-      shapely
-      urllib3;
   };
   xmltoman = pkgs.callPackage ./pkgs/xmltoman { };
-  yaml2probatree = pkgs.callPackage ./pkgs/Yaml2ProbaTree { };
-  youtube-dl = pkgs.callPackage ./pkgs/youtube-dl { };
 } // 
 # Override derivations (patches),
 # I put them here so that they get evaluated

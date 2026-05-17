@@ -1,10 +1,9 @@
 { lib
 , python3Packages
 , fetchFromGitHub 
-, nix-gitignore
 }:
 
-python3Packages.buildPythonPackage rec {
+python3Packages.buildPythonPackage {
   pname = "kitty-ntfy-cmd";
   version = "unstable";
 
@@ -17,6 +16,8 @@ python3Packages.buildPythonPackage rec {
 
   # src = nix-gitignore.gitignoreSource [ ] /home/scott/GIT/kitty-ntfy-cmd;
   propagatedBuildInputs = with python3Packages; [ plyer dbus-python ];
+  buildInputs = with python3Packages; [ setuptools ];
+  pyproject = true;
 
   meta = with lib; {
     description = "Python script and kitty watcher to make kitty post ntfy notifications when commands have finished executing";

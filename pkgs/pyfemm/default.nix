@@ -12,6 +12,8 @@ python3Packages.buildPythonPackage rec {
   };
 
   doCheck = false;
+  buildInputs = with python3Packages; [ setuptools ];
+  pyproject = true;
 
   meta = with lib; {
     description = ''Python interface to Finite Element Method Magnetics (FEMM)'';
