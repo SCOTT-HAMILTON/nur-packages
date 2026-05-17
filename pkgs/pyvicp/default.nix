@@ -14,6 +14,9 @@ python3Packages.buildPythonPackage rec {
   propagatedBuildInputs = with python3Packages; [
     setuptools-scm
   ];
+  buildInputs = with python3Packages; [ setuptools ];
+  pyproject = true;
+  # format = "setuptools";
 
   # doCheck = false;
 

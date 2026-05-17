@@ -40,7 +40,7 @@ pkgs.lib.traceValFn (x:
 
   android-platform-tools = pkgs.callPackage ./pkgs/android-platform-tools { };
   argparse = pkgs.callPackage ./pkgs/argparse { };
-  autognirehtet = pkgs.callPackage ./pkgs/AutoGnirehtet { };
+  # autognirehtet = pkgs.callPackage ./pkgs/AutoGnirehtet { };
   cargo-sort-ck = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/cargo-sort-ck {
     inherit buildRustPackage;
   };
