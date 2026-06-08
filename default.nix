@@ -66,6 +66,7 @@ pkgs.lib.traceValFn (x:
   go-sdl2 = pkgs.callPackage ./pkgs/go-sdl2 { inherit (mylib.gomod2nix) buildGoApplication; };
   # graph-cli = pkgs.callPackage ./pkgs/graph-cli { };
   haste-client = pkgs.callPackage ./pkgs/haste-client { };
+  indexedproperty = pkgs.callPackage ./pkgs/indexedproperty { };
   instanttee = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/InstantTee {
     inherit buildRustPackage;
   };
@@ -140,6 +141,7 @@ pkgs.lib.traceValFn (x:
   #   meson = patchedMeson;
   # };
   # qradiopredict = pkgs.libsForQt5.callPackage ./pkgs/qradiopredict { };
+  rswaveform = pkgs.callPackage ./pkgs/RsWaveform { inherit (self) indexedproperty; };
   rush = pkgs.callPackage ./pkgs/Rush { };
   scim = with pkgs; callPackage ./pkgs/scim { };
   labyrinthe = with pkgs; callPackage ./pkgs/Labyrinthe { };
