@@ -92,6 +92,7 @@ pkgs.lib.traceValFn (x:
   phidget22 = pkgs.callPackage ./pkgs/phidget22 { };
   pronote-timetable-fetch = pkgs.callPackage ./pkgs/pronote-timetable-fetch { };
   pyfemm = pkgs.callPackage ./pkgs/pyfemm { };
+  pylint-qt = pkgs.callPackage ./pkgs/pylint-qt { };
   pymecavideo = pkgs.callPackage ./pkgs/pymecavideo {
     inherit (pkgs.qt6) qttools wrapQtAppsHook;
     inherit (pkgs.libsForQt5) qtbase;

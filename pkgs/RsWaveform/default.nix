@@ -7,11 +7,6 @@
 python3Packages.buildPythonPackage rec {
   pname = "RsWaveform";
   version = "0.5.0";
-
-  # src = python3Packages.fetchPypi {
-  #   inherit pname version;
-  #   sha256 = "sha256-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=";
-  # };
   src = fetchFromGitHub {
     owner = "Rohde-Schwarz";
     repo = "RsWaveform";
