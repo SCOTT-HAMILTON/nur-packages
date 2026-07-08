@@ -101,6 +101,7 @@ def make_fillable(
     root: str | Path | None = None,
     pdf_bytes: bytes | None = None,
     style: FieldStyle | None = None,
+    is_standalone_file: bool = False,
 ) -> bytes:
     """
     Create a fillable PDF from a Typst template.
@@ -133,16 +134,16 @@ def make_fillable(
         pdf = make_fillable("form.typ", pdf_bytes=base)
     """
     template_path = Path(template)
-    root_path = Path(root) if root else None
 
     # Create temp directory for compilation and metadata extraction
     # Both need context.json to exist for the template to compile
     temp_dir = Path(tempfile.mkdtemp())
     try:
         # Setup temp directory with template and context.json
-        if root_path:
+        if not is_standalone_file:
             temp_root = temp_dir / "template"
-            shutil.copytree(root_path, temp_root)
+            print(f"Copying {template_path.parent} to {temp_root}...")
+            shutil.copytree(template_path.parent, temp_root)
             temp_template = temp_root / template_path.name
         else:
             temp_root = temp_dir
@@ -156,7 +157,7 @@ def make_fillable(
 
         # Step 1: Compile template or use provided PDF
         if pdf_bytes is None:
-            base_pdf = typst.compile(str(temp_template), root=str(temp_root))
+            base_pdf = typst.compile(temp_template, root=temp_root)
         else:
             base_pdf = pdf_bytes
 
