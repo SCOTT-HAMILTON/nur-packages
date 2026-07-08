@@ -2,6 +2,7 @@
   python3Packages,
   fetchFromGitHub,
   lib,
+  # nix-gitignore,
 }:
 python3Packages.buildPythonPackage {
   pname = "typst-fillable";
@@ -11,9 +12,10 @@ python3Packages.buildPythonPackage {
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "typst-fillable";
-    rev = "20f73a30d0061bae7c2a618520a6df1896e965e8";
-    hash = "sha256-HdrecFYxmMCG5NdqX2tVN2TLUFllVm2SkxyUXFtk0Uk=";
+    rev = "f5b50cacc72aa08f870c21e470448bda4e1aa8ec";
+    hash = "sha256-hc7qbPK3DqDooQPI3xHdt6m/Ldmt5vSe93NPzmvDE7Y=";
   };
+  # src = nix-gitignore.gitignoreSource [] ~/GIT/typst-fillable;
 
   build-system = with python3Packages; [ hatchling ];
 
