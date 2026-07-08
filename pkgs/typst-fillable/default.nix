@@ -5,14 +5,14 @@
 }:
 python3Packages.buildPythonPackage {
   pname = "typst-fillable";
-  version = "2025-12-31";
+  version = "2026-07-08";
   pyproject = true;
 
   src = fetchFromGitHub {
-    owner = "carpe-diem";
+    owner = "SCOTT-HAMILTON";
     repo = "typst-fillable";
-    rev = "31407567df630d157607b394cd55cdba51012c12";
-    hash = "sha256-VJi0LY0zF4+IO6r8JDNH6X89jv8m8VIBvIYqi9q47OM=";
+    rev = "20f73a30d0061bae7c2a618520a6df1896e965e8";
+    hash = "sha256-HdrecFYxmMCG5NdqX2tVN2TLUFllVm2SkxyUXFtk0Uk=";
   };
 
   build-system = with python3Packages; [ hatchling ];
