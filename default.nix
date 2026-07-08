@@ -169,6 +169,7 @@ pkgs.lib.traceValFn (x:
     nodejs = pkgs."nodejs-18_x";
   };
   tg = pkgs.callPackage ./pkgs/tg  { };
+  typst-fillable = pkgs.callPackage ./pkgs/typst-fillable { };
   unoconvui = with pkgs.libsForQt5; callPackage ./pkgs/UnoconvUI  {
     inherit qmake qtbase qttools qtquickcontrols2;
   };
