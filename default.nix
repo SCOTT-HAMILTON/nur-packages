@@ -44,6 +44,7 @@ pkgs.lib.traceValFn (x:
   cargo-sort-ck = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/cargo-sort-ck {
     inherit buildRustPackage;
   };
+  circular-import-detector = pkgs.callPackage ./pkgs/circular-import-detector { };
   chunkdrive = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/chunkdrive {
     inherit buildRustPackage;
   };
