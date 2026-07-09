@@ -6,7 +6,7 @@
 }:
 python3Packages.buildPythonPackage {
   pname = "typst-fillable";
-  version = "2026-07-08";
+  version = "2026-07-09";
   pyproject = true;
 
   src = fetchFromGitHub {
