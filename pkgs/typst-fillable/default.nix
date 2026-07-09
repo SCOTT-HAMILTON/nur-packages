@@ -12,8 +12,8 @@ python3Packages.buildPythonPackage {
   src = fetchFromGitHub {
     owner = "SCOTT-HAMILTON";
     repo = "typst-fillable";
-    rev = "cd2c77317414f88113c7c11f70d4fdb37aab274f";
-    hash = "sha256-1O8gw3CCP12nrLjSnxUofedLM37nFuqrcJFAJTBHdbc=";
+    rev = "2021e52d3a25c446eec0136f6e8b33469c9d1bf6";
+    hash = "sha256-oEHlrIr9GQ5kyV2MWxOANNaJDao66uZN6UEYmu1VZEk=";
   };
   # src = nix-gitignore.gitignoreSource [] ~/GIT/typst-fillable;
 
