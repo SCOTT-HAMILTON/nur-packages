@@ -71,7 +71,7 @@ pkgs.lib.traceValFn (x:
   instanttee = with pkgs.rustPlatform; pkgs.callPackage ./pkgs/InstantTee {
     inherit buildRustPackage;
   };
-  kirigami-gallery = pkgs.libsForQt5.callPackage ./pkgs/KirigamiGallery { };
+  # kirigami-gallery = pkgs.libsForQt5.callPackage ./pkgs/KirigamiGallery { };
   # kitty-ntfy-cmd = pkgs.callPackage ./pkgs/kitty-ntfy-cmd { };
   kotlin-vim = with pkgs.vimUtils; pkgs.callPackage ./pkgs/kotlin-vim {
     inherit buildVimPlugin;
@@ -81,7 +81,7 @@ pkgs.lib.traceValFn (x:
   };
   lbstanza-bin = pkgs.callPackage ./pkgs/lbstanza-bin { };
   libfake = pkgs.callPackage ./pkgs/FakeLib { };
-  lokalize = pkgs.libsForQt5.callPackage ./pkgs/Lokalize { };
+  # lokalize = pkgs.libsForQt5.callPackage ./pkgs/Lokalize { };
   love3d = pkgs.callPackage ./pkgs/L-ove3D { };
   mario-sokoban = with pkgs; callPackage ./pkgs/MarioSokoban { };
   merge-keepass = pkgs.callPackage ./pkgs/merge-keepass { };
@@ -101,7 +101,7 @@ pkgs.lib.traceValFn (x:
 
   pyvicp = pkgs.callPackage ./pkgs/pyvicp { };
   mypython = let
-    shellPython = pkgs.python310;
+    shellPython = pkgs.python3;
   in (shellPython.buildEnv.override {
       extraLibs = with shellPython.pkgs; [
         pandas
@@ -160,7 +160,7 @@ pkgs.lib.traceValFn (x:
     inherit (gnome3) gnome-common;
   } else {  }));
   smtprelay = pkgs.callPackage ./pkgs/smtprelay { inherit (pkgs) buildGoModule; };
-  spectacle-clipboard = pkgs.libsForQt5.callPackage ./pkgs/spectacle-clipboard { };
+  # spectacle-clipboard = pkgs.libsForQt5.callPackage ./pkgs/spectacle-clipboard { };
   splat = pkgs.callPackage ./pkgs/splat { };
   sync-database = pkgs.callPackage ./pkgs/sync-database {
     inherit (self) merge-keepass;
